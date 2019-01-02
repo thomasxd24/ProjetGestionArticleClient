@@ -1,0 +1,12 @@
+tabArticle sera en tableau des pointeur
+tabClient sera en tableau des structure
+chaque client aura un listeLigneCommande
+Fonction a faire:
+int trieTabArticle(Article tabArticle[], int taille)
+Cette fonction triera la tabArtcle en utilisant le trie Dicotomie, il retournera 1 si sucess, 0 sinon
+int rechercheDicoArticle(Article tabArticle[], Article artcleRecherche)
+Cette fonction recherchera un Article dans tabArtcle en utilisant la recherche Dicotomie
+int adjouterArticle(Article tabArticle[], Article artcleRecherche)
+Cette fonction adjoutera un Article dans tabArtcle
+int enleverArticle(Article tabArticle[], Article artcleRecherche)
+Cette fonction enlevera un Article dans tabArticle
