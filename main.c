@@ -5,11 +5,18 @@
 
 int main(void)
 {
-    Article * taba[100];
-    int nba,choix,nbc,choixArt1,trouvemodele,posmodele;
+    Article * taba[100],*hi;
+    int nba,choix,nbc,choixArt1,trouvemodele,posmodele,trouve,op;
     char rechmodele[5];
     nba=remplirTabArticle(taba,100);
     afficherTabArticle(taba,nba);
-    printf("Il marche!");
+    
+    triDicoDesignation(taba,nba);
+    op=rechercherDicoDesignation("Chocolat",taba,nba,&trouve);
+    hi=taba[op];
+    printf("%d\n",hi->idarticle);
+    printf("%d\n",trouve);
+    afficherTabArticle(taba,nba);
+    printf("Il marche!\n");
     return 1;
 }

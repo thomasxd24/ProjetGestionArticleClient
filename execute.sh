@@ -1,1 +1,1 @@
-gcc -o projet *.c && ./projet
+gcc -o projet *.c && ./projet -S
