@@ -2,6 +2,7 @@
 #include<string.h>
 #include<stdlib.h>
 
+
 typedef struct{
 	int idarticle;
 	float prixunitaire;
@@ -45,8 +46,3 @@ void triDicoID (Article * tab[], int n);
 int rechercherDicoDesignation(char * rechmodele,Article ** tab, int nbc,int *trouve);
 
 /*-------------------------------------------- RecherheDicoArticle --------------------------------------------------------*/
-
-void copierClient(Client * tab[], int i, int j, Client * R[]);
-void fusionClient(Client * R[], int n, Client * S[], int m ,Client * t[]);
-void triDicoClient(Client * tab[], int n);
-int rechercherDicoClient(char * rechnom,Client ** tab, int nbc,int *trouve);
