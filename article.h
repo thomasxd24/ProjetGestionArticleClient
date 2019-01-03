@@ -3,6 +3,7 @@
 #include<stdlib.h>
 
 
+
 typedef struct{
 	int idarticle;
 	float prixunitaire;
@@ -11,38 +12,26 @@ typedef struct{
 } Article;
 /*-------------------------------------------- Chargement tableau ( v1 )-------------------------------------*/
 
-Article saisirArticle(FILE *flot);
-void afficherArticle(Article a);
-int remplirTabArticle(Article * tab[],int tmax);
-void afficherTabArticle(Article ** tab,int nbarticle);
+Article saisirArticle(FILE *flot);// ca marche
+void afficherArticle(Article a);// ca marche
+int remplirTabArticle(Article * tab[],int tmax);// ca marche
+void afficherTabArticle(Article ** tab,int nbarticle);// ca marche
 
 /*-------------------------------------------- Sauvegarder Tableau ------------------------------------------*/
 
 void sauveTabArticle(Article *tab,int tmax);
 
 /*-------------------------------------------- TrieDicoArticleDesignation --------------------------------------------------------*/
+void triDicoArticle (Article * tab[], int n,int choix);// ca marche
+// choix:
+// 1: idarticle
+// 2: designation
+// 3: prix
+// 4: quantite
 
-void copier (Article * tab[], int i, int j, Article * R[]);
-void fusionDesignation (Article * R[], int n, Article * S[], int m ,Article * t[]);
-void triDicoDesignation (Article * tab[], int n);
-
-/*-------------------------------------------- TrieDicoArticlePrix --------------------------------------------------------*/
-
-void fusionPrix (Article * R[], int n, Article * S[], int m ,Article * t[]);
-void triDicoPrix(Article * tab[], int n);
-
-/*-------------------------------------------- TrieDicoArticleQuantite --------------------------------------------------------*/
-
-void fusionQuantite (Article * R[], int n, Article * S[], int m ,Article * t[]);
-void triDicoQuantite (Article * tab[], int n);
-
-/*-------------------------------------------- TrieDicoArticleID --------------------------------------------------------*/
-
-void fusionID (Article * R[], int n, Article * S[], int m ,Article * t[]);
-void triDicoID (Article * tab[], int n);
 
 /*-------------------------------------------- RechercheArticleDesignation --------------------------------------------------------*/
 
-int rechercherDicoDesignation(char * rechmodele,Article ** tab, int nbc,int *trouve);
+int rechercherDicoDesignation(char * rechmodele,Article ** tab, int nbc,int *trouve); // ca marche
 
 /*-------------------------------------------- RecherheDicoArticle --------------------------------------------------------*/

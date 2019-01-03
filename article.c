@@ -1,5 +1,5 @@
 #include"article.h"
-
+#define champ choix
 Article saisirArticle(FILE *flot){
 	Article a;
 	fscanf(flot,"%d %f %d ",&a.idarticle,&a.prixunitaire,&a.quantite);
@@ -73,10 +73,33 @@ void copier(Article * tab[], int i, int j, Article * R[]){
 	}
 }
 
-void fusionDesignation (Article * R[], int n, Article * S[], int m ,Article * t[]){
+int testPosArticle(Article * R, Article * S,int choix)
+{
+	
+	switch (choix)
+	{
+		case 1:
+			return R->idarticle-S->idarticle;
+			break;
+		case 2:
+			return strcmp(R->designation,S->designation);
+			break;
+		case 3:
+			return R->prixunitaire-S->prixunitaire;
+			break;
+		case 4:
+			return R->quantite-S->quantite;
+			break;
+	
+		default:
+			break;
+	}
+}
+
+void fusion (Article * R[], int n, Article * S[], int m ,Article * t[],int choix){
 	int i=0, j=0, k=0;
 	while(i<n && j<m){
-		if ((strcmp(R[i]->designation,S[j]->designation))<0){
+		if ((testPosArticle(R[i],S[j],choix))<0){
 			t[k]=R[i];
 			i=i+1;
 			k=k+1;
@@ -98,7 +121,7 @@ void fusionDesignation (Article * R[], int n, Article * S[], int m ,Article * t[
 	}
 }
 
-void triDicoDesignation (Article * tab[], int n){
+void triDicoArticle (Article * tab[], int n,int choix){
 	Article **R,**S;
 	if (n==1)
 		return;
@@ -110,9 +133,9 @@ void triDicoDesignation (Article * tab[], int n){
 	}
 	copier(tab,0,n/2,R);
 	copier(tab,n/2,n,S);
-	triDicoDesignation(R,n/2);
-	triDicoDesignation(S,n-n/2);
-	fusionDesignation(R,n/2,S,n-(n/2),tab);
+	triDicoArticle(R,n/2,choix);
+	triDicoArticle(S,n-n/2,choix);
+	fusion(R,n/2,S,n-(n/2),tab,choix);
 	free(R);
 	free(S);
 }

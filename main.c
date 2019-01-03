@@ -11,7 +11,7 @@ int main(void)
     nba=remplirTabArticle(taba,100);
     afficherTabArticle(taba,nba);
     
-    triDicoDesignation(taba,nba);
+    triDicoArticle(taba,nba,2);
     op=rechercherDicoDesignation("Chocolat",taba,nba,&trouve);
     hi=taba[op];
     printf("%d\n",hi->idarticle);
