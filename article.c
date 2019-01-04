@@ -170,6 +170,7 @@ int supprimeArticle(Article ** tabArt,int nb){
 	int pos,trouve,i;
 	printf("Saisir le nom d'un article : \t");
 	scanf("%s%*c",rechdesig_art);
+	printf("%s\n",rechdesig_art);
 	pos=rechercherDicoDesignation(rechdesig_art,tabArt,nb,&trouve);
 	if (trouve==0){
 		printf("Article non trouvee \n");
@@ -181,3 +182,42 @@ int supprimeArticle(Article ** tabArt,int nb){
 	afficherTabArticle(tabArt,nb);
 	return nb;
 }
+
+/*-------------------------------------------- Ajouter Article -------------------------------------------------------*/
+Article saisieArticle(int tailleArt){
+	Article a;
+	printf("Saisir le nom d'un nouveaux article : \t");
+	fgets(a.designation,50,stdin);
+	a.designation[strlen(a.designation)-1]='\0';
+	printf("Prix unitaire : ");
+	scanf("%f%*c",&a.prixunitaire);
+	printf("Quantite initial: ");
+	scanf("%d%*c",&a.quantite);
+	a.idarticle=tailleArt+1;
+	return a;
+
+}
+
+int adjouterArticle(Article *tabArt[], int tailleArt)
+{
+	Article a;
+	int trouve,pos;
+	triDicoArticle(tabArt,tailleArt,1);
+	a=saisieArticle(tabArt[tailleArt-1]->idarticle);
+	triDicoArticle(tabArt,tailleArt,2);
+	pos=rechercherDicoDesignation(a.designation,tabArt,tailleArt,&trouve);
+	if(trouve==1){
+		printf("Erreur: Article déja enregistrée \n");
+		return tailleArt;
+	}
+	tabArt[tailleArt]=(Article *)malloc(sizeof(Article));
+	*(tabArt[tailleArt])=a;
+	tailleArt=tailleArt+1;
+	triDicoArticle(tabArt,tailleArt,2);
+	printf("Adjout de article reussi.");
+	return tailleArt;
+	
+
+}
+
+

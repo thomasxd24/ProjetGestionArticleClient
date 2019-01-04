@@ -34,10 +34,10 @@ int afficheMenuPrinciple(void)
     printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
     printf("┃\tGestion des Client et Article et Commande\t┃\n");
     printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-    printf("┃\t\t1. Client\t\t\t\t┃\n");
-    printf("┃\t\t2. Article\t\t\t\t┃\n");
-    printf("┃\t\t1. Commande\t\t\t\t┃\n");
-    printf("┃\t\t1. Reapprovisonnement\t\t\t┃\n");
+    printf("┃\t\t1. Article\t\t\t\t┃\n");
+    printf("┃\t\t2. Client\t\t\t\t┃\n");
+    printf("┃\t\t3. Commande\t\t\t\t┃\n");
+    printf("┃\t\t4. Reapprovisonnement\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 
     return 10;
@@ -51,7 +51,7 @@ int choixMenu(void)
     return n;
 }
 
-void menuClient(void)
+void menuClient(Client tabClient[],int *nbClient)
 {
     int choix;
     afficheMenuClient();
@@ -61,19 +61,40 @@ void menuClient(void)
     switch (choix)
     {
     case 1:
-        printf("hi");
-        break;
+            afficherTabClient(tabClient,*nbClient);
+            printf("Press ENTER key to Continue\n");  
+            getchar();
+            break;
 
-    case 10:
-        break;
 
-    default:
-        break;
+        case 3:
+            triDicoClient(tabClient,*nbClient,0);
+            *nbClient=adjouterClient(tabClient,*nbClient);
+            printf("Press ENTER key to Continue\n");  
+            getchar();
+            break;
+
+        case 4:
+            
+            *nbClient=supprimeClient(tabClient,*nbClient);
+            triDicoClient(tabClient,*nbClient,1);
+            printf("Press ENTER key to Continue\n");  
+            getchar();
+            break;
+
+        
+
+        case 10:
+            break;
+
+        default:
+            printf("Mauvais saisi");
+            break;
     }
-    menuClient();
+    menuClient(tabClient,nbClient);
 }
 
-void menuArticle(Article * tabArt[], int tailleArt)
+void menuArticle(Article * tabArt[], int *tailleArt)
 {
     int choix;
     while (choix != 10)
@@ -84,11 +105,27 @@ void menuArticle(Article * tabArt[], int tailleArt)
         switch (choix)
         {
         case 1:
-
-            afficherTabArticle(tabArt,tailleArt);
+            afficherTabArticle(tabArt,*tailleArt);
             printf("Press ENTER key to Continue\n");  
             getchar();
             break;
+
+
+        case 3:
+            triDicoArticle(tabArt,*tailleArt,2);
+            *tailleArt=adjouterArticle(tabArt,*tailleArt);
+            printf("Press ENTER key to Continue\n");  
+            getchar();
+            break;
+
+        case 4:
+            triDicoArticle(tabArt,*tailleArt,2);
+            *tailleArt=supprimeArticle(tabArt,*tailleArt);
+            printf("Press ENTER key to Continue\n");  
+            getchar();
+            break;
+
+        
 
         case 10:
             break;
@@ -100,7 +137,7 @@ void menuArticle(Article * tabArt[], int tailleArt)
     }
 }
 
-void menuPrinciple(Article * tabArt[], int tailleArt)
+void menuPrinciple(Article * tabArt[], int *tailleArt,Client tabClient[],int *nbClient)
 {
     int choix;
     while (choix != 10)
@@ -111,11 +148,10 @@ void menuPrinciple(Article * tabArt[], int tailleArt)
         {
         case 1:
             menuArticle(tabArt,tailleArt);
-                
             break;
 
         case 2:
-            menuClient();
+            menuClient(tabClient,nbClient);
             break;
 
         case 10:

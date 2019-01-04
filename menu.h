@@ -6,4 +6,4 @@
 #include"ligneCommande.h"
 /*-------------------------------------------- Menu (v1) ---------------------------------------------------------*/
 
-void menuPrinciple(Article * tabArt[], int tailleArt);
+void menuPrinciple(Article * tabArt[], int *tailleArt,Client tabClient[],int *nbClient);

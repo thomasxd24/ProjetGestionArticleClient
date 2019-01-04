@@ -33,3 +33,5 @@ void triDicoArticle (Article * tab[], int n,int choix);// ca marche
 int rechercherDicoDesignation(char * rechmodele,Article ** tab, int nbc,int *trouve); // ca marche
 
 /*-------------------------------------------- RecherheDicoArticle --------------------------------------------------------*/
+int supprimeArticle(Article ** tabArt,int nb);
+int adjouterArticle(Article *tabArt[], int tailleArt);

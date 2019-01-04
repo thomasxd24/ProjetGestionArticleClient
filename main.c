@@ -11,10 +11,7 @@ int main(void)
     int nbArt,nbClient;
     nbArt = remplirTabArticle(tabArt, 100);
     tabClient = chargeTabClient(tabClient,&nbClient);
-    // menuPrinciple(tabArt,nbArt);
-    afficherTabClient(tabClient,nbClient);
-    triDicoClient(tabClient, nbClient);
-    afficherTabClient(tabClient,nbClient);
+    menuPrinciple(tabArt,&nbArt,tabClient,&nbClient);
     printf("Il marche!\n");
     return 0;
 }

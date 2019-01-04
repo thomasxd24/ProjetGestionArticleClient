@@ -10,8 +10,8 @@ typedef struct{
 } Client;
 
 
-void triDicoClient(Client tab[], int n);
-int rechercherDicoClient(char * rechnom,Client ** tab, int nbc,int *trouve);
+void triDicoClient(Client tab[], int n,int trieID);
+int rechercherDicoClient(char * rechnom,Client * tab, int nbc,int *trouve);
 
 Client saisirClient(FILE *flot);
 Client * chargeTabClient(Client *tabClient,int *nbClient);
@@ -21,4 +21,5 @@ void afficherTabClient(Client tabClient[],int nbClient);
 
 /*-------------------------------------------- SupprimerUnClient --------------------------------------------------------*/
 
-int supprimeClient(Client **tab,int nbc);
+int supprimeClient(Client * tabClient,int nb);
+int adjouterClient(Client tabClient[], int nbClient);

@@ -68,10 +68,15 @@ void copierClient(Client tab[], int i, int j, Client R[]){
 	}
 }
 
-void fusionClient(Client  R[], int n, Client  S[], int m ,Client  t[]){
-	int i=0, j=0, k=0;
+void fusionClient(Client  R[], int n, Client  S[], int m ,Client  t[],int trieID){
+	int i=0, j=0, k=0, testOrdre;
 	while(i<n && j<m){
-		if ((strcmp(R[i].nom,S[j].nom))<0){
+		if(trieID)
+			testOrdre=R[i].idClient-S[j].idClient;
+		else
+			testOrdre=strcmp(R[i].nom,S[j].nom);
+		
+		if (testOrdre<0){
 			t[k]=R[i];
 			i=i+1;
 			k=k+1;
@@ -91,7 +96,7 @@ void fusionClient(Client  R[], int n, Client  S[], int m ,Client  t[]){
 	}
 }
 
-void triDicoClient(Client tab[], int n){
+void triDicoClient(Client tab[], int n,int trieID){
 	Client *R,*S;
 	if (n==1)
 		return;
@@ -103,22 +108,22 @@ void triDicoClient(Client tab[], int n){
 	}
 	copierClient(tab,0,n/2,R);
 	copierClient(tab,n/2,n,S);
-	triDicoClient(R,n/2);
-	triDicoClient(S,n/2);
-	fusionClient(R,n/2,S,n-(n/2),tab);
+	triDicoClient(R,n/2,trieID);
+	triDicoClient(S,n-n/2,trieID);
+	fusionClient(R,n/2,S,n-(n/2),tab,trieID);
 	free(R);
 	free(S);
 }
 
-int rechercherDicoClient(char * rechnom,Client ** tab, int nbc,int *trouve){
+int rechercherDicoClient(char * rechnom,Client tab[], int nbc,int *trouve){
 	int inf=0, sup=nbc-1, m;
 	while (inf<=sup){
 		m=(inf+sup)/2;
-		if((strcmp(rechnom,tab[m]->nom))==0){
+		if((strcmp(rechnom,tab[m].nom))==0){
 			*trouve=1;
 			return m;
 		}
-		if((strcmp(rechnom,tab[m]->nom))<0)
+		if((strcmp(rechnom,tab[m].nom))<0)
 			sup=m-1;
 		else
 			inf=m+1;
@@ -129,21 +134,57 @@ int rechercherDicoClient(char * rechnom,Client ** tab, int nbc,int *trouve){
 
 /*-------------------------------------------- SupprimerUnClient --------------------------------------------------------*/
 
-int supprimeClient(Client **tab,int nbc){
-	char rechnom[10];
+int supprimeClient(Client * tabClient,int nb){
+	char rechdesig_art[50];
 	int pos,trouve,i;
-	printf("Saisir le nom d'un client : ");
-	scanf("%s%*c",rechnom);
-	printf("%s",rechnom);
-	pos=rechercherDicoClient(rechnom,tab,nbc,&trouve);
+	printf("Saisir le nom du client : \t");
+	scanf("%s%*c",rechdesig_art);
+	pos=rechercherDicoClient(rechdesig_art,tabClient,nb,&trouve);
 	if (trouve==0){
-        printf("\t -------------------\n");
-		printf("\t Client non trouvee \n");
-        printf("\t -------------------\n");
-		return nbc;
+		printf("Article non trouvee \n");
+		return nb;
 	}
-	for (i=pos;i<nbc;i++)
-		tab[i]=tab[i+1];
-	nbc=nbc-1;
-	return nbc;
+	for (i=pos;i<nb;i++)
+		tabClient[i]=tabClient[i+1];
+	nb=nb-1;
+	afficherTabClient(tabClient,nb);
+	return nb;
+}
+
+/*-------------------------------------------- Ajouter Article -------------------------------------------------------*/
+Client saisieClient(int nb){
+	Client c;
+	printf("Civilité de nouveau client: ");
+	scanf("%s%*c",c.civilite);
+	printf("Nom de nouveau client : ");
+	scanf("%s%*c",c.nom);
+	printf("Prénom de nouveau client: ");
+	scanf("%s%*c",c.prenom);
+	printf("Saisir l'address de nouveau client :");
+	fgets(c.adresse,50,stdin);
+	c.adresse[strlen(c.adresse)-1]='\0';
+	c.idClient=nb+1;
+	return c;
+
+}
+
+int adjouterClient(Client tabClient[], int nbClient)
+{
+	Client a;
+	int trouve,pos;
+	triDicoClient(tabClient,nbClient,1);
+	a=saisieClient(tabClient[nbClient-1].idClient);
+	triDicoClient(tabClient,nbClient,0);
+	pos=rechercherDicoClient(a.nom,tabClient,nbClient,&trouve);
+	if(trouve==1){
+		printf("Erreur: Article déja enregistrée \n");
+		return nbClient;
+	}
+	tabClient[nbClient]=a;
+	nbClient=nbClient+1;
+	triDicoClient(tabClient,nbClient,2);
+	printf("Adjout de article reussi.");
+	return nbClient;
+	
+
 }
