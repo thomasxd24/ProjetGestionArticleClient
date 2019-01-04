@@ -6,7 +6,7 @@ typedef struct{
 	float prixunitaire;
 	int quantite;
     char designation[50];
-} Article;
+} Article;	
 
 /*-------------------------------------------- Chargement tableau ( v1 )-------------------------------------*/
 

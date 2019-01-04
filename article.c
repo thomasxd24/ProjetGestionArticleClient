@@ -162,3 +162,22 @@ int rechercherDicoDesignation(char rechmodele[],Article * tab[], int nbc,int *tr
 	*trouve=0;
 	return inf;
 }
+
+/*-------------------------------------------- Supprimer Article -------------------------------------------------------*/
+
+int supprimeArticle(Article ** tabArt,int nb){
+	char rechdesig_art[50];
+	int pos,trouve,i;
+	printf("Saisir le nom d'un article : \t");
+	scanf("%s%*c",rechdesig_art);
+	pos=rechercherDicoDesignation(rechdesig_art,tabArt,nb,&trouve);
+	if (trouve==0){
+		printf("Article non trouvee \n");
+		return nb;
+	}
+	for (i=pos;i<nb;i++)
+		tabArt[i]=tabArt[i+1];
+	nb=nb-1;
+	afficherTabArticle(tabArt,nb);
+	return nb;
+}

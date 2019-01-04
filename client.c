@@ -8,45 +8,58 @@ Client saisirClient(FILE *flot){
     fscanf(flot,"%s",c.prenom);
     fgets(c.adresse,50,flot);
     c.adresse[strlen(c.adresse)-2]='\0';
+
+
 	return c;
 }
 
-Client * chargeTabClient(int * tmax){
+void afficherTabClient(Client tabClient[],int nbClient){
+	int i=0;
+	printf("\t Nombre de client : %d \n",nbClient);
+	printf("ID\tCivilité\tnom\t\tprenom \t\t adresse \n");
+	printf("---------------------------------------------------------------------------------------------\n");
+	for (i=0;i<nbClient;i++)
+		printf("%d\t%s\t\t%s\t\t%s\t\t%s\n",tabClient[i].idClient,tabClient[i].civilite,tabClient[i].nom,tabClient[i].prenom,tabClient[i].adresse);
+}
+
+Client * chargeTabClient(Client *tabClient,int *nbClient){
 	FILE *flot;
-	int i;
-	Client * tab;
+	int i=0,tMax=1;
 	flot=fopen("clients.don","r");
 	if(flot==NULL){
 		printf("Probleme ouverture");
 		fclose(flot);
 		return NULL;
 	}
-	fscanf(flot,"%d",tmax);
-	tab=(Client *)malloc((*tmax)*sizeof(Client));
-	if (tab==NULL){
+	 tabClient=(Client *)malloc(sizeof(Client));
+	if (tabClient==NULL){
 		printf("Pb malloc\n");
 		fclose(flot);
 		return NULL;
 	}
-	for(i=0;i<*tmax;i++)
-		tab[i]=saisirClient(flot);
+	while(!feof(flot)){
+		if(i==tMax)
+		{
+			tabClient=(Client *)realloc(tabClient,tMax*sizeof(Client)+1*sizeof(Client));
+			tMax=tMax+1;
+		}
+		tabClient[i]=saisirClient(flot);
+
+		i=i+1;
+	}
+	*nbClient=i;
+			// afficherTabClient(tabClient,i);
 	fclose(flot);
-	return tab;
+
+	return tabClient;
 }
 
-void afficherTabClient(Client tab[],int nbclient){
-	int i;
-	printf("\t Nombre de client : %d \n",nbclient);
-	printf("idClient civilite nom prenom \t\t adresse \n");
-	printf("---------------------------------------------------------------------------------------------\n");
-	for (i=0;i<nbclient;i++)
-		printf("%d \t %s %s %s \t %s\n",tab[i].idClient,tab[i].civilite,tab[i].nom,tab[i].prenom,tab[i].adresse);
-}
+
 
 
 /*-------------------------------------------- RecherheDicoClient --------------------------------------------------------*/
 
-void copierClient(Client * tab[], int i, int j, Client * R[]){
+void copierClient(Client tab[], int i, int j, Client R[]){
 	int t=0;
 	while(i<j){
 		R[t]=tab[i];
@@ -55,10 +68,10 @@ void copierClient(Client * tab[], int i, int j, Client * R[]){
 	}
 }
 
-void fusionClient(Client * R[], int n, Client * S[], int m ,Client * t[]){
+void fusionClient(Client  R[], int n, Client  S[], int m ,Client  t[]){
 	int i=0, j=0, k=0;
 	while(i<n && j<m){
-		if ((strcmp(R[i]->nom,S[j]->nom))<0){
+		if ((strcmp(R[i].nom,S[j].nom))<0){
 			t[k]=R[i];
 			i=i+1;
 			k=k+1;
@@ -78,12 +91,12 @@ void fusionClient(Client * R[], int n, Client * S[], int m ,Client * t[]){
 	}
 }
 
-void triDicoClient(Client * tab[], int n){
-	Client **R,**S;
+void triDicoClient(Client tab[], int n){
+	Client *R,*S;
 	if (n==1)
 		return;
-	R=(Client**)malloc((n/2)*sizeof(Client*));
-	S=(Client**)malloc((n-(n/2))*sizeof(Client*));
+	R=(Client*)malloc((n/2)*sizeof(Client));
+	S=(Client*)malloc((n-(n/2))*sizeof(Client));
 	if (R==NULL || S==NULL){
 		printf("Probleme malloc");
 		return;

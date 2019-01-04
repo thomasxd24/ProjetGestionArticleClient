@@ -10,14 +10,12 @@ typedef struct{
 } Client;
 
 
-void copierClient(Client * tab[], int i, int j, Client * R[]);
-void fusionClient(Client * R[], int n, Client * S[], int m ,Client * t[]);
-void triDicoClient(Client * tab[], int n);
+void triDicoClient(Client tab[], int n);
 int rechercherDicoClient(char * rechnom,Client ** tab, int nbc,int *trouve);
 
 Client saisirClient(FILE *flot);
-Client * chargeTabClient(int * tmax);
-void afficherTabClient(Client tab[],int nbclient);
+Client * chargeTabClient(Client *tabClient,int *nbClient);
+void afficherTabClient(Client tabClient[],int nbClient);
 
 
 

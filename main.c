@@ -5,10 +5,16 @@
 
 int main(void)
 {
-    Article *taba[100];
-    int nba;
-    nba = remplirTabArticle(taba, 100);
-    menuPrinciple(taba,nba);
+    Article *tabArt[100];
+    Client *tabClient;
+   
+    int nbArt,nbClient;
+    nbArt = remplirTabArticle(tabArt, 100);
+    tabClient = chargeTabClient(tabClient,&nbClient);
+    // menuPrinciple(tabArt,nbArt);
+    afficherTabClient(tabClient,nbClient);
+    triDicoClient(tabClient, nbClient);
+    afficherTabClient(tabClient,nbClient);
     printf("Il marche!\n");
     return 0;
 }
