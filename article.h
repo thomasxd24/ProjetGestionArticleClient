@@ -1,15 +1,13 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-
-
-
 typedef struct{
 	int idarticle;
 	float prixunitaire;
 	int quantite;
     char designation[50];
 } Article;
+
 /*-------------------------------------------- Chargement tableau ( v1 )-------------------------------------*/
 
 Article saisirArticle(FILE *flot);// ca marche

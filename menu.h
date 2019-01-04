@@ -1,13 +1,9 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-
+#include"article.h"
+#include"client.h"
+#include"ligneCommande.h"
 /*-------------------------------------------- Menu (v1) ---------------------------------------------------------*/
 
-void afficheMenu(void);
-int choixMenu(void);
-
-/*-------------------------------------------- Menu (v2) ---------------------------------------------------------*/
-
-void afficheMenuArt1(void);
-int choixMenuArt1(void);
+void menuPrinciple(Article * tabArt[], int tailleArt);

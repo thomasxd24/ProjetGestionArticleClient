@@ -7,7 +7,7 @@ Client saisirClient(FILE *flot){
     fscanf(flot,"%s",c.nom);
     fscanf(flot,"%s",c.prenom);
     fgets(c.adresse,50,flot);
-    c.adresse[strlen(c.adresse)-1]='\0';
+    c.adresse[strlen(c.adresse)-2]='\0';
 	return c;
 }
 
@@ -15,7 +15,7 @@ Client * chargeTabClient(int * tmax){
 	FILE *flot;
 	int i;
 	Client * tab;
-	flot=fopen("Client.txt","r");
+	flot=fopen("clients.don","r");
 	if(flot==NULL){
 		printf("Probleme ouverture");
 		fclose(flot);
@@ -40,7 +40,7 @@ void afficherTabClient(Client tab[],int nbclient){
 	printf("idClient civilite nom prenom \t\t adresse \n");
 	printf("---------------------------------------------------------------------------------------------\n");
 	for (i=0;i<nbclient;i++)
-		printf("%d \t %s %s %s \t %s \n",tab[i].idClient,tab[i].civilite,tab[i].nom,tab[i].prenom,tab[i].adresse);
+		printf("%d \t %s %s %s \t %s\n",tab[i].idClient,tab[i].civilite,tab[i].nom,tab[i].prenom,tab[i].adresse);
 }
 
 
