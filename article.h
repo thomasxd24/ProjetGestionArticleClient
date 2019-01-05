@@ -1,3 +1,5 @@
+#ifndef SOME_HEADER_GUARD_WITH_UNIQUE_NAME
+#define SOME_HEADER_GUARD_WITH_UNIQUE_NAME
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -35,3 +37,4 @@ int rechercherDicoDesignation(char * rechmodele,Article ** tab, int nbc,int *tro
 /*-------------------------------------------- RecherheDicoArticle --------------------------------------------------------*/
 int supprimeArticle(Article ** tabArt,int nb);
 int adjouterArticle(Article *tabArt[], int tailleArt);
+#endif /* EXAMPLE_H */

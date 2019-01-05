@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#ifndef SOME_HEADER_GUARD_WITH_UIQUE_NAME
+#define SOME_HEADER_GUARD_WITH_UIQUE_NAME
 typedef struct{
 	int idClient;
 	char civilite[5];
@@ -23,3 +25,4 @@ void afficherTabClient(Client tabClient[],int nbClient);
 
 int supprimeClient(Client * tabClient,int nb);
 int adjouterClient(Client tabClient[], int nbClient);
+#endif /* EXAMPLE_H */
