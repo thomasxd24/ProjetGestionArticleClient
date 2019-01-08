@@ -10,7 +10,7 @@ Article saisirArticle(FILE *flot){
 }
 
 void afficherArticle(Article a){
-	printf("%d\t\t%.2f\t\t%d\t\t%s\n",a.idarticle,a.prixunitaire,a.quantite,a.designation);
+	printf("%d\t┃%.2f\t┃%d\t ┃%s\n",a.idarticle,a.prixunitaire,a.quantite,a.designation);
 }
 
 int remplirTabArticle(Article * tab[],int tmax){
@@ -44,10 +44,27 @@ int remplirTabArticle(Article * tab[],int tmax){
 
 void afficherTabArticle(Article ** tab,int nbarticle){
 	int i;
-	printf("IDArticle  \tPrix Unitaire \tQuantite \t Designation \n");
-	printf("--------------------------------------------------------------------------\n");
+	printf("Liste des Articles\n");
+	printf("━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━\n");
+	printf("ID\t┃Prix\t┃Quantite┃Designation \n");
+	printf("━━━━━━━━╋━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	for (i=0;i<nbarticle;i++)
 		afficherArticle(*tab[i]);
+	printf("━━━━━━━━┻━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━\n");
+	printf("Nombre de Article en total : %d \n",nbarticle);
+}
+
+void afficherTabArticleRupture(Article ** tab,int nbarticle){
+	int i;
+	printf("Liste des Articles en ruptures\n");
+	printf("━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━\n");
+	printf("ID\t┃Prix\t┃Quantite┃Designation \n");
+	printf("━━━━━━━━╋━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━\n");
+	for (i=0;i<nbarticle;i++)
+	if(tab[i]->quantite==0)
+		afficherArticle(*tab[i]);
+	printf("━━━━━━━━┻━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━\n");
+	printf("Nombre de Article En Rupture : %d \n",nbarticle);
 }
 
 void sauveTabArticle(Article *tab,int tmax){

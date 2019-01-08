@@ -14,6 +14,7 @@ typedef struct{
 
 Article saisirArticle(FILE *flot);// ca marche
 void afficherArticle(Article a);// ca marche
+void afficherTabArticleRupture(Article ** tab,int nbarticle);// ca marche
 int remplirTabArticle(Article * tab[],int tmax);// ca marche
 void afficherTabArticle(Article ** tab,int nbarticle);// ca marche
 
