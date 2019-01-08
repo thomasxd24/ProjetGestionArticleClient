@@ -44,7 +44,7 @@ void afficherEnsemble (Ensemble e){
 	}
 	printf("e={");
 	while (e->suiv!=NULL){
-		printf("%d,",e->v);
+		printf("%s,",e->v.artCommande->designation);
 		e=e->suiv;
 	}
 	printf("%d}",e->v.idCommande);

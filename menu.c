@@ -1,7 +1,5 @@
 #include "menu.h"
-void yellow {
-  printf("\033[1;33m");
-}
+
 void afficheMenuArticle(void)
 {
     system("clear");
@@ -251,4 +249,56 @@ void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *n
         }
     }
 }
-/*-------------------------------------------- Menu (v2) --------------------------------------------------------*/
+
+
+void menuChoixTriArticle(Article tabArticle[], int *nbArticle)
+{
+    int choix;
+    while (choix != 10)
+    {
+        afficheChoixTriArticle();
+        choix = choixMenu();
+        system("clear");
+        switch (choix)
+        {
+        case 1:
+            triDicoArticle(tabArticle, *nbArticle, 1);
+            afficherTabArticle(tabArticle, *nbArticle);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            choix = 10;
+            break;
+
+        case 2:
+            triDicoArticle(tabArticle, *nbArticle, 1);
+            afficherTabArticle(tabArticle, *nbArticle);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            choix = 10;
+            break;
+
+        case 3:
+            triDicoArticle(tabArticle, *nbArticle, 1);
+            afficherTabArticle(tabArticle, *nbArticle);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            choix = 10;
+            break;
+
+        case 4:
+            triDicoArticle(tabArticle, *nbArticle, 1);
+            afficherTabArticle(tabArticle, *nbArticle);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            choix = 10;
+            break;
+
+        case 10:
+            break;
+
+        default:
+            printf("Mauvais saisi");
+            break;
+        }
+    }
+}
