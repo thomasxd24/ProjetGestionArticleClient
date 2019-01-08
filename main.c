@@ -12,7 +12,6 @@ int main(void)
     printf("Chargement des Article...");
     nbArt = remplirTabArticle(tabArt, 100);
     printf("Réussi\n");
-    printf("cc");
     printf("Chargement des Client...");
     tabClient = chargeTabClient(tabClient,&nbClient);
     printf("Réussi\n");
