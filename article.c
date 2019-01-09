@@ -19,7 +19,7 @@ int remplirTabArticle(Article * tab[],int tmax){
 	Article a;
 	flot=fopen("articles.don","r");
 	if(flot==NULL){
-		printf("Probleme ouverture");
+		printf("Problème d'ouverture du fichier");
 		return -1;
 	}
 	a=saisirArticle(flot);
@@ -31,7 +31,7 @@ int remplirTabArticle(Article * tab[],int tmax){
         tab[i]=(Article *)malloc(sizeof(Article));
 		if (tab[i]==NULL)
 		{
-			printf("Probleme malloc \n");
+			printf("Problème malloc \n");
 			return -3;
 		}
         *tab[i]=a;
@@ -51,7 +51,7 @@ void afficherTabArticle(Article ** tab,int nbarticle){
 	for (i=0;i<nbarticle;i++)
 		afficherArticle(*tab[i]);
 	printf("━━━━━━━━┻━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━\n");
-	printf("Nombre de Article en total : %d \n",nbarticle);
+	printf("Nombre d'Article en total : %d \n",nbarticle);
 }
 
 void afficherTabArticleRupture(Article ** tab,int nbarticle){
@@ -64,7 +64,7 @@ void afficherTabArticleRupture(Article ** tab,int nbarticle){
 	if(tab[i]->quantite==0)
 		afficherArticle(*tab[i]);
 	printf("━━━━━━━━┻━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━\n");
-	printf("Nombre de Article En Rupture : %d \n",nbarticle);
+	printf("Nombre d'Article En Rupture : %d \n",nbarticle);
 }
 
 void sauveTabArticle(Article *tab,int tmax){
@@ -74,7 +74,7 @@ void sauveTabArticle(Article *tab,int tmax){
 	scanf("%s",nomfichier);
 	flot=fopen(nomfichier,"wb");
 	if(flot==NULL){
-		printf("Probleme ouverture");
+		printf("Problème d'ouverture du fichier");
 		return;
 	}
 	fprintf(flot,"%d",tmax);
@@ -145,7 +145,7 @@ void triDicoArticle (Article * tab[], int n,int choix){
 	R=(Article**)malloc((n/2)*sizeof(Article*));
 	S=(Article**)malloc((n-(n/2))*sizeof(Article*));
 	if (R==NULL || S==NULL){
-		printf("Probleme malloc");
+		printf("Problème malloc");
 		return;
 	}
 	copier(tab,0,n/2,R);
@@ -190,7 +190,7 @@ int supprimeArticle(Article ** tabArt,int nb){
 	printf("%s\n",rechdesig_art);
 	pos=rechercherDicoDesignation(rechdesig_art,tabArt,nb,&trouve);
 	if (trouve==0){
-		printf("Article non trouvee \n");
+		printf("Article non trouvé \n");
 		return nb;
 	}
 	for (i=pos;i<nb;i++)
@@ -203,12 +203,12 @@ int supprimeArticle(Article ** tabArt,int nb){
 /*-------------------------------------------- Ajouter Article -------------------------------------------------------*/
 Article saisieArticle(int tailleArt){
 	Article a;
-	printf("Saisir le nom d'un nouveaux article : \t");
+	printf("Saisir le nom d'un nouvel article : \t");
 	fgets(a.designation,50,stdin);
 	a.designation[strlen(a.designation)-1]='\0';
 	printf("Prix unitaire : ");
 	scanf("%f%*c",&a.prixunitaire);
-	printf("Quantite initial: ");
+	printf("Quantité initiale: ");
 	scanf("%d%*c",&a.quantite);
 	a.idarticle=tailleArt+1;
 	return a;
