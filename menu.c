@@ -227,6 +227,7 @@ void menuChoixTriArticle(Article *tabArticle[], int *nbArticle)
             break;
         }
     }
+}
 
 void menuArticle(Article *tabArt[], int *tailleArt)
 {
@@ -301,6 +302,3 @@ void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *n
     }
 }
 
-
-
-}
