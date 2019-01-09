@@ -1,6 +1,10 @@
 #ifndef SOME_HEADER_GUARD_WITHh_UNIQUE_NAME
 #define SOME_HEADER_GUARD_WITHh_UNIQUE_NAME
 #include"article.h"
+
+
+/*-------------------------------------------- Structure -------------------------------------------------------*/
+
 typedef struct 
 {
     int idCommande;
@@ -26,3 +30,13 @@ Ensemble supprimerCommande(Ensemble e, Article *x);
 int longueur (Ensemble e);
 
 #endif /* EXAMPLE_H */
+
+int remplirTabLigneCommande(LigneCommande *tab[], int tmax, FILE*flot);
+LigneCommande lireLigneCommande(LigneCommande * flot);
+
+/* Fonctionnalite à rajouter :
+
+
+Fonctionnalite à modifier :
+
+*/ 
