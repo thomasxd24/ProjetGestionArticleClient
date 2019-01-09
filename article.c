@@ -69,18 +69,17 @@ void afficherTabArticleRupture(Article ** tab,int nbarticle){
 
 void sauveTabArticle(Article *tab,int tmax){
 	FILE *flot;
-	char nomfichier[50];
-	printf("Quel fichier voulez-vous sauvegarder ?");
-	scanf("%s",nomfichier);
-	flot=fopen(nomfichier,"wb");
+	flot=fopen("articles.don","r+");
 	if(flot==NULL){
 		printf("Problème d'ouverture du fichier");
 		return;
 	}
-	fprintf(flot,"%d",tmax);
+	fwrite(&tmax,sizeof(int),1,flot);
 	fwrite(tab,sizeof(Article),tmax,flot);
 	fclose(flot);
 }
+
+
 void copier(Article * tab[], int i, int j, Article * R[]){
 	int t=0;
 	while(i<j){

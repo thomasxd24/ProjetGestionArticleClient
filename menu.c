@@ -328,7 +328,7 @@ void menuReglage(Article *tabArt[], int *tailleArt)
         switch (choix)
         {
         case 1:
-            sauveTabArticle(*tabArt,*tailleArt);
+            sauveTabArticle(tabArt,*tailleArt);
             afficherTabArticle(tabArt,*tailleArt);
             break;
 
