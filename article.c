@@ -1,5 +1,8 @@
 #include"article.h"
 #define champ choix
+
+/*-------------------------------------------- Chargement TAB ---------------------------------------------------*/
+
 Article saisirArticle(FILE *flot){
 	Article a;
 	fscanf(flot,"%d %f %d ",&a.idarticle,&a.prixunitaire,&a.quantite);
@@ -7,10 +10,6 @@ Article saisirArticle(FILE *flot){
 	fgets(a.designation,50,flot);
 	a.designation[strlen(a.designation)-2]='\0';
 	return a;
-}
-
-void afficherArticle(Article a){
-	printf("%d\t┃%.2f\t┃%d\t ┃%s\n",a.idarticle,a.prixunitaire,a.quantite,a.designation);
 }
 
 int remplirTabArticle(Article * tab[],int tmax){
@@ -42,6 +41,12 @@ int remplirTabArticle(Article * tab[],int tmax){
 	return i;
 }
 
+/*-------------------------------------------- Afficher TAB------------------------------------------------------*/
+
+void afficherArticle(Article a){
+	printf("%d\t┃%.2f\t┃%d\t ┃%s\n",a.idarticle,a.prixunitaire,a.quantite,a.designation);
+}
+
 void afficherTabArticle(Article ** tab,int nbarticle){
 	int i;
 	printf("Liste des Articles\n");
@@ -66,6 +71,7 @@ void afficherTabArticleRupture(Article ** tab,int nbarticle){
 	printf("━━━━━━━━┻━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	printf("Nombre d'Article En Rupture : %d \n",nbarticle);
 }
+/*-------------------------------------------- Sauvegarder TAB --------------------------------------------------*/
 
 void sauveTabArticle(Article *tab,int tmax){
 	FILE *flot;
@@ -79,16 +85,7 @@ void sauveTabArticle(Article *tab,int tmax){
 	fclose(flot);
 }
 
-
-void copier(Article * tab[], int i, int j, Article * R[]){
-	int t=0;
-	while(i<j){
-		R[t]=tab[i];
-		i=i+1;
-		t=t+1;
-	}
-}
-
+/*-------------------------------------------- Trie Dico Article ------------------------------------------------*/
 int testPosArticle(Article * R, Article * S,int choix)
 {
 	
@@ -109,6 +106,15 @@ int testPosArticle(Article * R, Article * S,int choix)
 	
 		default:
 			break;
+	}
+}
+
+void copier(Article * tab[], int i, int j, Article * R[]){
+	int t=0;
+	while(i<j){
+		R[t]=tab[i];
+		i=i+1;
+		t=t+1;
 	}
 }
 
@@ -156,9 +162,7 @@ void triDicoArticle (Article * tab[], int n,int choix){
 	free(S);
 }
 
-
-
-/*-------------------------------------------- RechercheArticleModele --------------------------------------------------------*/
+/*-------------------------------------------- Recherche Article Designation ------------------------------------*/
 
 int rechercherDicoDesignation(char rechmodele[],Article * tab[], int nbc,int *trouve){
 	Article hi;
@@ -200,6 +204,7 @@ int supprimeArticle(Article ** tabArt,int nb){
 }
 
 /*-------------------------------------------- Ajouter Article -------------------------------------------------------*/
+
 Article saisieArticle(int tailleArt){
 	Article a;
 	printf("Saisir le nom d'un nouvel article : \t");
