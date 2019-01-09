@@ -177,81 +177,7 @@ void menuClient(Client tabClient[], int *nbClient)
     menuClient(tabClient, nbClient);
 }
 
-void menuArticle(Article *tabArt[], int *tailleArt)
-{
-    int choix;
-    while (choix != 10)
-    {
-        afficheMenuArticle();
-        choix = choixMenu();
-        system("clear");
-        switch (choix)
-        {
-        case 1:
-            afficherTabArticle(tabArt, *tailleArt);
-            printf("Appuyer sur une touche pour continuer...\n");
-            getchar();
-            break;
-
-        case 3:
-            triDicoArticle(tabArt, *tailleArt, 2);
-            *tailleArt = adjouterArticle(tabArt, *tailleArt);
-            printf("Appuyer sur une touche pour continuer...\n");
-            getchar();
-            break;
-
-        case 4:
-            triDicoArticle(tabArt, *tailleArt, 2);
-            *tailleArt = supprimeArticle(tabArt, *tailleArt);
-            printf("Appuyer sur une touche pour continuer...\n");
-            getchar();
-            break;
-
-        case 5:
-            triDicoArticle(tabArt, *tailleArt, 1);
-            afficherTabArticleRupture(tabArt, *tailleArt);
-            printf("Appuyer sur une touche pour continuer...\n");
-            getchar();
-            break;
-
-        case 10:
-            break;
-
-        default:
-            printf("Mauvais saisi");
-            break;
-        }
-    }
-}
-
-void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *nbClient)
-{
-    int choix;
-    while (choix != 10)
-    {
-        afficheMenuPrinciple();
-        choix = choixMenu();
-        switch (choix)
-        {
-        case 1:
-            menuArticle(tabArt, tailleArt);
-            break;
-
-        case 2:
-            menuClient(tabClient, nbClient);
-            break;
-
-        case 10:
-            break;
-
-        default:
-            break;
-        }
-    }
-}
-
-
-void menuChoixTriArticle(Article tabArticle[], int *nbArticle)
+void menuChoixTriArticle(Article *tabArticle[], int *nbArticle)
 {
     int choix;
     while (choix != 10)
@@ -301,4 +227,80 @@ void menuChoixTriArticle(Article tabArticle[], int *nbArticle)
             break;
         }
     }
+
+void menuArticle(Article *tabArt[], int *tailleArt)
+{
+    int choix;
+    while (choix != 10)
+    {
+        afficheMenuArticle();
+        choix = choixMenu();
+        system("clear");
+        switch (choix)
+        {
+        case 1:
+            menuChoixTriArticle(tabArt, tailleArt);
+            break;
+
+        case 3:
+            triDicoArticle(tabArt, *tailleArt, 2);
+            *tailleArt = adjouterArticle(tabArt, *tailleArt);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            break;
+
+        case 4:
+            triDicoArticle(tabArt, *tailleArt, 2);
+            *tailleArt = supprimeArticle(tabArt, *tailleArt);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            break;
+
+        case 5:
+            triDicoArticle(tabArt, *tailleArt, 1);
+            afficherTabArticleRupture(tabArt, *tailleArt);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            break;
+
+        case 10:
+            break;
+
+        default:
+            printf("Mauvais saisi");
+            break;
+        }
+    }
+}
+
+
+
+void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *nbClient)
+{
+    int choix;
+    while (choix != 10)
+    {
+        afficheMenuPrinciple();
+        choix = choixMenu();
+        switch (choix)
+        {
+        case 1:
+            menuArticle(tabArt, tailleArt);
+            break;
+
+        case 2:
+            menuClient(tabClient, nbClient);
+            break;
+
+        case 10:
+            break;
+
+        default:
+            break;
+        }
+    }
+}
+
+
+
 }
