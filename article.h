@@ -30,6 +30,9 @@ void sauveTabArticle(Article *tab,int tmax);
 
 /*-------------------------------------------- Trie Dico Article -------------------------------------------------*/
 
+int testPosArticle(Article * R, Article * S,int choix);
+void copier(Article * tab[], int i, int j, Article * R[]);
+void fusion (Article * R[], int n, Article * S[], int m ,Article * t[],int choix);
 void triDicoArticle (Article * tab[], int n,int choix);// ca marche
 // choix:
 // 1: idarticle
@@ -47,6 +50,7 @@ int supprimeArticle(Article ** tabArt,int nb);
 
 /*-------------------------------------------- Ajouter Article -----------------------------------------------------*/
 
+Article saisieArticle(int tailleArt);
 int adjouterArticle(Article *tabArt[], int tailleArt);
 
 
