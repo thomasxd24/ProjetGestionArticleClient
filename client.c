@@ -15,7 +15,7 @@ Client saisirClient(FILE *flot){
 
 void afficherTabClient(Client tabClient[],int nbClient){
 	int i=0;
-	printf("Liste des Client\n");
+	printf("Liste des Clients\n");
 	printf("━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	printf("   ID\t┃Civilité  ┃Nom            ┃Prénom         ┃Adresse \n");
 	printf("━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
@@ -30,13 +30,13 @@ Client * chargeTabClient(Client *tabClient,int *nbClient){
 	int i=0,tMax=1;
 	flot=fopen("clients.don","r");
 	if(flot==NULL){
-		printf("Probleme ouverture");
+		printf("Problème d'ouverture du fichier");
 		fclose(flot);
 		return NULL;
 	}
 	 tabClient=(Client *)malloc(sizeof(Client));
 	if (tabClient==NULL){
-		printf("Pb malloc\n");
+		printf("Problème malloc\n");
 		fclose(flot);
 		return NULL;
 	}
@@ -126,7 +126,7 @@ void triDicoClient(Client tab[], int n,int trieID){
 	R=(Client *)malloc((n/2)*sizeof(Client));
 	S=(Client *)malloc((n-(n/2))*sizeof(Client));
 	if (R==NULL || S==NULL){
-		printf("Probleme malloc");
+		printf("Problème malloc");
 		return;
 	}
 	copierClient(tab,0,n/2,R);
@@ -164,14 +164,14 @@ int supprimeClient(Client * tabClient,int nb){
 	scanf("%s%*c",rechdesig_art);
 	pos=rechercherDicoClient(rechdesig_art,tabClient,nb,&trouve);
 	if (trouve==0){
-		printf("Client non trouvée \n");
+		printf("Client non trouvé \n");
 		return nb;
 	}
 	for (i=pos;i<nb;i++)
 		tabClient[i]=tabClient[i+1];
 	tabClient=(Client *)realloc(tabClient,nb*sizeof(Client)-1*sizeof(Client));
 	nb=nb-1;
-	printf("Client Supprimmée.\n");
+	printf("Client Supprimmé.\n");
 	return nb;
 }
 
@@ -184,7 +184,7 @@ Client saisieClient(int nb){
 	scanf("%s%*c",c.nom);
 	printf("Prénom de nouveau client: ");
 	scanf("%s%*c",c.prenom);
-	printf("Saisir l'address de nouveau client :");
+	printf("Saisir l'adresse de nouveau client :");
 	fgets(c.adresse,50,stdin);
 	c.adresse[strlen(c.adresse)-1]='\0';
 	c.idClient=nb+1;
@@ -201,14 +201,14 @@ int adjouterClient(Client tabClient[], int nbClient)
 	triDicoClient(tabClient,nbClient,0);
 	pos=rechercherDicoClient(a.nom,tabClient,nbClient,&trouve);
 	if(trouve==1){
-		printf("Erreur: Client déja enregistrée \n");
+		printf("Erreur: Client déjà enregistré \n");
 		return nbClient;
 	}
 	tabClient=(Client *)realloc(tabClient,nbClient*sizeof(Client)+1*sizeof(Client));
 	tabClient[nbClient]=a;
 	nbClient=nbClient+1;
 	triDicoClient(tabClient,nbClient,2);
-	printf("Ajout de client reussi.\n");
+	printf("Ajout du client réussi.\n");
 	return nbClient;
 	
 

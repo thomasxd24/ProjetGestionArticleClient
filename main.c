@@ -9,10 +9,10 @@ int main(void)
     Client *tabClient;
    
     int nbArt,nbClient;
-    printf("Chargement des Article...");
+    printf("Chargement des Articles...");
     nbArt = remplirTabArticle(tabArt, 100);
     printf("Réussi\n");
-    printf("Chargement des Client...");
+    printf("Chargement des Clients...");
     tabClient = chargeTabClient(tabClient,&nbClient);
     printf("Réussi\n");
     printf("Appuyer sur une touche pour continuer...\n");  

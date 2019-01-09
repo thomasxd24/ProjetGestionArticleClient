@@ -53,7 +53,7 @@ void afficherEnsemble (Ensemble e){
 Ensemble supprimerEnTete (Ensemble e){
 	Maillon * aux;
 	if (e==NULL){
-		printf ("Op�ration impossible");
+		printf ("Opération impossible");
 		exit (1);
 	}
 	aux=e;
