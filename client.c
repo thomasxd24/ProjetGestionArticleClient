@@ -94,12 +94,7 @@ void copierClient(Client tab[], int i, int j, Client R[]){
 void fusionClient(Client  R[], int n, Client  S[], int m ,Client  t[],int trieID){
 	int i=0, j=0, k=0, testOrdre;
 	while(i<n && j<m){
-		if(trieID)
-			testOrdre=R[i].idClient-S[j].idClient;
-		else
-			testOrdre=strcmp(R[i].nom,S[j].nom);
-		
-		if (testOrdre<0){
+		if (testPosClient(R[i],S[j],trieID)<0){
 			t[k]=R[i];
 			i=i+1;
 			k=k+1;

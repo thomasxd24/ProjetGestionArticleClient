@@ -33,12 +33,12 @@ void afficheChoixTriArticle(void)
 {
     system("clear");
     printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-    printf("┃\t\t\tAfficher Article\t\t\t┃\n");
+    printf("┃\t\t\tAfficher Article\t\t┃\n");
     printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
     printf("┃\t1.  Afficher par ID\t\t\t\t┃\n");
-    printf("┃\t2.  Afficher par désignation\t\t\t\t┃\n");
+    printf("┃\t2.  Afficher par désignation\t\t\t┃\n");
     printf("┃\t3.  Afficher par prix\t\t\t\t┃\n");
-    printf("┃\t4.  Afficher par quantité\t\t\t\t┃\n");
+    printf("┃\t4.  Afficher par quantité\t\t\t┃\n");
     printf("┃\t10. Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
@@ -47,12 +47,12 @@ void afficheChoixTriClient(void)
 {
     system("clear");
     printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-    printf("┃\t\t\t[0;33mAfficher Client\t\t\t┃\n");
+    printf("┃\t\t\tAfficher Client\t\t\t┃\n");
     printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
     printf("┃\t1.  Afficher par ID\t\t\t\t┃\n");
     printf("┃\t2.  Afficher par nom\t\t\t\t┃\n");
     printf("┃\t3.  Afficher par prénom\t\t\t\t┃\n");
-    printf("┃\t4.  Afficher par adresse\t\t\t\t┃\n");
+    printf("┃\t4.  Afficher par adresse\t\t\t┃\n");
     printf("┃\t10. Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
@@ -67,6 +67,7 @@ int afficheMenuPrinciple(void)
     printf("┃\t2.  Client\t\t\t\t\t┃\n");
     printf("┃\t3.  Commande\t\t\t\t\t┃\n");
     printf("┃\t4.  Réapprovisonnement\t\t\t\t┃\n");
+    printf("┃\t5.  Sauvegarde\t\t\t\t┃\n");
     printf("┃\t10. Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 
@@ -100,7 +101,7 @@ void menuChoixTriClient(Client tabClient[], int *nbClient)
             break;
 
         case 2:
-            triDicoClient(tabClient, *nbClient, 1);
+            triDicoClient(tabClient, *nbClient, 2);
             afficherTabClient(tabClient, *nbClient);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
@@ -108,20 +109,13 @@ void menuChoixTriClient(Client tabClient[], int *nbClient)
             break;
 
         case 3:
-            triDicoClient(tabClient, *nbClient, 1);
+            triDicoClient(tabClient, *nbClient, 3);
             afficherTabClient(tabClient, *nbClient);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
             choix = 10;
             break;
 
-        case 4:
-            triDicoClient(tabClient, *nbClient, 1);
-            afficherTabClient(tabClient, *nbClient);
-            printf("Appuyer sur une touche pour continuer...\n");
-            getchar();
-            choix = 10;
-            break;
 
         case 10:
             break;
@@ -196,7 +190,7 @@ void menuChoixTriArticle(Article *tabArticle[], int *nbArticle)
             break;
 
         case 2:
-            triDicoArticle(tabArticle, *nbArticle, 1);
+            triDicoArticle(tabArticle, *nbArticle, 2);
             afficherTabArticle(tabArticle, *nbArticle);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
@@ -204,7 +198,7 @@ void menuChoixTriArticle(Article *tabArticle[], int *nbArticle)
             break;
 
         case 3:
-            triDicoArticle(tabArticle, *nbArticle, 1);
+            triDicoArticle(tabArticle, *nbArticle, 3);
             afficherTabArticle(tabArticle, *nbArticle);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
@@ -212,7 +206,7 @@ void menuChoixTriArticle(Article *tabArticle[], int *nbArticle)
             break;
 
         case 4:
-            triDicoArticle(tabArticle, *nbArticle, 1);
+            triDicoArticle(tabArticle, *nbArticle, 4);
             afficherTabArticle(tabArticle, *nbArticle);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
