@@ -74,6 +74,23 @@ int afficheMenuPrinciple(void)
     return 10;
 }
 
+int afficheMenuReglage(void)
+{
+    system("clear");
+    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+    printf("┃\tGestion des Client et Article et Commande\t┃\n");
+    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+    printf("┃\t1.  Sauvegarder le fichier articles\t\t\t\t\t┃\n");
+    printf("┃\t2.  Sauvegarder le fichier client\t\t\t\t\t┃\n");
+    printf("┃\t3.  Sauvegarder le fichier commande\t\t\t\t\t┃\n");
+    printf("┃\t4.  Restaurer les fichiers par default\t\t\t\t\t┃\n");
+    printf("┃\t\t\t\t\t\t\t┃\n");
+    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
+    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+
+    return 10;
+}
+
 int choixMenu(void)
 {
     int n;
@@ -296,3 +313,29 @@ void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *n
     }
 }
 
+void MenuReglage(Article *tabArt[], int *tailleArt)
+{
+    int choix;
+    while (choix != 10)
+    {
+        afficheMenuReglage();
+        choix = choixMenu();
+        system("clear");
+        switch (choix)
+        {
+        case 1:
+            sauveTabArticle(tabArt, *tailleArt);
+            afficherTabArticle(tabArt, *tailleArt);
+            break;
+
+        
+
+        case 10:
+            break;
+
+        default:
+            printf("Mauvais saisi");
+            break;
+        }
+    }
+}
