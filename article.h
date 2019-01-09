@@ -40,10 +40,12 @@ void triDicoArticle (Article * tab[], int n,int choix);// ca marche
 // 3: prix
 // 4: quantite
 
-/*-------------------------------------------- Recherche Article Designation --------------------------------------*/
+/*-------------------------------------------- Recherche Article-------------------------------------*/
 
-int rechercherDicoDesignation(char * rechmodele,Article ** tab, int nbc,int *trouve); // ca marche
-
+int rechercherDicoArticle(char * rechmodele,Article ** tab, int nbc,int *trouve,int choixID); // ca marche
+// choix:
+// 1: idarticle
+// 2: designation
 /*-------------------------------------------- Supprimer Article --------------------------------------------------*/
 
 int supprimeArticle(Article ** tabArt,int nb);

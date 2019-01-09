@@ -7,7 +7,8 @@ int main(void)
 {
     Article *tabArt[100];
     Client *tabClient;
-   
+    Ensemble en;
+    LigneCommande lc;
     int nbArt,nbClient;
     printf("Chargement des Articles...");
     nbArt = remplirTabArticle(tabArt, 100);
@@ -17,6 +18,7 @@ int main(void)
     printf("Réussi\n");
     printf("Appuyer sur une touche pour continuer...\n");  
     getchar();
-    menuPrinciple(tabArt,&nbArt,tabClient,&nbClient);
+    // menuPrinciple(tabArt,&nbArt,tabClient,&nbClient);
+
     return 0;
 }

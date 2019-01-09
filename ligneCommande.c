@@ -2,52 +2,49 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
+
 Ensemble ensembleVide (void){
 	return NULL;
 }
 
-Ensemble insererEnTete (Ensemble e, int x){
+Ensemble insererEnTete (Ensemble e, LigneCommande commande){
 	Ensemble m;
 	m=(Maillon*)malloc(sizeof(Maillon));
 	if (m==NULL){
 		printf("Erreur de malloc");
 		exit (1);
 	}
-	m->v.idCommande=x;
+	m->v=commande;
 	m->suiv=e;
 	return m;
 
 }
 
-Ensemble ajouter (Ensemble e ,int x){
+Ensemble ajouterCommande(Ensemble e ,LigneCommande commande){
 	if (e==NULL)
-		return insererEnTete (e,x);
-	if (x<e->v.idCommande)
-		return insererEnTete (e,x);
-	if (x==e->v.idCommande)
-		return e;
-	e->suiv=ajouter (e->suiv, x);
+		return insererEnTete (e,commande);
+	e->suiv=ajouterCommande(e->suiv, commande);
 	return e;
 }
 
 
-Booleen vide (Ensemble e){
+Booleen commandeEstVide(Ensemble e){
 	if (e==NULL)
 		return vrai;
 	return faux;
 }
 
-void afficherEnsemble (Ensemble e){
+void afficherCommande (Ensemble e){
 	if (e==NULL){
 		printf("Ensemble vide");
 		return;
 	}
-	printf("e={");
+	printf("%s\n",e->v.artCommande->designation);
 	while (e->suiv!=NULL){
-		printf("%s,",e->v.artCommande->designation);
+		printf("%s\n",e->v.artCommande->designation);
 		e=e->suiv;
 	}
-	printf("%d}",e->v.idCommande);
 }
 
 Ensemble supprimerEnTete (Ensemble e){
@@ -62,14 +59,12 @@ Ensemble supprimerEnTete (Ensemble e){
 	return e;
 }
 
-Ensemble supprimer(Ensemble e, int x){
+Ensemble supprimerCommande(Ensemble e, Article *x){
 	if (e==NULL)
 		return e;
-	if (x<e->v.idCommande)
-		return e;
-	if (x==e->v.idCommande)
+	if (x->idarticle==e->v.artCommande->idarticle)
 		return supprimerEnTete (e);
-	e->suiv= supprimer (e->suiv, x);
+	e->suiv= supprimerCommande(e->suiv, x);
 	return e;
 }
 

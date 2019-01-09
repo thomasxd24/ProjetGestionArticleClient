@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include"ligneCommande.h"
 #ifndef SOME_HEADER_GUARD_WITH_UIQUE_NAME
 #define SOME_HEADER_GUARD_WITH_UIQUE_NAME
 typedef struct{
@@ -9,6 +10,7 @@ typedef struct{
 	char nom[10];
 	char prenom[10];
 	char adresse[50];
+	Ensemble commandes;
 } Client;
 
 

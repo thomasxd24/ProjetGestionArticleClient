@@ -16,4 +16,13 @@ typedef struct Maillon{
 typedef Maillon *Ensemble;
 
 typedef enum {faux,vrai}Booleen;
+Ensemble ensembleVide (void);
+Ensemble insererEnTete (Ensemble e, LigneCommande commande);
+Ensemble ajouterCommande(Ensemble e ,LigneCommande commande);
+Booleen commandeEstVide(Ensemble e);
+void afficherCommande (Ensemble e);
+Ensemble supprimerEnTete (Ensemble e);
+Ensemble supprimerCommande(Ensemble e, Article *x);
+int longueur (Ensemble e);
+
 #endif /* EXAMPLE_H */
