@@ -78,3 +78,31 @@ int longueur (Ensemble e){
 		return 0;
 	return 1+longueur(e->suiv);
 }
+
+int remplirTabLigneCommande(LigneCommande *tab[], int tmax, FILE*flot){
+	LigneCommande v;
+	int i=0;
+	v=lireLigneCommande(flot);
+	while(!feof(flot)){
+		if(i==tmax)
+			return -1;
+		tab[i]=(LigneCommande*)malloc(sizeof(LigneCommande));
+		if(tab[i]==NULL){
+			printf("Probleme malloc \n");
+			exit(1);
+		}
+		*tab[i]=v;
+		i=i+1;
+		v=lireLigneCommande(flot);
+	}
+	return i;
+}
+
+LigneCommande lireLigneCommande(*flot){
+	lireLigneCommande v;
+	fscanf(flot,"%d",&v.idCommande);
+	fgets(v.artCommande,100,flot);
+	v.artCommande[strlen(v.artCommande)-1]="\0";
+	fscanf(flot,"%d",&v.quantite);
+	return v;
+}
