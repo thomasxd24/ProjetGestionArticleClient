@@ -67,7 +67,7 @@ int afficheMenuPrinciple(void)
     printf("┃\t2.  Client\t\t\t\t\t┃\n");
     printf("┃\t3.  Commande\t\t\t\t\t┃\n");
     printf("┃\t4.  Réapprovisonnement\t\t\t\t┃\n");
-    printf("┃\t5.  Sauvegarde\t\t\t\t┃\n");
+    printf("┃\t5.  Sauvegarde / Restaurer\t\t\t┃\n");
     printf("┃\t10. Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 
@@ -80,10 +80,10 @@ int afficheMenuReglage(void)
     printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
     printf("┃\tGestion des Client et Article et Commande\t┃\n");
     printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-    printf("┃\t1.  Sauvegarder le fichier articles\t\t\t\t\t┃\n");
-    printf("┃\t2.  Sauvegarder le fichier client\t\t\t\t\t┃\n");
-    printf("┃\t3.  Sauvegarder le fichier commande\t\t\t\t\t┃\n");
-    printf("┃\t4.  Restaurer les fichiers par default\t\t\t\t\t┃\n");
+    printf("┃\t1.  Sauvegarder le fichier articles\t\t┃\n");
+    printf("┃\t2.  Sauvegarder le fichier client\t\t┃\n");
+    printf("┃\t3.  Sauvegarder le fichier commande\t\t┃\n");
+    printf("┃\t4.  Restaurer les fichiers par default\t\t┃\n");
     printf("┃\t\t\t\t\t\t\t┃\n");
     printf("┃\t10. Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
@@ -303,6 +303,10 @@ void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *n
         case 2:
             menuClient(tabClient, nbClient);
             break;
+        
+        case 5:
+            menuReglage(tabArt, tailleArt);
+            break;
 
         case 10:
             break;
@@ -313,7 +317,7 @@ void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *n
     }
 }
 
-void MenuReglage(Article *tabArt[], int *tailleArt)
+void menuReglage(Article *tabArt[], int *tailleArt)
 {
     int choix;
     while (choix != 10)
@@ -324,11 +328,9 @@ void MenuReglage(Article *tabArt[], int *tailleArt)
         switch (choix)
         {
         case 1:
-            sauveTabArticle(tabArt, *tailleArt);
-            afficherTabArticle(tabArt, *tailleArt);
+            sauveTabArticle(*tabArt,*tailleArt);
+            afficherTabArticle(tabArt,*tailleArt);
             break;
-
-        
 
         case 10:
             break;

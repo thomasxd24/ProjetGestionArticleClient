@@ -7,3 +7,4 @@
 /*-------------------------------------------- Menu (v1) ---------------------------------------------------------*/
 
 void menuPrinciple(Article * tabArt[], int *tailleArt,Client tabClient[],int *nbClient);
+void menuReglage(Article *tabArt[], int *tailleArt);
