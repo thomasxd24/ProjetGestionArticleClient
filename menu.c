@@ -67,6 +67,7 @@ int afficheMenuPrinciple(void)
     printf("┃\t2.  Client\t\t\t\t\t┃\n");
     printf("┃\t3.  Commande\t\t\t\t\t┃\n");
     printf("┃\t4.  Réapprovisonnement\t\t\t\t┃\n");
+    printf("┃\t5.  Reglage\t\t\t\t\t┃\n");
     printf("┃\t10. Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 
@@ -308,6 +309,10 @@ void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *n
 
         case 2:
             menuClient(tabClient, nbClient);
+            break;
+
+        case 5:
+            menuReglage(tabArt, tailleArt);
             break;
 
         case 10:
