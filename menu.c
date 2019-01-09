@@ -1,61 +1,14 @@
 #include "menu.h"
 
-void afficheMenuArticle(void)
+int choixMenu(void)
 {
-    system("clear");
-    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-    printf("┃\t\t\tMenu Article\t\t\t┃\n");
-    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-    printf("┃\t1.  Afficher la liste des articles\t\t┃\n");
-    printf("┃\t2.  Ajouter un article\t\t\t\t┃\n");
-    printf("┃\t3.  Enlever un article\t\t\t\t┃\n");
-    printf("┃\t4.  Modifier un article\t\t\t\t┃\n");
-    printf("┃\t5.  Afficher les articles en rupture\t\t┃\n");
-    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
-    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+    int n;
+    printf("\n Option choisie : ");
+    scanf("%d%*c", &n);
+    return n;
 }
 
-void afficheMenuClient(void)
-{
-    system("clear");
-    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-    printf("┃\t\t\tMenu Client\t\t\t┃\n");
-    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-    printf("┃\t1.  Afficher la liste des clients\t\t┃\n");
-    printf("┃\t2.  Ajouter un client\t\t\t\t┃\n");
-    printf("┃\t3.  Enlever un client\t\t\t\t┃\n");
-    printf("┃\t4.  Modifier un client\t\t\t\t┃\n");
-    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
-    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
-}
-
-void afficheChoixTriArticle(void)
-{
-    system("clear");
-    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-    printf("┃\t\t\tAfficher Article\t\t┃\n");
-    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-    printf("┃\t1.  Afficher par ID\t\t\t\t┃\n");
-    printf("┃\t2.  Afficher par désignation\t\t\t┃\n");
-    printf("┃\t3.  Afficher par prix\t\t\t\t┃\n");
-    printf("┃\t4.  Afficher par quantité\t\t\t┃\n");
-    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
-    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
-}
-
-void afficheChoixTriClient(void)
-{
-    system("clear");
-    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-    printf("┃\t\t\tAfficher Client\t\t\t┃\n");
-    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-    printf("┃\t1.  Afficher par ID\t\t\t\t┃\n");
-    printf("┃\t2.  Afficher par nom\t\t\t\t┃\n");
-    printf("┃\t3.  Afficher par prénom\t\t\t\t┃\n");
-    printf("┃\t4.  Afficher par adresse\t\t\t┃\n");
-    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
-    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
-}
+/*-------------------------------------------- Menu ---------------------------------------------------------*/
 
 int afficheMenuPrinciple(void)
 {
@@ -74,118 +27,65 @@ int afficheMenuPrinciple(void)
     return 10;
 }
 
-int afficheMenuReglage(void)
-{
-    system("clear");
-    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-    printf("┃\tGestion des Client et Article et Commande\t┃\n");
-    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-    printf("┃\t1.  Sauvegarder le fichier articles\t\t┃\n");
-    printf("┃\t2.  Sauvegarder le fichier client\t\t┃\n");
-    printf("┃\t3.  Sauvegarder le fichier commande\t\t┃\n");
-    printf("┃\t4.  Restaurer les fichiers par default\t\t┃\n");
-    printf("┃\t\t\t\t\t\t\t┃\n");
-    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
-    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
-
-    return 10;
-}
-
-int choixMenu(void)
-{
-    int n;
-    printf("\n Option choisie : ");
-    scanf("%d%*c", &n);
-    return n;
-}
-
-void menuChoixTriClient(Client tabClient[], int *nbClient)
+void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *nbClient)
 {
     int choix;
     while (choix != 10)
     {
-        afficheChoixTriClient();
+        afficheMenuPrinciple();
         choix = choixMenu();
-        system("clear");
         switch (choix)
         {
         case 1:
-            triDicoClient(tabClient, *nbClient, 1);
-            afficherTabClient(tabClient, *nbClient);
-            printf("Appuyer sur une touche pour continuer...\n");
-            getchar();
-            choix = 10;
+            menuArticle(tabArt, tailleArt);
             break;
 
         case 2:
-            triDicoClient(tabClient, *nbClient, 2);
-            afficherTabClient(tabClient, *nbClient);
-            printf("Appuyer sur une touche pour continuer...\n");
-            getchar();
-            choix = 10;
+            menuClient(tabClient, nbClient);
             break;
-
-        case 3:
-            triDicoClient(tabClient, *nbClient, 3);
-            afficherTabClient(tabClient, *nbClient);
-            printf("Appuyer sur une touche pour continuer...\n");
-            getchar();
-            choix = 10;
+        
+        case 5:
+            menuReglage(tabArt, tailleArt);
             break;
-
 
         case 10:
             break;
 
         default:
-            printf("Mauvaise saisie");
             break;
         }
     }
 }
 
-void menuClient(Client tabClient[], int *nbClient)
+/*-------------------------------------------- Menu Article -------------------------------------------------*/
+
+void afficheMenuArticle(void)
 {
-    int choix;
-    afficheMenuClient();
-    choix = choixMenu();
-    if (choix == 10)
-        return;
-    switch (choix)
-    {
-    case 1:
-        menuChoixTriClient(tabClient, nbClient);
-        break;
+    system("clear");
+    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+    printf("┃\t\t\tMenu Article\t\t\t┃\n");
+    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+    printf("┃\t1.  Afficher la liste des articles\t\t┃\n");
+    printf("┃\t2.  Ajouter un article\t\t\t\t┃\n");
+    printf("┃\t3.  Enlever un article\t\t\t\t┃\n");
+    printf("┃\t4.  Modifier un article\t\t\t\t┃\n");
+    printf("┃\t5.  Afficher les articles en rupture\t\t┃\n");
+    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
+    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+}
 
-    case 2:
-        triDicoClient(tabClient, *nbClient, 0);
-        *nbClient = adjouterClient(tabClient, *nbClient);
-        printf("Appuyer sur une touche pour afficher les changements...\n");
-        getchar();
-        afficherTabClient(tabClient, *nbClient);
-        printf("Appuyer sur une touche pour continuer...\n");
-        getchar();
-        break;
-
-    case 3:
-        triDicoClient(tabClient, *nbClient, 0);
-        *nbClient = supprimeClient(tabClient, *nbClient);
-        triDicoClient(tabClient, *nbClient, 1);
-        printf("Appuyer sur une touche pour afficher les changements...\n");
-        getchar();
-        afficherTabClient(tabClient, *nbClient);
-        printf("Appuyer sur une touche pour continuer...\n");
-        getchar();
-        break;
-
-    case 10:
-        break;
-
-    default:
-        printf("Mauvaise saisie");
-        break;
-    }
-    menuClient(tabClient, nbClient);
+void afficheChoixTriArticle(void)
+{
+    system("clear");
+    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+    printf("┃\t\t\tAfficher Article\t\t┃\n");
+    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+    printf("┃\t1.  Afficher par ID\t\t\t\t┃\n");
+    printf("┃\t2.  Afficher par désignation\t\t\t┃\n");
+    printf("┃\t3.  Afficher par prix\t\t\t\t┃\n");
+    printf("┃\t4.  Afficher par quantité\t\t\t┃\n");
+    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
+    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
 void menuChoixTriArticle(Article *tabArticle[], int *nbArticle)
@@ -285,36 +185,144 @@ void menuArticle(Article *tabArt[], int *tailleArt)
     }
 }
 
+/*-------------------------------------------- Menu Client --------------------------------------------------*/
 
+void afficheMenuClient(void)
+{
+    system("clear");
+    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+    printf("┃\t\t\tMenu Client\t\t\t┃\n");
+    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+    printf("┃\t1.  Afficher la liste des clients\t\t┃\n");
+    printf("┃\t2.  Ajouter un client\t\t\t\t┃\n");
+    printf("┃\t3.  Enlever un client\t\t\t\t┃\n");
+    printf("┃\t4.  Modifier un client\t\t\t\t┃\n");
+    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
+    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+}
 
-void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *nbClient)
+void afficheChoixTriClient(void)
+{
+    system("clear");
+    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+    printf("┃\t\t\tAfficher Client\t\t\t┃\n");
+    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+    printf("┃\t1.  Afficher par ID\t\t\t\t┃\n");
+    printf("┃\t2.  Afficher par nom\t\t\t\t┃\n");
+    printf("┃\t3.  Afficher par prénom\t\t\t\t┃\n");
+    printf("┃\t4.  Afficher par adresse\t\t\t┃\n");
+    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
+    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+}
+
+void menuChoixTriClient(Client tabClient[], int *nbClient)
 {
     int choix;
     while (choix != 10)
     {
-        afficheMenuPrinciple();
+        afficheChoixTriClient();
         choix = choixMenu();
+        system("clear");
         switch (choix)
         {
         case 1:
-            menuArticle(tabArt, tailleArt);
+            triDicoClient(tabClient, *nbClient, 1);
+            afficherTabClient(tabClient, *nbClient);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            choix = 10;
             break;
 
         case 2:
-            menuClient(tabClient, nbClient);
+            triDicoClient(tabClient, *nbClient, 2);
+            afficherTabClient(tabClient, *nbClient);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            choix = 10;
             break;
-        
-        case 5:
-            menuReglage(tabArt, tailleArt);
+
+        case 3:
+            triDicoClient(tabClient, *nbClient, 3);
+            afficherTabClient(tabClient, *nbClient);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            choix = 10;
             break;
+
 
         case 10:
             break;
 
         default:
+            printf("Mauvaise saisie");
             break;
         }
     }
+}
+
+void menuClient(Client tabClient[], int *nbClient)
+{
+    int choix;
+    afficheMenuClient();
+    choix = choixMenu();
+    if (choix == 10)
+        return;
+    switch (choix)
+    {
+    case 1:
+        menuChoixTriClient(tabClient, nbClient);
+        break;
+
+    case 2:
+        triDicoClient(tabClient, *nbClient, 0);
+        *nbClient = adjouterClient(tabClient, *nbClient);
+        printf("Appuyer sur une touche pour afficher les changements...\n");
+        getchar();
+        afficherTabClient(tabClient, *nbClient);
+        printf("Appuyer sur une touche pour continuer...\n");
+        getchar();
+        break;
+
+    case 3:
+        triDicoClient(tabClient, *nbClient, 0);
+        *nbClient = supprimeClient(tabClient, *nbClient);
+        triDicoClient(tabClient, *nbClient, 1);
+        printf("Appuyer sur une touche pour afficher les changements...\n");
+        getchar();
+        afficherTabClient(tabClient, *nbClient);
+        printf("Appuyer sur une touche pour continuer...\n");
+        getchar();
+        break;
+
+    case 10:
+        break;
+
+    default:
+        printf("Mauvaise saisie");
+        break;
+    }
+    menuClient(tabClient, nbClient);
+}
+
+/*-------------------------------------------- Menu Commande ------------------------------------------------*/
+
+/*-------------------------------------------- Menu Reglage -------------------------------------------------*/
+
+int afficheMenuReglage(void)
+{
+    system("clear");
+    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+    printf("┃\tGestion des Client et Article et Commande\t┃\n");
+    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+    printf("┃\t1.  Sauvegarder le fichier articles\t\t┃\n");
+    printf("┃\t2.  Sauvegarder le fichier client\t\t┃\n");
+    printf("┃\t3.  Sauvegarder le fichier commande\t\t┃\n");
+    printf("┃\t4.  Restaurer les fichiers par default\t\t┃\n");
+    printf("┃\t\t\t\t\t\t\t┃\n");
+    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
+    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+
+    return 10;
 }
 
 void menuReglage(Article *tabArt[], int *tailleArt)
@@ -341,3 +349,6 @@ void menuReglage(Article *tabArt[], int *tailleArt)
         }
     }
 }
+
+/*-----------------------------------------------------------------------------------------------------------*/
+
