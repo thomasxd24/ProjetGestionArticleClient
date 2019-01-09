@@ -224,14 +224,14 @@ int adjouterArticle(Article *tabArt[], int tailleArt)
 	triDicoArticle(tabArt,tailleArt,2);
 	pos=rechercherDicoDesignation(a.designation,tabArt,tailleArt,&trouve);
 	if(trouve==1){
-		printf("Erreur: Article déja enregistrée \n");
+		printf("Erreur: Article déjà enregistré \n");
 		return tailleArt;
 	}
 	tabArt[tailleArt]=(Article *)malloc(sizeof(Article));
 	*(tabArt[tailleArt])=a;
 	tailleArt=tailleArt+1;
 	triDicoArticle(tabArt,tailleArt,2);
-	printf("Adjout de article reussi.");
+	printf("Ajout de l'article réussi.");
 	return tailleArt;
 	
 
