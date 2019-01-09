@@ -15,7 +15,6 @@ int main(void)
     printf("Chargement des Clients...");
     tabClient = chargeTabClient(tabClient,&nbClient);
     printf("Réussi\n");
-    printf("GG\n");
     printf("Appuyer sur une touche pour continuer...\n");  
     getchar();
     menuPrinciple(tabArt,&nbArt,tabClient,&nbClient);
