@@ -8,7 +8,7 @@ Article saisirArticle(FILE *flot)
 	fscanf(flot, "%d %f %d ", &a.idarticle, &a.prixunitaire, &a.quantite);
 
 	fgets(a.designation, 50, flot);
-	a.designation[strlen(a.designation) - 2] = '\0';
+	a.designation[strlen(a.designation) - 1] = '\0';
 	return a;
 }
 

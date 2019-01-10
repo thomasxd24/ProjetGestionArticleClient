@@ -45,7 +45,7 @@ void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *n
             break;
         
         case 5:
-            menuReglage(tabArt, tailleArt);
+            menuReglage(tabArt, tailleArt,tabClient,nbClient);
             break;
 
         case 10:
@@ -353,7 +353,7 @@ int afficheMenuReglage(void)
     printf("┃\t1.  Sauvegarder le fichier articles\t\t┃\n");
     printf("┃\t2.  Sauvegarder le fichier client\t\t┃\n");
     printf("┃\t3.  Sauvegarder le fichier commande\t\t┃\n");
-    printf("┃\t4.  Restaurer les fichiers par default\t\t┃\n");
+    printf("┃\t4.  Sauvegarder tous les fichiers\t\t┃\n");
     printf("┃\t\t\t\t\t\t\t┃\n");
     printf("┃\t10. Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
@@ -361,7 +361,7 @@ int afficheMenuReglage(void)
     return 10;
 }
 
-void menuReglage(Article *tabArt[], int *tailleArt)
+void menuReglage(Article *tabArt[], int *tailleArt,Client tabClient[], int *nbClient)
 {
     int choix;
     while (choix != 10)
@@ -373,9 +373,18 @@ void menuReglage(Article *tabArt[], int *tailleArt)
         {
         case 1:
             sauvegardeTabArticle(tabArt,*tailleArt);
-            afficherTabArticle(tabArt,*tailleArt);
             break;
 
+        case 2:
+            sauvegardeTabClient(tabClient,*nbClient);
+            break;
+
+        case 4:
+            sauvegardeTabArticle(tabArt,*tailleArt);
+            sauvegardeTabClient(tabClient,*nbClient);
+            break;
+
+        
         case 10:
             break;
 
