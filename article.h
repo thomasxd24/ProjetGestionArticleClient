@@ -3,15 +3,11 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include"struct.h"
 
 /*-------------------------------------------- Structure -------------------------------------------------------*/
 
-typedef struct{
-	int idarticle;
-	float prixunitaire;
-	int quantite;
-    char designation[50];
-} Article;	
+
 
 /*-------------------------------------------- Chargement TAB ---------------------------------------------------*/
 
@@ -26,7 +22,7 @@ void afficherTabArticle(Article ** tab,int nbarticle);// ca marche
 
 /*-------------------------------------------- Sauvegarder TAB --------------------------------------------------*/
 
-void sauveTabArticle(Article *tab,int tmax);
+void sauveTabArticle(Article *tab[],int tmax);
 
 /*-------------------------------------------- Trie Dico Article -------------------------------------------------*/
 

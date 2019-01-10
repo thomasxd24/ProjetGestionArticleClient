@@ -1,22 +1,16 @@
+#ifndef SOME_HEADER_GUARD_WITH_UIQUE_NAME
+#define SOME_HEADER_GUARD_WITH_UIQUE_NAME
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-#include"ligneCommande.h"
-#ifndef SOME_HEADER_GUARD_WITH_UIQUE_NAME
-#define SOME_HEADER_GUARD_WITH_UIQUE_NAME
-typedef struct{
-	int idClient;
-	char civilite[5];
-	char nom[10];
-	char prenom[10];
-	char adresse[50];
-	Ensemble commandes;
-} Client;
+#include"struct.h"
+
 
 
 void triDicoClient(Client tab[], int n,int trieID);
-int rechercherDicoClient(char * rechnom,Client * tab, int nbc,int *trouve);
-
+int rechercherDicoClient(char *rechnom, Client tab[], int nbc, int *trouve, int rechID);
+// si recherche id, alors rechnom doit etre '\0'
+//si recherche client nom, alors rechID doit etre -1
 Client saisirClient(FILE *flot);
 Client * chargeTabClient(Client *tabClient,int *nbClient);
 void afficherTabClient(Client tabClient[],int nbClient);
@@ -27,4 +21,8 @@ void afficherTabClient(Client tabClient[],int nbClient);
 
 int supprimeClient(Client * tabClient,int nb);
 int adjouterClient(Client tabClient[], int nbClient);
+
+
+
+void remplirTabLigneCommande(Client tabClient[],int nbClient, Article *tabArt[], int nbArt);
 #endif /* EXAMPLE_H */

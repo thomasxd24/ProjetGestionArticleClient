@@ -1,8 +1,8 @@
-#include"ligneCommande.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include"ligneCommande.h"
 
 Ensemble ensembleVide (void){
 	return NULL;
@@ -40,9 +40,9 @@ void afficherCommande (Ensemble e){
 		printf("Ensemble vide");
 		return;
 	}
-	printf("%s\n",e->v.artCommande->designation);
+	printf("%s\n",e->v.article->designation);
 	while (e->suiv!=NULL){
-		printf("%s\n",e->v.artCommande->designation);
+		printf("%s\n",e->v.article->designation);
 		e=e->suiv;
 	}
 }
@@ -62,7 +62,7 @@ Ensemble supprimerEnTete (Ensemble e){
 Ensemble supprimerCommande(Ensemble e, Article *x){
 	if (e==NULL)
 		return e;
-	if (x->idarticle==e->v.artCommande->idarticle)
+	if (x->idarticle==e->v.article->idarticle)
 		return supprimerEnTete (e);
 	e->suiv= supprimerCommande(e->suiv, x);
 	return e;
@@ -74,30 +74,43 @@ int longueur (Ensemble e){
 	return 1+longueur(e->suiv);
 }
 
-int remplirTabLigneCommande(LigneCommande *tab[], int tmax, FILE*flot){
-	LigneCommande v;
-	int i=0;
-	v=lireLigneCommande(flot);
-	while(!feof(flot)){
-		if(i==tmax)
-			return -1;
-		tab[i]=(LigneCommande*)malloc(sizeof(LigneCommande));
-		if(tab[i]==NULL){
-			printf("Probleme malloc \n");
-			exit(1);
-		}
-		*tab[i]=v;
-		i=i+1;
-		v=lireLigneCommande(flot);
-	}
-	return i;
-}
 
-LigneCommande lireLigneCommande(*flot){
-	lireLigneCommande v;
+
+
+LigneCommande lireLigneCommande(FILE*flot,Article *tabArt[], int nbArt){
+	LigneCommande v;
+	Article * art;
+	int pos,trouve,idArt;
 	fscanf(flot,"%d",&v.idCommande);
-	fgets(v.artCommande,100,flot);
-	v.artCommande[strlen(v.artCommande)-1]="\0";
+	fscanf(flot,"%d",&idArt);
+	pos=rechercherDicoArticle('\0',tabArt,nbArt,&trouve,idArt);
+	if(!trouve)//Article non trouvee, passer au prochain lignecommande
+		v.article=NULL;
+	else
+		v.article=tabArt[pos];
 	fscanf(flot,"%d",&v.quantite);
 	return v;
+}
+
+void remplirTabLigneCommande(Client tabClient[],int nbClient, Article *tabArt[], int nbArt){
+	FILE *flot;
+	LigneCommande commande;
+	int trouve,pos;
+	flot = fopen("ligneCommandes.don", "r");
+	if (flot == NULL)
+	{
+		printf("Problème d'ouverture du fichier");
+		return;
+	}
+	commande=lireLigneCommande(flot,tabArt,nbArt);
+	while(!feof(flot)){
+		pos=rechercherDicoClient('\0',tabClient,nbClient,&trouve,commande.idClient);
+		if(!trouve||commande.article==NULL)//Client non trouvee ou article non trouvee, passer au prochain lignecommande
+		{
+			commande=lireLigneCommande(flot,tabArt,nbArt);
+			continue;
+		}
+		tabClient[pos].commandes=ajouterCommande(tabClient[pos].commandes,commande);
+		commande=lireLigneCommande(flot,tabArt,nbArt);
+	}
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
 #include "main.h"
 
 int main(void)
@@ -18,7 +19,7 @@ int main(void)
     printf("Réussi\n");
     printf("Appuyer sur une touche pour continuer...\n");  
     getchar();
-    // menuPrinciple(tabArt,&nbArt,tabClient,&nbClient);
+    menuPrinciple(tabArt,&nbArt,tabClient,&nbClient);
 
     return 0;
 }

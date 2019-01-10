@@ -1,9 +1,11 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-#include"article.h"
-#include"client.h"
 #include"ligneCommande.h"
+#include"client.h"
+#include"article.h"
+
+
 
 /*-------------------------------------------- Menu ---------------------------------------------------------*/
 int afficheMenuPrinciple(void);

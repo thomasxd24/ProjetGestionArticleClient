@@ -1,5 +1,4 @@
 #include "article.h"
-#define champ choix
 
 /*-------------------------------------------- Chargement TAB ---------------------------------------------------*/
 
@@ -81,7 +80,7 @@ void afficherTabArticleRupture(Article **tab, int nbarticle)
 }
 /*-------------------------------------------- Sauvegarder TAB --------------------------------------------------*/
 
-void sauveTabArticle(Article *tab, int tmax)
+void sauveTabArticle(Article *tab[], int tmax)
 {
 	FILE *flot;
 	flot = fopen("articles.don", "r+");
