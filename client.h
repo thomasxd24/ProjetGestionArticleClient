@@ -5,24 +5,43 @@
 #include<stdlib.h>
 #include"struct.h"
 
+/*-------------------------------------------- Afficher le tableau des clients --------------------------------------------------------*/
 
+void afficherTabClient(Client tabClient[],int nbClient);
 
+/*-------------------------------------------- Chargement du tableau de client --------------------------------------------------------*/
+
+Client saisirClient(FILE *flot);
+Client * chargeTabClient(Client *tabClient,int *nbClient);
+
+/*-------------------------------------------- Tri dico --------------------------------------------------------*/
+
+int testPosClient(Client R, Client S, int choix);
+void copierClient(Client tab[], int i, int j, Client R[]);
+void fusionClient(Client R[], int n, Client S[], int m, Client t[], int trieID);
 void triDicoClient(Client tab[], int n,int trieID);
+
+/*-------------------------------------------- Recherche dico --------------------------------------------------------*/
+
 int rechercherDicoClient(char *rechnom, Client tab[], int nbc, int *trouve, int rechID);
 // si recherche id, alors rechnom doit etre '\0'
 //si recherche client nom, alors rechID doit etre -1
-Client saisirClient(FILE *flot);
-Client * chargeTabClient(Client *tabClient,int *nbClient);
-void afficherTabClient(Client tabClient[],int nbClient);
-
-
 
 /*-------------------------------------------- SupprimerUnClient --------------------------------------------------------*/
 
 int supprimeClient(Client * tabClient,int nb);
-int adjouterClient(Client tabClient[], int nbClient);
 
+/*-------------------------------------------- Ajouter un client -------------------------------------------------------*/
 
+Client saisieClient(int nb);
+int ajouterClient(Client tabClient[], int nbClient);
 
-void remplirTabLigneCommande(Client tabClient[],int nbClient, Article *tabArt[], int nbArt);
 #endif /* EXAMPLE_H */
+
+/* Fonctionnalite à rajouter :
+- Pouvoir rajouter une fonction qui recherche un client et qui affiche seulement ce client
+- Lier les clients aux listes de commande
+- Fonction ModifierClient 
+- Faire une fonction sauvClient
+
+*/ 

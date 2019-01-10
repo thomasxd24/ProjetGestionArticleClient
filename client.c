@@ -1,18 +1,6 @@
 #include "client.h"
 
-Client saisirClient(FILE *flot)
-{
-	Client c;
-	fscanf(flot, "%d", &c.idClient);
-	fscanf(flot, "%s", c.civilite);
-	fscanf(flot, "%s", c.nom);
-	fscanf(flot, "%s", c.prenom);
-	fgets(c.adresse, 50, flot);
-	c.adresse[strlen(c.adresse) - 2] = '\0';
-	c.commandes = NULL;
-
-	return c;
-}
+/*-------------------------------------------- Afficher le tableau des clients --------------------------------------------------------*/
 
 void afficherTabClient(Client tabClient[], int nbClient)
 {
@@ -25,6 +13,22 @@ void afficherTabClient(Client tabClient[], int nbClient)
 		printf("%d\t┃%-10s┃%-15s┃%-15s┃%s\n", tabClient[i].idClient, tabClient[i].civilite, tabClient[i].nom, tabClient[i].prenom, tabClient[i].adresse);
 	printf("━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	printf("Nombre de client : %d \n", nbClient);
+}
+
+/*-------------------------------------------- Chargement du tableau de client --------------------------------------------------------*/
+
+Client saisirClient(FILE *flot)
+{
+	Client c;
+	fscanf(flot, "%d", &c.idClient);
+	fscanf(flot, "%s", c.civilite);
+	fscanf(flot, "%s", c.nom);
+	fscanf(flot, "%s", c.prenom);
+	fgets(c.adresse, 50, flot);
+	c.adresse[strlen(c.adresse) - 2] = '\0';
+	c.commandes = NULL;
+
+	return c;
 }
 
 Client *chargeTabClient(Client *tabClient, int *nbClient)
@@ -63,7 +67,7 @@ Client *chargeTabClient(Client *tabClient, int *nbClient)
 	return tabClient;
 }
 
-/*-------------------------------------------- RecherheDicoClient --------------------------------------------------------*/
+/*-------------------------------------------- Tri dico --------------------------------------------------------*/
 
 int testPosClient(Client R, Client S, int choix)
 {
@@ -149,6 +153,9 @@ void triDicoClient(Client tab[], int n, int trieID)
 	free(S);
 }
 
+/*-------------------------------------------- Recherche dico --------------------------------------------------------*/
+
+
 int rechercherDicoClient(char *rechnom, Client tab[], int nbc, int *trouve, int rechID)
 {
 	int inf = 0, sup = nbc - 1, m;
@@ -206,7 +213,7 @@ int supprimeClient(Client *tabClient, int nb)
 	return nb;
 }
 
-/*-------------------------------------------- Ajouter Article -------------------------------------------------------*/
+/*-------------------------------------------- Ajouter un client -------------------------------------------------------*/
 Client saisieClient(int nb)
 {
 	Client c;
@@ -223,7 +230,7 @@ Client saisieClient(int nb)
 	return c;
 }
 
-int adjouterClient(Client tabClient[], int nbClient)
+int ajouterClient(Client tabClient[], int nbClient)
 {
 	Client a;
 	int trouve, pos;
