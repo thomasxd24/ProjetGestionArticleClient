@@ -5,7 +5,7 @@
 #include"client.h"
 #include"article.h"
 
-
+int choixMenu(void);
 
 /*-------------------------------------------- Menu ---------------------------------------------------------*/
 int afficheMenuPrinciple(void);

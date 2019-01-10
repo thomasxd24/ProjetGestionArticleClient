@@ -156,7 +156,7 @@ void menuArticle(Article *tabArt[], int *tailleArt)
 
         case 3:
             triDicoArticle(tabArt, *tailleArt, 2);
-            *tailleArt = adjouterArticle(tabArt, *tailleArt);
+            *tailleArt = ajouterArticle(tabArt, *tailleArt);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
             break;
@@ -306,6 +306,37 @@ void menuClient(Client tabClient[], int *nbClient)
 
 /*-------------------------------------------- Menu Commande ------------------------------------------------*/
 
+void afficheMenuCommande(void)
+{
+    system("clear");
+    printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+    printf("┃\t\t\tMenu Commande\t\t\t┃\n");
+    printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+    printf("┃\t1.  Afficher la liste des ccommandes\t\t┃\n");
+    printf("┃\t2.  Ajouter une commande\t\t\t\t┃\n");
+    printf("┃\t3.  Enlever une commande\t\t\t\t┃\n");
+    printf("┃\t4.  Modifier une commande\t\t\t\t┃\n");
+    printf("┃\t10. Quitter\t\t\t\t\t┃\n");
+    printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+}
+
+void menuCommande(Article *tabArt[], int nbArt)
+{
+    int choix;
+    afficheMenuCommande();
+    choix = choixMenu();
+    if (choix == 10)
+        return;
+    switch (choix)
+    {
+   
+
+    default:
+        printf("Mauvaise saisie");
+        break;
+    }
+    menuCommande(*tabArt[], nbArt);
+}
 /*-------------------------------------------- Menu Reglage -------------------------------------------------*/
 
 int afficheMenuReglage(void)

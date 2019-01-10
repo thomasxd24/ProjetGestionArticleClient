@@ -6,7 +6,8 @@
 
 /*-------------------------------------------- Fonctions liste --------------------------------------------------------*/
 
-Ensemble ensembleVide (void){
+Ensemble ensembleVide(void)
+{
 	return NULL;
 }
 
@@ -168,7 +169,8 @@ void sauvegarder (Article *tabArt[], int nbArt, FILE*flot)
 {
 	int i;
 	for(i=0;i<nbArt;i++)
-	{	fprintf(flot,"%d %s %d %d",tabArt[i]->commande,tabArt[i]->commande,*(tabArt[i]->commande))
-		affciherCommande(tabArt[i]-commande,flot)
+	{	
+		fprintf(flot,"%d %s %d %d",tabArt[i]->commande,tabArt[i]->commande,*(tabArt[i]->commande));
+		affciherCommande(tabArt[i]-commande,flot);
 	}
 }
