@@ -38,7 +38,9 @@ int ajouterClient(Client tabClient[], int nbClient);
 
 /*-------------------------------------------- Sauvegarder un client -------------------------------------------------------*/
 
-void sauveTabClient(Client tabClient[], int nbClient);
+void sauvegardeTabClient(Client tab[],int tmax);
+void sauvegardeClient(Client c,FILE * flot);
+
 void consulterClient(Client tabClient[],int nbClient);
 
 #endif /* EXAMPLE_H *
@@ -49,6 +51,6 @@ void consulterClient(Client tabClient[],int nbClient);
 - Fonction ModifierClient
 
 Fonction à modifier: 
-- fonction sauvClient
+- fonction rajouter client
 
 */ 

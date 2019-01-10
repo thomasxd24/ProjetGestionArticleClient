@@ -232,19 +232,19 @@ Client saisieClient(int nb)
 
 int ajouterClient(Client tabClient[], int nbClient)
 {
-	Client a;
+	Client c;
 	int trouve, pos;
 	triDicoClient(tabClient, nbClient, 1);
-	a = saisieClient(tabClient[nbClient - 1].idClient);
+	c = saisieClient(tabClient[nbClient - 1].idClient);
 	triDicoClient(tabClient, nbClient, 0);
-	pos = rechercherDicoClient(a.nom, tabClient, nbClient, &trouve, -1);
+	pos = rechercherDicoClient(c.nom, tabClient, nbClient, &trouve, -1);
 	if (trouve == 1)
 	{
 		printf("Erreur: Client déjà enregistré \n");
 		return nbClient;
 	}
 	tabClient = (Client *)realloc(tabClient, nbClient * sizeof(Client) + 1 * sizeof(Client));
-	tabClient[nbClient] = a;
+	tabClient[nbClient] = c;
 	nbClient = nbClient + 1;
 	triDicoClient(tabClient, nbClient, 2);
 	printf("Ajout du client réussi.\n");
@@ -284,8 +284,12 @@ void consulterClient(Client tabClient[],int nbClient)
 
 /*-------------------------------------------- Sauvegarder un client -------------------------------------------------------*/
 
-void sauveTabClient(Client tabClient[], int nbClient)
-{
+void sauvegardeClient(Client c,FILE * flot){
+	fprintf(flot,"%d \t %s \t %s \t %s \t %s \n",c.idClient,c.civilite,c.nom,c.prenom,c.adresse);
+}
+
+void sauvegardeTabClient(Client tab[],int tmax){
+	int i;
 	FILE *flot;
 	flot = fopen("clients.don", "r+");
 	if (flot == NULL)
@@ -293,6 +297,9 @@ void sauveTabClient(Client tabClient[], int nbClient)
 		printf("Problème d'ouverture du fichier");
 		return;
 	}
-	fwrite(tabClient, sizeof(Client), nbClient, flot);
+	for(i=0;i<tmax;i++){
+		sauvegardeClient(tab[i],flot);
+	}
+	printf("sauvegarde article effectuée");
 	fclose(flot);
 }
