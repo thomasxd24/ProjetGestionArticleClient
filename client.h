@@ -1,5 +1,5 @@
-#ifndef SOME_HEADER_GUARD_WITH_UIQUE_NAME
-#define SOME_HEADER_GUARD_WITH_UIQUE_NAME
+#ifndef CLIENTDEF
+#define CLIENTDEF
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>

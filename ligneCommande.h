@@ -1,5 +1,5 @@
-#ifndef SOME_HEADER_GUARD_WITHh_UNIQUE_NAMEO
-#define SOME_HEADER_GUARD_WITHh_UNIQUE_NAMEO
+#ifndef LIGNECOMMANDEDEF
+#define LIGNECOMMANDEDEF
 #include"struct.h"
 #include"article.h"
 #include"client.h"
@@ -18,17 +18,13 @@ int longueur (Ensemble e);
 /*-------------------------------------------- Chargement tableau--------------------------------------------------------*/
 
 LigneCommande lireLigneCommande(FILE*flot,Article *tabArt[], int nbArt);
-void remplirTabLigneCommande(Client tabClient[],int nbClient, Article *tabArt[], int nbArt;
+void remplirTabLigneCommande(Client tabClient[],int nbClient, Article *tabArt[], int nbArt);
 
 /*-------------------------------------------- Supprimer ligne vide --------------------------------------------------------*/
 
-LigneCommande supprimerLigneCommandeVide(Article *tabArt[], int nbArt);
 
 /*-------------------------------------------- Tri echange --------------------------------------------------------*/
 
-void triEchange(Article *tabArt[], int nbArt);
-void echanger(Article *tabArt[], int i, int j);
-int plusGrand(Article *tabArt[], int nbArt);
 
 /* ----------------------------------------Sauvegarder----------------------------------*/
 

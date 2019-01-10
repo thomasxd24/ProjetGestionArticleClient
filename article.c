@@ -259,7 +259,7 @@ Article saisieArticle(int tailleArt)
 	return a;
 }
 
-int adjouterArticle(Article *tabArt[], int tailleArt)
+int ajouterArticle(Article *tabArt[], int tailleArt)
 {
 	Article a;
 	int trouve, pos;

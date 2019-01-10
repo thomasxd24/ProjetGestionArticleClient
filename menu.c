@@ -275,7 +275,7 @@ void menuClient(Client tabClient[], int *nbClient)
 
     case 2:
         triDicoClient(tabClient, *nbClient, 0);
-        *nbClient = adjouterClient(tabClient, *nbClient);
+        *nbClient = ajouterClient(tabClient, *nbClient);
         printf("Appuyer sur une touche pour afficher les changements...\n");
         getchar();
         afficherTabClient(tabClient, *nbClient);
@@ -335,7 +335,7 @@ void menuCommande(Article *tabArt[], int nbArt)
         printf("Mauvaise saisie");
         break;
     }
-    menuCommande(*tabArt[], nbArt);
+    menuCommande(tabArt, nbArt);
 }
 /*-------------------------------------------- Menu Reglage -------------------------------------------------*/
 

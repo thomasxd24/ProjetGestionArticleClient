@@ -1,5 +1,5 @@
-#ifndef SOME_HEADER_GUARD_WITH_UNIQUE_NAME
-#define SOME_HEADER_GUARD_WITH_UNIQUE_NAME
+#ifndef ARTICLEDEF
+#define ARTICLEDEF
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -45,7 +45,7 @@ int supprimeArticle(Article ** tabArt,int nb);
 /*-------------------------------------------- Ajouter Article -----------------------------------------------------*/
 
 Article saisieArticle(int tailleArt);
-int adjouterArticle(Article *tabArt[], int tailleArt);
+int ajouterArticle(Article *tabArt[], int tailleArt);
 
 
 
