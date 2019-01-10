@@ -94,7 +94,6 @@ LigneCommande lireLigneCommande(FILE *flot, Article *tabArt[], int nbArt)
 	Article *art;
 	int pos, trouve, idArt;
 	fscanf(flot, "%d%d%d%d", &v.idCommande,&idArt,&v.idClient,&v.quantite);
-	printf("%d %d %d", v.idCommande,v.idClient,v.quantite);
 	pos = rechercherDicoArticle('\0', tabArt, nbArt, &trouve, idArt);
 	if (!trouve) //Article non trouvee, passer au prochain lignecommande
 		v.article = NULL;
@@ -127,3 +126,4 @@ void remplirTabLigneCommande(Client tabClient[], int nbClient, Article *tabArt[]
 		tabClient[pos].commandes = ajouterCommande(tabClient[pos].commandes, commande);
 	}
 }
+

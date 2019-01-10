@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <curses.h>
 
 #include "main.h"
+
 
 int main(void)
 {
@@ -11,6 +14,7 @@ int main(void)
     Ensemble en;
     LigneCommande lc;
     int nbArt, nbClient;
+    system("clear");
     printf("Chargement des Articles...");
     nbArt = remplirTabArticle(tabArt, 100);
     printf("Réussi\n");
@@ -23,6 +27,5 @@ int main(void)
     printf("Appuyer sur une touche pour continuer...\n");
     getchar();
     menuPrinciple(tabArt, &nbArt, tabClient, &nbClient);
-
     return 0;
 }
