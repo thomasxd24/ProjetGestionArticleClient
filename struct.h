@@ -1,6 +1,8 @@
 #ifndef STRUCTDEF
 #define STRUCTDEF
 
+/*-------------------------------------------------- Structure Article -----------------------------------*/
+
 typedef struct{
 	int idarticle;
 	float prixunitaire;
@@ -8,6 +10,7 @@ typedef struct{
     char designation[50];
 } Article;	
 
+/*-------------------------------------------------- Structure LigneCommande -------------------------------*/
 typedef struct 
 {
     int idCommande;
@@ -25,7 +28,7 @@ typedef Maillon *Ensemble;
 
 typedef enum {faux,vrai}Booleen;
 
-
+/*-------------------------------------------------- Structure Client ---------------------------------------*/
 typedef struct{
 	int idClient;
 	char civilite[5];
