@@ -18,7 +18,8 @@ void afficherTabArticle(Article ** tab,int nbarticle);// ca marche
 
 /*-------------------------------------------- Sauvegarder TAB --------------------------------------------------*/
 
-void sauveTabArticle(Article *tab[],int tmax);
+void sauvegardeArticle(Article a,FILE * flot);
+void sauvegardeTabArticle(Article *tab[],int tmax);
 
 /*-------------------------------------------- Trie Dico Article -------------------------------------------------*/
 

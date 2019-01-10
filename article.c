@@ -93,6 +93,25 @@ void sauveTabArticle(Article *tab[], int tmax)
 	fclose(flot);
 }
 
+void sauvegardeArticle(Article a,FILE * flot){
+	fprintf(flot,"%d \t %.2f \t %d \t %s \n",a.idarticle,a.prixunitaire,a.quantite,a.designation);
+}
+
+void sauvegardeTabArticle(Article *tab[],int tmax){
+	int i;
+	FILE *flot;
+	flot = fopen("articles.don", "r+");
+	if (flot == NULL)
+	{
+		printf("Problème d'ouverture du fichier");
+		return;
+	}
+	for(i=0;i<tmax;i++){
+		sauvegardeArticle(*tab[i],flot);
+	}
+	printf("sauvegarde article effectuée");
+	fclose(flot);
+}
 /*-------------------------------------------- Trie Dico Article ------------------------------------------------*/
 int testTriArticle(Article *R, Article *S, int choix)
 {
