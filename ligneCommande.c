@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include"ligneCommande.h"
 
+/*-------------------------------------------- Fonctions liste --------------------------------------------------------*/
+
 Ensemble ensembleVide (void){
 	return NULL;
 }
@@ -75,7 +77,7 @@ int longueur (Ensemble e){
 }
 
 
-
+/*-------------------------------------------- Chargement tableau--------------------------------------------------------*/
 
 LigneCommande lireLigneCommande(FILE*flot,Article *tabArt[], int nbArt){
 	LigneCommande v;
@@ -115,8 +117,10 @@ void remplirTabLigneCommande(Client tabClient[],int nbClient, Article *tabArt[],
 	}
 }
 
+/*-------------------------------------------- Supprimer ligne vide --------------------------------------------------------*/
 
-LigneCommande supprimerLigneCommandeVide(Article *tabArt[], int nbArt){
+LigneCommande supprimerLigneCommandeVide(Article *tabArt[], int nbArt)
+{
 	int i, j;
 	for(i=0;i<nb;i++){	
 		if(tabArt[i]->commande=ensembleVide()){	
@@ -128,6 +132,8 @@ LigneCommande supprimerLigneCommandeVide(Article *tabArt[], int nbArt){
 	}
 	return nbArt;
 }
+
+/*-------------------------------------------- Tri echange --------------------------------------------------------*/
 
 void triEchange(Article *tabArt[], int nbArt)
 {
@@ -155,6 +161,8 @@ int plusGrand(Article *tabArt[], int nbArt)
 			pge=1;
 	return pge;
 }
+
+/* ----------------------------------------Sauvegarder----------------------------------*/
 
 void sauvegarder (Article *tabArt[], int nbArt, FILE*flot)
 {
