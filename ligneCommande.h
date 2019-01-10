@@ -23,25 +23,9 @@ void remplirTabLigneCommande(Client tabClient[],int nbClient, Article *tabArt[],
 
 /*-------------------------------------------- Tri echange --------------------------------------------------------*/
 
-
+void sauvegardeListeCommandes(Client tabClient[],int nbClient);
 /* ----------------------------------------Sauvegarder----------------------------------*/
-
-void sauvegarder (Article *tabArt[], int nbArt, FILE*flot);
 
 
 #endif /* EXAMPLE_H */
 
-/* fonction à rajouter:
-    - modidierLigneCommande
-    - RechercherLigneCommande
-
-+++++++++++Rajouter tous dans le menu+++++++
-
-/* Fonctionnalite à modifier :
-    - supprimerLigneCommandeVide(Article *tabArt[], int nbArt);
-    - triEchange(Article *tabArt[], int nbArt);
-    - echanger(Article *tabArt[], int i, int j);
-    - plusGrand(Article *tabArt[], int nbArt);
-    - sauvegarder (Article *tabArt[], int nbArt, FILE*flot);
-
-*/ 

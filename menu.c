@@ -378,6 +378,10 @@ void menuReglage(Article *tabArt[], int *tailleArt,Client tabClient[], int *nbCl
             sauvegardeTabClient(tabClient,*nbClient);
             break;
 
+        case 3:
+            sauvegardeListeCommandes(tabClient,*nbClient);
+            break;
+
         case 4:
             sauvegardeTabArticle(tabArt,*tailleArt);
             sauvegardeTabClient(tabClient,*nbClient);

@@ -191,6 +191,12 @@ void triDicoArticle(Article *tab[], int n, int choix)
 
 int rechercherDicoArticle(char rechmodele[], Article *tab[], int nbc, int *trouve, int rechID)
 {
+	if(rechID == -1)
+		triDicoArticle(tab,nbc,2);
+	else
+		triDicoArticle(tab,nbc,1);
+	
+	
 	int inf = 0, sup = nbc - 1, m;
 	while (inf <= sup)
 	{

@@ -7,10 +7,10 @@ void afficherTabClient(Client tabClient[], int nbClient)
 	int i = 0;
 	printf("Liste des Clients\n");
 	printf("━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
-	printf("   ID\t┃Civilité  ┃Nom            ┃Prénom         ┃Adresse \n");
+	printf("   ID\t┃Civilité  ┃Nom            ┃Prénom         ┃Nb Commandes┃Adresse \n");
 	printf("━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	for (i = 0; i < nbClient; i++)
-		printf("%d\t┃%-10s┃%-15s┃%-15s┃%s\n", tabClient[i].idClient, tabClient[i].civilite, tabClient[i].nom, tabClient[i].prenom, tabClient[i].adresse);
+		printf("%d\t┃%-10s┃%-15s┃%-15s┃%d\t┃%s\n", tabClient[i].idClient, tabClient[i].civilite, tabClient[i].nom, tabClient[i].prenom, longueur(tabClient[i].commandes),tabClient[i].adresse);
 	printf("━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	printf("Nombre de client : %d \n", nbClient);
 }

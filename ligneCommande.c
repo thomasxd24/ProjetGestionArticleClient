@@ -95,6 +95,7 @@ LigneCommande lireLigneCommande(FILE *flot, Article *tabArt[], int nbArt)
 	int pos, trouve, idArt;
 	fscanf(flot, "%d%d%d%d", &v.idCommande,&idArt,&v.idClient,&v.quantite);
 	pos = rechercherDicoArticle('\0', tabArt, nbArt, &trouve, idArt);
+	printf("marche%d %d\n",trouve,idArt);
 	if (!trouve) //Article non trouvee, passer au prochain lignecommande
 		v.article = NULL;
 	else
@@ -117,13 +118,43 @@ void remplirTabLigneCommande(Client tabClient[], int nbClient, Article *tabArt[]
 	while (!feof(flot))
 	{
 		commande = lireLigneCommande(flot, tabArt, nbArt);
+		
 		pos = rechercherDicoClient('\0', tabClient, nbClient, &trouve, commande.idClient);
 		if (!trouve || commande.article == NULL) //Client non trouvee ou article non trouvee, passer au prochain lignecommande
 		{
+			printf("marche%d %d\n",trouve,commande.article == NULL);
 			commande = lireLigneCommande(flot, tabArt, nbArt);
 			continue;
 		}
+		
 		tabClient[pos].commandes = ajouterCommande(tabClient[pos].commandes, commande);
 	}
 }
 
+Ensemble sauvegardeCommande(Ensemble e,FILE *flot)
+{
+	if (e == NULL)
+	{
+		return e;
+	}	
+	fprintf(flot,"%d %d %d %d\n", e->v.idCommande, e->v.article->idarticle, e->v.idClient,e->v.quantite);
+	e->suiv=sauvegardeCommande(e->suiv,flot);
+	return e;
+}
+
+void sauvegardeListeCommandes(Client tabClient[],int nbClient){
+	int i;
+	FILE *flot;
+	flot = fopen("ligneCommande.don", "w");
+	if (flot == NULL)
+	{
+		printf("Problème d'ouverture du fichier");
+		return;
+	}
+	for(i = 0; i < nbClient; i++)
+	{
+		sauvegardeCommande(tabClient[i].commandes,flot);
+	}
+	printf("sauvegarde ligne commande effectuée");
+	fclose(flot);
+}
