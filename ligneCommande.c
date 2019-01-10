@@ -114,3 +114,53 @@ void remplirTabLigneCommande(Client tabClient[],int nbClient, Article *tabArt[],
 		commande=lireLigneCommande(flot,tabArt,nbArt);
 	}
 }
+
+
+LigneCommande supprimerLigneCommandeVide(Article *tabArt[], int nbArt){
+	int i, j;
+	for(i=0;i<nb;i++){	
+		if(tabArt[i]->commande=ensembleVide()){	
+			free(tabArt[i]);
+			for(j=i;j<nbArt-1;j++)
+				tabArt[j]=tabArt[j+1];
+		}
+		nbArt=nbArt-1;
+	}
+	return nbArt;
+}
+
+void triEchange(Article *tabArt[], int nbArt)
+{
+	int pge;
+	while(nbArt>1)
+	{	pge=plusGrand(tabArt,nbArt);
+		echanger(tabArt,pge,nbArt-1);
+		nbArt=nbArt-1;
+	}
+}
+
+void echanger(Article *tabArt[], int i, int j)
+{
+	Article * aux;
+	aux=tabArt[i];
+	tabArt[i]=tabArt[j];
+	tabArt[j]=aux;
+}
+
+int plusGrand(Article *tabArt[], int nbArt)
+{
+	int pge=0, i;
+	for(i=0;i<nbArt;i++)
+		if(*(tabArt[i]->commande)>*(tabArt[pge]->commande))
+			pge=1;
+	return pge;
+}
+
+void sauvegarder (Article *tabArt[], int nbArt, FILE*flot)
+{
+	int i;
+	for(i=0;i<nbArt;i++)
+	{	fprintf(flot,"%d %s %d %d",tabArt[i]->commande,tabArt[i]->commande,*(tabArt[i]->commande))
+		affciherCommande(tabArt[i]-commande,flot)
+	}
+}
