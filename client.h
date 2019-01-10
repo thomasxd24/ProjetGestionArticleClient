@@ -34,7 +34,7 @@ int supprimeClient(Client * tabClient,int nb);
 /*-------------------------------------------- Ajouter un client -------------------------------------------------------*/
 
 Client saisieClient(int nb);
-int ajouterClient(Client tabClient[], int nbClient);
+Client * ajouterClient(Client tabClient[], int *nbClient);
 
 /*-------------------------------------------- Sauvegarder un client -------------------------------------------------------*/
 

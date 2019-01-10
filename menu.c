@@ -274,8 +274,8 @@ void menuClient(Client tabClient[], int *nbClient)
         break;
 
     case 2:
-        triDicoClient(tabClient, *nbClient, 0);
-        *nbClient = ajouterClient(tabClient, *nbClient);
+        tabClient = ajouterClient(tabClient, nbClient);
+        triDicoClient(tabClient, *nbClient, 1);
         printf("Appuyer sur une touche pour afficher les changements...\n");
         getchar();
         afficherTabClient(tabClient, *nbClient);
@@ -284,9 +284,8 @@ void menuClient(Client tabClient[], int *nbClient)
         break;
 
     case 3:
-        triDicoClient(tabClient, *nbClient, 0);
-        *nbClient = supprimeClient(tabClient, *nbClient);
         triDicoClient(tabClient, *nbClient, 1);
+        *nbClient = supprimeClient(tabClient, *nbClient);
         printf("Appuyer sur une touche pour afficher les changements...\n");
         getchar();
         afficherTabClient(tabClient, *nbClient);

@@ -230,25 +230,25 @@ Client saisieClient(int nb)
 	return c;
 }
 
-int ajouterClient(Client tabClient[], int nbClient)
+Client * ajouterClient(Client tabClient[], int *nbClient)
 {
-	Client c;
+	Client a;
 	int trouve, pos;
-	triDicoClient(tabClient, nbClient, 1);
-	c = saisieClient(tabClient[nbClient - 1].idClient);
-	triDicoClient(tabClient, nbClient, 0);
-	pos = rechercherDicoClient(c.nom, tabClient, nbClient, &trouve, -1);
+	triDicoClient(tabClient, *nbClient, 1);
+	a = saisieClient(tabClient[*nbClient - 1].idClient);
+	triDicoClient(tabClient, *nbClient, 2);
+	pos = rechercherDicoClient(a.nom, tabClient, *nbClient, &trouve, -1);
 	if (trouve == 1)
 	{
 		printf("Erreur: Client déjà enregistré \n");
-		return nbClient;
+		return tabClient;
 	}
-	tabClient = (Client *)realloc(tabClient, nbClient * sizeof(Client) + 1 * sizeof(Client));
-	tabClient[nbClient] = c;
-	nbClient = nbClient + 1;
-	triDicoClient(tabClient, nbClient, 2);
+	tabClient = (Client *)realloc(tabClient, *nbClient * sizeof(Client) + 1 * sizeof(Client));
+	tabClient[*nbClient] = a;
+	*nbClient = *nbClient + 1;
+	triDicoClient(tabClient, *nbClient, 2);
 	printf("Ajout du client réussi.\n");
-	return nbClient;
+	return tabClient;
 }
 
 void afficherConsultClient(Client client)
