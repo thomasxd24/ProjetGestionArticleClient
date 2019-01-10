@@ -44,7 +44,7 @@ void afficherCommande(Ensemble e)
 {
 	if (e == NULL)
 	{
-		printf("Ensemble vide");
+		printf("┃     -    ┃          -        ┃    -     ┃   -    ┃     -      ┃\n");
 		return;
 	}
 		
@@ -119,14 +119,11 @@ void remplirTabLigneCommande(Client tabClient[], int nbClient, Article *tabArt[]
 	{
 		commande = lireLigneCommande(flot, tabArt, nbArt);
 		pos = rechercherDicoClient('\0', tabClient, nbClient, &trouve, commande.idClient);
-		printf("|%d %d %d", commande.idCommande,commande.idClient,commande.quantite);
 		if (!trouve || commande.article == NULL) //Client non trouvee ou article non trouvee, passer au prochain lignecommande
 		{
-			printf("%d", commande.article == NULL);
 			commande = lireLigneCommande(flot, tabArt, nbArt);
 			continue;
 		}
-		printf("ajout");
 		tabClient[pos].commandes = ajouterCommande(tabClient[pos].commandes, commande);
 	}
 }

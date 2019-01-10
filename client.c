@@ -23,9 +23,9 @@ Client saisirClient(FILE *flot)
 	fscanf(flot, "%d", &c.idClient);
 	fscanf(flot, "%s", c.civilite);
 	fscanf(flot, "%s", c.nom);
-	fscanf(flot, "%s", c.prenom);
+	fscanf(flot, "%s ", c.prenom);
 	fgets(c.adresse, 50, flot);
-	c.adresse[strlen(c.adresse) - 2] = '\0';
+	c.adresse[strlen(c.adresse) - 1] = '\0';
 	c.commandes = NULL;
 
 	return c;
@@ -157,7 +157,6 @@ void triDicoClient(Client tab[], int n, int trieID)
 
 int rechercherDicoClient(char *rechnom, Client tab[], int nbc, int *trouve, int rechID)
 {
-	printf("rechID %d",rechID);
 	int inf = 0, sup = nbc - 1, m;
 	while (inf <= sup)
 	{
