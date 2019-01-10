@@ -36,12 +36,18 @@ int supprimeClient(Client * tabClient,int nb);
 Client saisieClient(int nb);
 int ajouterClient(Client tabClient[], int nbClient);
 
-#endif /* EXAMPLE_H */
+/*-------------------------------------------- Sauvegarder un client -------------------------------------------------------*/
+
+void sauveTabClient(Client tabClient[], int nbClient);
+
+#endif /* EXAMPLE_H *
 
 /* Fonctionnalite à rajouter :
 - Pouvoir rajouter une fonction qui recherche un client et qui affiche seulement ce client
 - Lier les clients aux listes de commande
-- Fonction ModifierClient 
-- Faire une fonction sauvClient
+- Fonction ModifierClient
+
+Fonction à modifier: 
+- fonction sauvClient
 
 */ 

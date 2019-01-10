@@ -251,4 +251,19 @@ int ajouterClient(Client tabClient[], int nbClient)
 	return nbClient;
 }
 
+/*-------------------------------------------- Sauvegarder un client -------------------------------------------------------*/
+
+void sauveTabClient(Client tabClient[], int nbClient)
+{
+	FILE *flot;
+	flot = fopen("clients.don", "r+");
+	if (flot == NULL)
+	{
+		printf("Problème d'ouverture du fichier");
+		return;
+	}
+	fwrite(tabClient, sizeof(Client), nbClient, flot);
+	fclose(flot);
+}
+
 

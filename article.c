@@ -89,7 +89,6 @@ void sauveTabArticle(Article *tab[], int tmax)
 		printf("Problème d'ouverture du fichier");
 		return;
 	}
-	fwrite(&tmax, sizeof(int), 1, flot);
 	fwrite(tab, sizeof(Article), tmax, flot);
 	fclose(flot);
 }
