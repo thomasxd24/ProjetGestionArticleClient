@@ -4,7 +4,7 @@
 #include<string.h>
 #include<stdlib.h>
 #include"struct.h"
-
+#include"ligneCommande.h"
 /*-------------------------------------------- Afficher le tableau des clients --------------------------------------------------------*/
 
 void afficherTabClient(Client tabClient[],int nbClient);
@@ -39,6 +39,7 @@ int ajouterClient(Client tabClient[], int nbClient);
 /*-------------------------------------------- Sauvegarder un client -------------------------------------------------------*/
 
 void sauveTabClient(Client tabClient[], int nbClient);
+void consulterClient(Client tabClient[],int nbClient);
 
 #endif /* EXAMPLE_H *
 

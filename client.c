@@ -155,9 +155,9 @@ void triDicoClient(Client tab[], int n, int trieID)
 
 /*-------------------------------------------- Recherche dico --------------------------------------------------------*/
 
-
 int rechercherDicoClient(char *rechnom, Client tab[], int nbc, int *trouve, int rechID)
 {
+	printf("rechID %d",rechID);
 	int inf = 0, sup = nbc - 1, m;
 	while (inf <= sup)
 	{
@@ -199,7 +199,7 @@ int supprimeClient(Client *tabClient, int nb)
 	int pos, trouve, i;
 	printf("Saisir le nom du client : \t");
 	scanf("%s%*c", rechdesig_art);
-	pos = rechercherDicoClient(rechdesig_art, tabClient, nb, &trouve,-1);
+	pos = rechercherDicoClient(rechdesig_art, tabClient, nb, &trouve, -1);
 	if (trouve == 0)
 	{
 		printf("Client non trouvé \n");
@@ -237,7 +237,7 @@ int ajouterClient(Client tabClient[], int nbClient)
 	triDicoClient(tabClient, nbClient, 1);
 	a = saisieClient(tabClient[nbClient - 1].idClient);
 	triDicoClient(tabClient, nbClient, 0);
-	pos = rechercherDicoClient(a.nom, tabClient, nbClient, &trouve,-1);
+	pos = rechercherDicoClient(a.nom, tabClient, nbClient, &trouve, -1);
 	if (trouve == 1)
 	{
 		printf("Erreur: Client déjà enregistré \n");
@@ -250,6 +250,37 @@ int ajouterClient(Client tabClient[], int nbClient)
 	printf("Ajout du client réussi.\n");
 	return nbClient;
 }
+
+void afficherConsultClient(Client client)
+{
+	system("clear");
+	printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf("┃\t\t\tConsultation Client\t\t\t┃\n");
+	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃ID:      %d\t\t\t\t\t\t\t┃\n",client.idClient);
+	printf("┃Nom:     %-54s┃\n",client.nom);
+	printf("┃Prenom:  %-54s┃\n",client.prenom);
+	printf("┃Address:%-55s┃\n",client.adresse);
+	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃\t\t\tCommandes En Attentes\t\t\t┃\n");
+	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
+	printf("┃idCommande┃Désignation Article┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
+	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
+	afficherCommande(client.commandes);
+	printf("┗━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┛\n");
+}
+
+void consulterClient(Client tabClient[],int nbClient)
+{
+	char rechdesig_art[50];
+	int pos, trouve, i;
+	printf("Saisir le nom du client : \t");
+	scanf("%s%*c", rechdesig_art);
+	pos = rechercherDicoClient(rechdesig_art, tabClient, nbClient, &trouve, -1);
+	afficherConsultClient(tabClient[pos]);
+}
+
+
 
 /*-------------------------------------------- Sauvegarder un client -------------------------------------------------------*/
 
@@ -265,5 +296,3 @@ void sauveTabClient(Client tabClient[], int nbClient)
 	fwrite(tabClient, sizeof(Client), nbClient, flot);
 	fclose(flot);
 }
-
-

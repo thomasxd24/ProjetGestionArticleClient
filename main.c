@@ -10,16 +10,19 @@ int main(void)
     Client *tabClient;
     Ensemble en;
     LigneCommande lc;
-    int nbArt,nbClient;
+    int nbArt, nbClient;
     printf("Chargement des Articles...");
     nbArt = remplirTabArticle(tabArt, 100);
     printf("Réussi\n");
     printf("Chargement des Clients...");
-    tabClient = chargeTabClient(tabClient,&nbClient);
+    tabClient = chargeTabClient(tabClient, &nbClient);
     printf("Réussi\n");
-    printf("Appuyer sur une touche pour continuer...\n");  
+    printf("Chargement des commandes en attentes...");
+    remplirTabLigneCommande(tabClient, nbClient, tabArt, nbArt);
+    printf("Réussi\n");
+    printf("Appuyer sur une touche pour continuer...\n");
     getchar();
-    menuPrinciple(tabArt,&nbArt,tabClient,&nbClient);
+    menuPrinciple(tabArt, &nbArt, tabClient, &nbClient);
 
     return 0;
 }

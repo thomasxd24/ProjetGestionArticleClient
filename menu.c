@@ -196,7 +196,7 @@ void afficheMenuClient(void)
     printf("┃\t1.  Afficher la liste des clients\t\t┃\n");
     printf("┃\t2.  Ajouter un client\t\t\t\t┃\n");
     printf("┃\t3.  Enlever un client\t\t\t\t┃\n");
-    printf("┃\t4.  Modifier un client\t\t\t\t┃\n");
+    printf("┃\t4.  Consulter un client\t\t\t\t┃\n");
     printf("┃\t10. Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
@@ -290,6 +290,11 @@ void menuClient(Client tabClient[], int *nbClient)
         printf("Appuyer sur une touche pour afficher les changements...\n");
         getchar();
         afficherTabClient(tabClient, *nbClient);
+        printf("Appuyer sur une touche pour continuer...\n");
+        getchar();
+        break;
+    case 4:
+        consulterClient(tabClient, *nbClient);
         printf("Appuyer sur une touche pour continuer...\n");
         getchar();
         break;

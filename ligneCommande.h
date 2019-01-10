@@ -16,8 +16,6 @@ Ensemble supprimerCommande(Ensemble e, Article *x);
 int longueur (Ensemble e);
 
 /*-------------------------------------------- Chargement tableau--------------------------------------------------------*/
-
-LigneCommande lireLigneCommande(FILE*flot,Article *tabArt[], int nbArt);
 void remplirTabLigneCommande(Client tabClient[],int nbClient, Article *tabArt[], int nbArt);
 
 /*-------------------------------------------- Supprimer ligne vide --------------------------------------------------------*/
