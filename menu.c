@@ -154,14 +154,14 @@ void menuArticle(Article *tabArt[], int *tailleArt)
             menuChoixTriArticle(tabArt, tailleArt);
             break;
 
-        case 3:
+        case 2:
             triDicoArticle(tabArt, *tailleArt, 2);
             *tailleArt = ajouterArticle(tabArt, *tailleArt);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
             break;
 
-        case 4:
+        case 3:
             triDicoArticle(tabArt, *tailleArt, 2);
             *tailleArt = supprimeArticle(tabArt, *tailleArt);
             printf("Appuyer sur une touche pour continuer...\n");
