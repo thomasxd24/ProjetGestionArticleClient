@@ -3,26 +3,28 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-typedef struct{
-	int idarticle;
-	float prixunitaire;
-	int quantite;
-    char designation[50];
-} Article;	
+#include"struct.h"
 
-/*-------------------------------------------- Chargement tableau ( v1 )-------------------------------------*/
+/*-------------------------------------------- Chargement TAB ---------------------------------------------------*/
 
 Article saisirArticle(FILE *flot);// ca marche
+int remplirTabArticle(Article * tab[],int tmax);// ca marche
+
+/*-------------------------------------------- Afficher TAB------------------------------------------------------*/
+
 void afficherArticle(Article a);// ca marche
 void afficherTabArticleRupture(Article ** tab,int nbarticle);// ca marche
-int remplirTabArticle(Article * tab[],int tmax);// ca marche
 void afficherTabArticle(Article ** tab,int nbarticle);// ca marche
 
-/*-------------------------------------------- Sauvegarder Tableau ------------------------------------------*/
+/*-------------------------------------------- Sauvegarder TAB --------------------------------------------------*/
 
-void sauveTabArticle(Article *tab,int tmax);
+void sauveTabArticle(Article *tab[],int tmax);
 
-/*-------------------------------------------- TrieDicoArticleDesignation --------------------------------------------------------*/
+/*-------------------------------------------- Trie Dico Article -------------------------------------------------*/
+
+int testPosArticle(Article * R, Article * S,int choix);
+void copier(Article * tab[], int i, int j, Article * R[]);
+void fusion (Article * R[], int n, Article * S[], int m ,Article * t[],int choix);
 void triDicoArticle (Article * tab[], int n,int choix);// ca marche
 // choix:
 // 1: idarticle
@@ -30,12 +32,31 @@ void triDicoArticle (Article * tab[], int n,int choix);// ca marche
 // 3: prix
 // 4: quantite
 
+/*-------------------------------------------- Recherche Article-------------------------------------*/
 
-/*-------------------------------------------- RechercheArticleDesignation --------------------------------------------------------*/
+int rechercherDicoArticle(char * rechmodele,Article ** tab, int nbc,int *trouve,int choixID); // ca marche
+// choix:
+// 1: idarticle
+// 2: designation
+/*-------------------------------------------- Supprimer Article --------------------------------------------------*/
 
-int rechercherDicoDesignation(char * rechmodele,Article ** tab, int nbc,int *trouve); // ca marche
-
-/*-------------------------------------------- RecherheDicoArticle --------------------------------------------------------*/
 int supprimeArticle(Article ** tabArt,int nb);
+
+/*-------------------------------------------- Ajouter Article -----------------------------------------------------*/
+
+Article saisieArticle(int tailleArt);
 int adjouterArticle(Article *tabArt[], int tailleArt);
+
+
+
 #endif /* EXAMPLE_H */
+
+/* Fonctionnalite à rajouter :
+- Pouvoir rajouter une fonction qui recherche un article et qui affiche seulement cette article
+- Rajouter les different triDicoArticle dans le menu triDicoArticle
+- Lier les article au liste de commande
+- Fonction ModifierArticle 
+
+Fonctionnalite à modifier :
+- sauveTabArticle = fonctionne pas
+*/ 
