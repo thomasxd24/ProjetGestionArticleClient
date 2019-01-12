@@ -47,7 +47,7 @@ void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *n
             break;
         
         case 3:
-            menuCommande(tabClient, nbClient);
+            menuCommande(tabClient, nbClient,tabArt,tailleArt);
             break;
 
         case 4:
@@ -344,7 +344,7 @@ void menuClient(Client tabClient[], int *nbClient)
 
 /*-------------------------------------------- Menu Commande ------------------------------------------------*/
 
-void menuCommande(Client tabClient[], int *nbClient)
+void menuCommande(Client tabClient[], int *nbClient,Article * tabArt[], int *nbArt)
 {
     int choix;
     afficheMenuCommande();
@@ -354,7 +354,12 @@ void menuCommande(Client tabClient[], int *nbClient)
     switch (choix)
     {
         case 1:
-            printf("hi");
+        printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            saisirCommande(tabClient,*nbClient,tabArt,*nbArt);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            getchar();
             break;
 
         case 2:
@@ -365,7 +370,7 @@ void menuCommande(Client tabClient[], int *nbClient)
         printf("Mauvaise saisie");
         break;
     }
-    menuCommande(tabClient, nbClient);
+    menuCommande(tabClient, nbClient,tabArt,nbArt);
 }
 
 
@@ -390,7 +395,7 @@ void menuReappro(Client tabClient[], int *nbClient)
         printf("Mauvaise saisie");
         break;
     }
-    menuCommande(tabClient, nbClient);
+    menuReappro(tabClient, nbClient);
 }
 /*-------------------------------------------- Menu Reglage -------------------------------------------------*/
 

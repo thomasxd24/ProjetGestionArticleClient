@@ -253,20 +253,21 @@ Client * ajouterClient(Client tabClient[], int *nbClient)
 void afficherConsultClient(Client client)
 {
 	system("clear");
-	printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-	printf("┃\t\t\tConsultation Client\t\t\t┃\n");
-	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-	printf("┃ID:      %d\t\t\t\t\t\t\t┃\n",client.idClient);
-	printf("┃Nom:     %-54s┃\n",client.nom);
-	printf("┃Prenom:  %-54s┃\n",client.prenom);
-	printf("┃Address:%-55s┃\n",client.adresse);
-	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-	printf("┃\t\t\tCommandes En Attentes\t\t\t┃\n");
-	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
-	printf("┃idCommande┃Désignation Article┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
-	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
+	printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf("┃\t\t\tConsultation Client\t\t\t\t  ┃\n");
+	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃ID:      %d\t\t\t\t\t\t\t\t  ┃\n",client.idClient);
+	printf("┃Nom:     %-64s┃\n",client.nom);
+	printf("┃Prenom:  %-64s┃\n",client.prenom);
+	printf("┃Address: %64s┃",client.adresse);
+	printf("\n");
+	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃\t\t\tCommandes En Attentes\t\t\t\t  ┃\n");
+	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
+	printf("┃idCommande┃Désignation Article          ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
+	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
 	afficherCommande(client.commandes);
-	printf("┗━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┛\n");
+	printf("┗━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┛\n");
 }
 
 void consulterClient(Client tabClient[],int nbClient)
@@ -275,7 +276,10 @@ void consulterClient(Client tabClient[],int nbClient)
 	int pos, trouve, i;
 	printf("Saisir le nom du client : \t");
 	scanf("%s%*c", rechdesig_art);
+	triDicoClient(tabClient,nbClient,2);
 	pos = rechercherDicoClient(rechdesig_art, tabClient, nbClient, &trouve, -1);
+	printf("%d",trouve);
+	getchar();
 	afficherConsultClient(tabClient[pos]);
 }
 
