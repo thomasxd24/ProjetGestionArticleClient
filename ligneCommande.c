@@ -50,7 +50,7 @@ void afficherCommande(Ensemble e)
 		
 	while (e != NULL)
 	{
-	printf("┃%d\t   ┃%-29s┃%.2f\t    ┃%d\t     ┃%.2f\t  ┃\n", e->v.idCommande, e->v.article->designation, e->v.article->prixunitaire, e->v.quantite, e->v.quantite * e->v.article->prixunitaire);
+	printf("┃%-10d┃%-29s┃%.2f\t    ┃%d\t     ┃%.2f\t  ┃\n", e->v.idCommande, e->v.article->designation, e->v.article->prixunitaire, e->v.quantite, e->v.quantite * e->v.article->prixunitaire);
 		e = e->suiv;
 	}
 }

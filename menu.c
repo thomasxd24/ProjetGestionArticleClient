@@ -327,6 +327,7 @@ void menuClient(Client tabClient[], int *nbClient)
         getchar();
         break;
     case 4:
+    system("clear");
         consulterClient(tabClient, *nbClient);
         printf("Appuyer sur une touche pour continuer...\n");
         getchar();
@@ -354,8 +355,7 @@ void menuCommande(Client tabClient[], int *nbClient,Article * tabArt[], int *nbA
     switch (choix)
     {
         case 1:
-        printf("Appuyer sur une touche pour continuer...\n");
-            getchar();
+        system("clear");
             saisirCommande(tabClient,*nbClient,tabArt,*nbArt);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
@@ -363,7 +363,10 @@ void menuCommande(Client tabClient[], int *nbClient,Article * tabArt[], int *nbA
             break;
 
         case 2:
-            printf("hi2");
+            lireFichierCommande(tabClient,*nbClient,tabArt,*nbArt);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            getchar();
             break;
 
     default:

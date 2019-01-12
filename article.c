@@ -96,7 +96,7 @@ void sauvegardeTabArticle(Article *tab[],int tmax){
 	for(i=0;i<tmax;i++){
 		sauvegardeArticle(*tab[i],flot);
 	}
-	printf("sauvegarde article effectuée");
+	printf("Sauvegarde article effectuée\n");
 	fclose(flot);
 }
 /*-------------------------------------------- Trie Dico Article ------------------------------------------------*/
