@@ -8,3 +8,4 @@
 
 void saisirCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt);
 void lireFichierCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt);
+void saisirReappro(Client tabClient[], int nbClient, Article *tabArt[], int nbArt);

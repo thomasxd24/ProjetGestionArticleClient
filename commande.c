@@ -50,7 +50,7 @@ void saisirCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbA
     }
 }
 
-void saisirLigneCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt, FILE *flot)
+void saisirLigneCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt, FILE *flot,int ligne)
 {
     char nomClient[50];
     Article *commandeArt;
@@ -65,14 +65,14 @@ void saisirLigneCommande(Client tabClient[], int nbClient, Article *tabArt[], in
     posClient = rechercherDicoClient(nomClient, tabClient, nbClient, &trouve, -1);
     if (!trouve)
     {
-        printf("Client %s introuvable. Ligne Ignore.\n",nomClient);
+        printf("%d: Client %s introuvable. Ligne Ignore.\n",ligne,nomClient);
         return;
     }
     trouve = 0;
     posArt = rechercherDicoArticle('\0', tabArt, nbArt, &trouve, idArt);
     if (!trouve)
     {
-        printf("Article de ID %d introuvable. Ligne Ignore.\n",idArt);
+        printf("%d: Article de ID %d introuvable. Ligne Ignore.\n",ligne,idArt);
         return;
     }
     commandeArt = tabArt[posArt];
@@ -97,7 +97,7 @@ void saisirLigneCommande(Client tabClient[], int nbClient, Article *tabArt[], in
 void lireFichierCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt)
 {
     FILE *flot;
-    int i;
+    int i=1;
     flot = fopen("commandes.don", "r");
     if (flot == NULL)
     {
@@ -106,8 +106,139 @@ void lireFichierCommande(Client tabClient[], int nbClient, Article *tabArt[], in
     }
     while (!feof(flot))
     {
-        saisirLigneCommande(tabClient, nbClient, tabArt, nbArt, flot);
+        saisirLigneCommande(tabClient, nbClient, tabArt, nbArt, flot,i);
+        i=i+1;
     }
     printf("Chargement effectuée\n");
     fclose(flot);
 }
+
+
+
+
+//-------------------Reappro------------------------
+
+
+Ensemble verifCommandeEnAttente(Ensemble commandes,Article * commandeArt,int *quantite)
+{
+   if (commandes == NULL)
+		return commandes;
+    if(commandes->v.article=commandeArt)
+    {
+        if(commandes->v.quantite<*quantite)
+        {
+            *quantite=*quantite-commandes->v.quantite;
+            printf("La commande de numero %d de client %d va etre expedié totalement.\n",commandes->v.idCommande,commandes->v.idClient);
+            commandes=supprimerEnTete(commandes);
+        }
+        else
+        {
+            commandes->v.quantite=commandes->v.quantite-*quantite;
+            printf("La commande de numero %d de client %d va etre expedié partiellement (%d expédiés).\n",commandes->v.idCommande,commandes->v.idClient,*quantite);
+            *quantite=0;
+            return commandes;
+        }
+        
+        
+    }
+	commandes->suiv = verifCommandeEnAttente(commandes->suiv, commandeArt,quantite);
+	return commandes;
+}
+
+void verifTabClientCommande(Client tabClient[], int nbClient, Article *commandeArt,int *quantite)
+{
+    for(int i = 0; i < nbClient; i++)
+    {
+        if(!commandeEstVide(tabClient[i].commandes))
+        {
+            tabClient[i].commandes=verifCommandeEnAttente(tabClient[i].commandes,commandeArt,quantite);
+        }
+    }
+    
+}
+
+void saisirReappro(Client tabClient[], int nbClient, Article *tabArt[], int nbArt)
+{
+    char nomClient[50];
+    Article *commandeArt;
+    LigneCommande commandeEnAttente;
+    int idArt, quantite, i, posArt, posClient, trouve=0, reste;
+    system("clear");
+    while (!trouve)
+    {
+        printf("Entrer l'identifiant de l'article:");
+        scanf("%d", &idArt);
+        posArt = rechercherDicoArticle('\0', tabArt, nbArt, &trouve, idArt);
+        if (!trouve)
+            printf("Article non trouvée. Retaper;\n");
+    }
+    commandeArt = tabArt[posArt];
+    printf("Entrer la quantité de l'article livrés:");
+    scanf("%d", &quantite);
+    if(commandeArt->quantite==0)
+    {
+        verifTabClientCommande(tabClient,nbClient,commandeArt,&quantite);
+        printf("%d stock va etre entreé en stockage",quantite);
+    }
+    
+}
+
+// void saisirLigneReappro(Client tabClient[], int nbClient, Article *tabArt[], int nbArt, FILE *flot,int ligne)
+// {
+//     char nomClient[50];
+//     Article *commandeArt;
+//     LigneCommande commandeEnAttente;
+//     int idArt, quantite, i, posArt, posClient, trouve, reste;
+//     fscanf(flot, "%d", &idArt);
+//     fscanf(flot, "%d", &quantite);
+//     triDicoClient(tabClient, nbClient, 2);
+//     posClient = rechercherDicoClient(nomClient, tabClient, nbClient, &trouve, -1);
+//     if (!trouve)
+//     {
+//         printf("%d: Client %s introuvable. Ligne Ignore.\n",ligne,nomClient);
+//         return;
+//     }
+//     trouve = 0;
+//     posArt = rechercherDicoArticle('\0', tabArt, nbArt, &trouve, idArt);
+//     if (!trouve)
+//     {
+//         printf("%d: Article de ID %d introuvable. Ligne Ignore.\n",ligne,idArt);
+//         return;
+//     }
+//     commandeArt = tabArt[posArt];
+//     reste = commandeArt->quantite - quantite;
+//     if (reste < 0)
+//     {
+//         commandeArt->quantite = 0;
+//         reste = reste * -1;
+//         commandeEnAttente.quantite = reste;
+//         commandeEnAttente.article = commandeArt;
+//         commandeEnAttente.idCommande = random() / 100;
+//         commandeEnAttente.idClient = tabClient[posClient].idClient;
+//         tabClient[posClient].commandes = ajouterCommande(tabClient[posClient].commandes, commandeEnAttente);
+//         printf("Mis en attente pour l'article %s le reste de la commande(%d en attente)\n", commandeArt->designation, reste);
+//     }
+//     else if (reste >= 0)
+//     {
+//         commandeArt->quantite = reste;
+//     }
+// }
+
+// void lireFichierReappro(Client tabClient[], int nbClient, Article *tabArt[], int nbArt)
+// {
+//     FILE *flot;
+//     int i=1;
+//     flot = fopen("commandes.don", "r");
+//     if (flot == NULL)
+//     {
+//         printf("Problème d'ouverture du fichier");
+//         return;
+//     }
+//     while (!feof(flot))
+//     {
+//         saisirLigneCommande(tabClient, nbClient, tabArt, nbArt, flot,i);
+//         i=i+1;
+//     }
+//     printf("Chargement effectuée\n");
+//     fclose(flot);
+// }
