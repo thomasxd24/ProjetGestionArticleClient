@@ -1,11 +1,13 @@
 #include "commande.h"
+#include <time.h>
 
 void saisirCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt)
 {
     char nomClient[50];
     Article *commandeArt;
-    LigneCommande commandeEnAttente;
+    LigneCommande commandeEnAttente,commandeEnCours;
     int idArt, quantite, i, posArt, posClient, trouve, reste;
+    srand(time(NULL)); 
     system("clear");
     printf("Entrer le nom du client:");
     scanf("%s", nomClient);
@@ -29,23 +31,40 @@ void saisirCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbA
     printf("Entrer la quantité de l'article demandée:");
     scanf("%d", &quantite);
     reste = commandeArt->quantite - quantite;
-    if (reste < 0)
+    if (reste < 0) //stock est insuffisante
     {
+        printf("Insuffisante de stock pour cette commande.\n");
+        // Traitement des commande en cours
+        if(commandeArt->quantite!=0)
+        {
+        commandeEnCours.quantite = commandeArt->quantite;
+        commandeEnCours.article = commandeArt;
+        commandeEnCours.idCommande = random()%1000;
+        commandeEnCours.idClient = tabClient[posClient].idClient;
+        tabClient[posClient].commandesEnCours=ajouterCommande(tabClient[posClient].commandesEnCours, commandeEnCours);
+        printf("Mis en commande de l'article (%d en stock)\n", quantite - reste);
+        printf("La commande en cours port la numéro %d\n", commandeEnCours.idCommande);
+        }
+        //Traitement des commande en attente
         commandeArt->quantite = 0;
         reste = reste * -1;
         commandeEnAttente.quantite = reste;
         commandeEnAttente.article = commandeArt;
-        commandeEnAttente.idCommande = random();
+        commandeEnAttente.idCommande = random()%1000;
         commandeEnAttente.idClient = tabClient[posClient].idClient;
-        tabClient[posClient].commandes = ajouterCommande(tabClient[posClient].commandes, commandeEnAttente);
-        printf("Insuffisante de stock pour ce article.\n");
-        printf("Vidé le stock de l'article (%d en stock)\n", quantite - reste);
-        printf("Mis en attente le reste (%d en attente)\n", reste);
-        printf("Il porte la commande numéro %d\n", commandeEnAttente.idCommande);
+        tabClient[posClient].commandesEnAttente = ajouterCommande(tabClient[posClient].commandesEnAttente, commandeEnAttente);
+
+        printf("Mis en attente %d produits\n", reste);
+        printf("La commande en attente porte la commande numéro %d\n", commandeEnAttente.idCommande);
     }
     else if (reste >= 0)
     {
         commandeArt->quantite = reste;
+        commandeEnCours.quantite = quantite;
+        commandeEnCours.article = commandeArt;
+        commandeEnCours.idCommande = random()%1000;
+        commandeEnCours.idClient = tabClient[posClient].idClient;
+        tabClient[posClient].commandesEnCours=ajouterCommande(tabClient[posClient].commandesEnCours, commandeEnCours);
         printf("Commande Client réussi.\n%d de %s commandé, il sera pret dans les 2 jours\n", quantite, commandeArt->designation);
     }
 }
@@ -54,7 +73,7 @@ void saisirLigneCommande(Client tabClient[], int nbClient, Article *tabArt[], in
 {
     char nomClient[50];
     Article *commandeArt;
-    LigneCommande commandeEnAttente;
+    LigneCommande commandeEnAttente,commandeEnCours;
     int idArt, quantite, i, posArt, posClient, trouve, reste;
 
     fscanf(flot, "%s", nomClient);
@@ -65,32 +84,49 @@ void saisirLigneCommande(Client tabClient[], int nbClient, Article *tabArt[], in
     posClient = rechercherDicoClient(nomClient, tabClient, nbClient, &trouve, -1);
     if (!trouve)
     {
-        printf("%d: Client %s introuvable. Ligne Ignore.\n",ligne,nomClient);
+        printf("Ligne %d: Client %s introuvable. Ligne Ignore.\n",ligne,nomClient);
         return;
     }
     trouve = 0;
     posArt = rechercherDicoArticle('\0', tabArt, nbArt, &trouve, idArt);
     if (!trouve)
     {
-        printf("%d: Article de ID %d introuvable. Ligne Ignore.\n",ligne,idArt);
+        printf("Ligne %d: Article de ID %d introuvable. Ligne Ignore.\n",ligne,idArt);
         return;
     }
     commandeArt = tabArt[posArt];
     reste = commandeArt->quantite - quantite;
     if (reste < 0)
     {
+        printf("Ligne %d: Insuffisante de stock pour cette commande. ",ligne);
+        // Traitement des commande en cours
+        if(commandeArt->quantite!=0)
+        {
+        commandeEnCours.quantite = commandeArt->quantite;
+        commandeEnCours.article = commandeArt;
+        commandeEnCours.idCommande = random()%1000;
+        commandeEnCours.idClient = tabClient[posClient].idClient;
+        tabClient[posClient].commandesEnCours=ajouterCommande(tabClient[posClient].commandesEnCours, commandeEnCours);
+        printf("Mis en commande %d produit. ", quantite - reste);
+        }
         commandeArt->quantite = 0;
         reste = reste * -1;
         commandeEnAttente.quantite = reste;
         commandeEnAttente.article = commandeArt;
-        commandeEnAttente.idCommande = random() / 100;
+        commandeEnAttente.idCommande = random()%1000;
         commandeEnAttente.idClient = tabClient[posClient].idClient;
-        tabClient[posClient].commandes = ajouterCommande(tabClient[posClient].commandes, commandeEnAttente);
-        printf("Mis en attente pour l'article %s le reste de la commande(%d en attente)\n", commandeArt->designation, reste);
+        tabClient[posClient].commandesEnAttente = ajouterCommande(tabClient[posClient].commandesEnAttente, commandeEnAttente);
+
+        printf("Mis en attente %d produits\n", reste);
     }
     else if (reste >= 0)
     {
         commandeArt->quantite = reste;
+        commandeEnCours.quantite = quantite;
+        commandeEnCours.article = commandeArt;
+        commandeEnCours.idCommande = random()%1000;
+        commandeEnCours.idClient = tabClient[posClient].idClient;
+        tabClient[posClient].commandesEnCours=ajouterCommande(tabClient[posClient].commandesEnCours, commandeEnCours);
     }
 }
 
@@ -98,12 +134,15 @@ void lireFichierCommande(Client tabClient[], int nbClient, Article *tabArt[], in
 {
     FILE *flot;
     int i=1;
+    system("clear");
+    printf("Chargement de fichier en cours...\n");
     flot = fopen("commandes.don", "r");
     if (flot == NULL)
     {
         printf("Problème d'ouverture du fichier");
         return;
     }
+    printf("Traitement des lignes...\n");
     while (!feof(flot))
     {
         saisirLigneCommande(tabClient, nbClient, tabArt, nbArt, flot,i);
@@ -119,29 +158,39 @@ void lireFichierCommande(Client tabClient[], int nbClient, Article *tabArt[], in
 //-------------------Reappro------------------------
 
 
-Ensemble verifCommandeEnAttente(Ensemble commandes,Article * commandeArt,int *quantite)
+Ensemble verifCommandeEnAttente(Ensemble commandes,Article * commandeArt,int *quantite,Ensemble commandesEnCours)
 {
+    LigneCommande enCours;
+    if(*quantite==0)
+    {
+        return commandes;
+    }
    if (commandes == NULL)
 		return commandes;
-    if(commandes->v.article=commandeArt)
+    if(commandes->v.article->idarticle==commandeArt->idarticle)
     {
         if(commandes->v.quantite<*quantite)
         {
             *quantite=*quantite-commandes->v.quantite;
-            printf("La commande de numero %d de client %d va etre expedié totalement.\n",commandes->v.idCommande,commandes->v.idClient);
+            printf("La commande de numero %d de client %d va passer en cours.\n",commandes->v.idCommande,commandes->v.idClient);
+            commandesEnCours=ajouterCommande(commandesEnCours,commandes->v);
             commandes=supprimerEnTete(commandes);
         }
         else
         {
+            enCours=commandes->v;
+            enCours.quantite=*quantite;
+            printf("La commande de numero %d de client %d va passer en cours partiellement (%d produits retirés).\n",commandes->v.idCommande,commandes->v.idClient,*quantite);
+            commandesEnCours=ajouterCommande(commandesEnCours,commandes->v);
             commandes->v.quantite=commandes->v.quantite-*quantite;
-            printf("La commande de numero %d de client %d va etre expedié partiellement (%d expédiés).\n",commandes->v.idCommande,commandes->v.idClient,*quantite);
             *quantite=0;
-            return commandes;
         }
         
         
     }
-	commandes->suiv = verifCommandeEnAttente(commandes->suiv, commandeArt,quantite);
+    if (commandes == NULL)
+		return commandes;
+	commandes->suiv = verifCommandeEnAttente(commandes->suiv, commandeArt,quantite,commandesEnCours);
 	return commandes;
 }
 
@@ -149,9 +198,10 @@ void verifTabClientCommande(Client tabClient[], int nbClient, Article *commandeA
 {
     for(int i = 0; i < nbClient; i++)
     {
-        if(!commandeEstVide(tabClient[i].commandes))
+        if(!commandeEstVide(tabClient[i].commandesEnAttente))
         {
-            tabClient[i].commandes=verifCommandeEnAttente(tabClient[i].commandes,commandeArt,quantite);
+            tabClient[i].commandesEnAttente=verifCommandeEnAttente(tabClient[i].commandesEnAttente,commandeArt,quantite,tabClient[i].commandesEnCours);
+            afficherCommande(tabClient[i].commandesEnCours);
         }
     }
     
@@ -175,11 +225,10 @@ void saisirReappro(Client tabClient[], int nbClient, Article *tabArt[], int nbAr
     commandeArt = tabArt[posArt];
     printf("Entrer la quantité de l'article livrés:");
     scanf("%d", &quantite);
-    if(commandeArt->quantite==0)
-    {
-        verifTabClientCommande(tabClient,nbClient,commandeArt,&quantite);
-        printf("%d stock va etre entreé en stockage",quantite);
-    }
+    printf("Véification des commandes en attente...\n");
+    verifTabClientCommande(tabClient,nbClient,commandeArt,&quantite);
+    commandeArt->quantite=commandeArt->quantite+quantite;
+    printf("%d produits va etre entreé en stock\n",quantite);
     
 }
 

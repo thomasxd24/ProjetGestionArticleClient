@@ -238,6 +238,7 @@ void menuArticle(Article *tabArt[], int *tailleArt)
             tabArt = modificationArt(tabArt, *tailleArt);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
+            getchar();
             break;
 
         case CINQ:

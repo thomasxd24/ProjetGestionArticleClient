@@ -8,7 +8,7 @@ Article saisirArticle(FILE *flot)
 	fscanf(flot, "%d %f %d ", &a.idarticle, &a.prixunitaire, &a.quantite);
 
 	fgets(a.designation, 50, flot);
-	a.designation[strlen(a.designation) - 1] = '\0';
+	a.designation[strlen(a.designation) - 2] = '\0'; // -2 parce que il faut encore eliminer le \n sinon il ne marche pas
 	return a;
 }
 
@@ -297,36 +297,40 @@ Article ** modificationArt(Article **tabArt,int taille)
 	Article a;
 	int id,pos,trouve;
 	char choix;
-	printf("Veuillez entrer le nom d'un article :\t");
+	printf("Veuillez entrer le nom d'un article :");
 	fgets(a.designation,50,stdin);
 	a.designation[strlen(a.designation)-1]='\0';
 	pos=rechercherDicoArticle(a.designation,tabArt,taille,&trouve,-1);
-	while(trouve==0)
+	if(trouve==0)
 	{
 		printf("Article non enregistré\n");
 		return tabArt ;
 	}
 	printf("\nVoici l'article' %s:\n",a.designation);
+	printf("━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━\n");
+	printf("ID\t┃Prix\t┃Quantite┃Designation \n");
+	printf("━━━━━━━━╋━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	afficherArticle(*tabArt[pos]);
 	printf("\nConfirmez vous que vous souhaitez modifier ce article?(O/N)");
 	scanf("%c%*c",&choix);
 	if(choix=='O'||choix=='o')
 	{
 		a=*tabArt[pos];
-		printf("Voulez vous modifier le prix unitaire ? (O/N)\n");
+		printf("Voulez vous modifier le prix unitaire ? (O/N) ");
 		scanf("%c%*c",&choix);
 		if (choix=='o' || choix=='O')
 		{
 			printf("Saisir le nouveau prix unitaire\t");
-			scanf("%f",&a.prixunitaire);
+			scanf("%f%*c",&a.prixunitaire);
 		}
-		printf("Voulez vous modifier la quantite ? (O/N)\n");
+		printf("Voulez vous modifier la quantite ? (O/N) ");
 		scanf("%c%*c",&choix);
 		if (choix=='o' || choix=='O')
 		{
 			printf("Saisir la nnouvelle quantite\t");
-			scanf("%d",&a.quantite);
+			scanf("%d%*c",&a.quantite);
 		}
+		printf("Vous avez modifié l'article\n");
 		*tabArt[pos]=a;
 		return tabArt;
 	}

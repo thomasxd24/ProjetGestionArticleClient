@@ -125,7 +125,7 @@ void remplirTabLigneCommande(Client tabClient[], int nbClient, Article *tabArt[]
 			continue;
 		}
 		
-		tabClient[pos].commandes = ajouterCommande(tabClient[pos].commandes, commande);
+		tabClient[pos].commandesEnAttente = ajouterCommande(tabClient[pos].commandesEnAttente, commande);
 	}
 }
 
@@ -151,7 +151,7 @@ void sauvegardeListeCommandes(Client tabClient[],int nbClient){
 	}
 	for(i = 0; i < nbClient; i++)
 	{
-		sauvegardeCommande(tabClient[i].commandes,flot);
+		sauvegardeCommande(tabClient[i].commandesEnAttente,flot);
 	}
 	printf("sauvegarde ligne commande effectuée");
 	fclose(flot);

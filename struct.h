@@ -35,7 +35,8 @@ typedef struct{
 	char nom[10];
 	char prenom[10];
 	char adresse[70];
-	Ensemble commandes;
+	Ensemble commandesEnAttente;
+	Ensemble commandesEnCours;
 } Client;
 
 

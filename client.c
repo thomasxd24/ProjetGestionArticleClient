@@ -10,7 +10,7 @@ void afficherTabClient(Client tabClient[], int nbClient)
 	printf("   ID\t┃Civilité  ┃Nom            ┃Prénom         ┃Nb Commandes┃Adresse \n");
 	printf("━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	for (i = 0; i < nbClient; i++)
-		printf("%d\t┃%-10s┃%-15s┃%-15s┃%d\t┃%s\n", tabClient[i].idClient, tabClient[i].civilite, tabClient[i].nom, tabClient[i].prenom, longueur(tabClient[i].commandes),tabClient[i].adresse);
+		printf("%d\t┃%-10s┃%-15s┃%-15s┃%d\t┃%s\n", tabClient[i].idClient, tabClient[i].civilite, tabClient[i].nom, tabClient[i].prenom, longueur(tabClient[i].commandesEnAttente),tabClient[i].adresse);
 	printf("━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	printf("Nombre de client : %d \n", nbClient);
 }
@@ -26,8 +26,8 @@ Client saisirClient(FILE *flot)
 	fscanf(flot, "%s ", c.prenom);
 	fgets(c.adresse, 50, flot);
 	c.adresse[strlen(c.adresse) - 1] = '\0';
-	c.commandes = NULL;
-
+	c.commandesEnAttente = NULL;
+	c.commandesEnCours = NULL;
 	return c;
 }
 
@@ -271,14 +271,19 @@ void afficherConsultClient(Client client)
 	printf("┃ID:      %d\t\t\t\t\t\t\t\t  ┃\n",client.idClient);
 	printf("┃Nom:     %-64s┃\n",client.nom);
 	printf("┃Prenom:  %-64s┃\n",client.prenom);
-	printf("┃Address: %64s┃",client.adresse);
-	printf("\n");
+	printf("┃Address: %-64s┃\n",client.adresse);
 	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
 	printf("┃\t\t\tCommandes En Attentes\t\t\t\t  ┃\n");
 	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
 	printf("┃idCommande┃Désignation Article          ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
 	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
-	afficherCommande(client.commandes);
+	afficherCommande(client.commandesEnAttente);
+	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃\t\t\tCommandes En Cours\t\t\t\t  ┃\n");
+	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
+	printf("┃idCommande┃Désignation Article          ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
+	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
+	afficherCommande(client.commandesEnCours);
 	printf("┗━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┛\n");
 }
 
@@ -290,8 +295,6 @@ void consulterClient(Client tabClient[],int nbClient)
 	scanf("%s%*c", rechdesig_art);
 	triDicoClient(tabClient,nbClient,2);
 	pos = rechercherDicoClient(rechdesig_art, tabClient, nbClient, &trouve, -1);
-	printf("%d",trouve);
-	getchar();
 	afficherConsultClient(tabClient[pos]);
 }
 
@@ -326,7 +329,7 @@ Client * modification(Client *tabClient,int taille)
 	Client c;
 	int id,pos,trouve;
 	char choix;
-	printf("Veuillez entrer le nom d'un client :\t");
+	printf("Veuillez entrer le nom d'un client :");
 	fgets(c.nom,10,stdin);
 	c.nom[strlen(c.nom)-1]='\0';
 	pos=rechercherDicoClient(c.nom,tabClient,taille,&trouve,-1);

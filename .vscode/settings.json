@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "menu.h": "c",
-        "article.h": "c"
+        "article.h": "c",
+        "commande.h": "c"
     },
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "C_Cpp.errorSquiggles": "Disabled"
