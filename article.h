@@ -54,10 +54,7 @@ int ajouterArticle(Article *tabArt[], int tailleArt);
 
 /* Fonctionnalite à rajouter :
 - Pouvoir rajouter une fonction qui recherche un article et qui affiche seulement cette article
-- Rajouter les different triDicoArticle dans le menu triDicoArticle
 - Lier les article au liste de commande
 - Fonction ModifierArticle 
 
-Fonctionnalite à modifier :
-- sauveTabArticle = fonctionne pas
 */ 

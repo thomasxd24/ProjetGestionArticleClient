@@ -216,8 +216,12 @@ int supprimeClient(Client *tabClient, int nb)
 Client saisieClient(int nb)
 {
 	Client c;
-	printf("Civilité de nouveau client: ");
+	printf("Civilité de nouveau client (Mr ou Mme): ");
 	scanf("%s%*c", c.civilite);
+	while(strcmp(c.civilite,"Mr")!=0 && strcmp(c.civilite,"Mme")!=0 ){
+		printf("Civilité de nouveau client (Mr ou Mme): ");
+		scanf("%s%*c", c.civilite);
+	}
 	printf("Nom de nouveau client : ");
 	scanf("%s%*c", c.nom);
 	printf("Prénom de nouveau client: ");
