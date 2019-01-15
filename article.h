@@ -47,7 +47,7 @@ int supprimeArticle(Article ** tabArt,int nb);
 
 Article saisieArticle(int tailleArt);
 int ajouterArticle(Article *tabArt[], int tailleArt);
-
+Article ** modificationArt(Article **tabArt,int taille);
 
 
 #endif /* EXAMPLE_H */

@@ -157,6 +157,14 @@ void triDicoClient(Client tab[], int n, int trieID)
 
 int rechercherDicoClient(char *rechnom, Client tab[], int nbc, int *trouve, int rechID)
 {
+	if(rechID==-1)
+	{
+		triDicoClient(tab,nbc,2);
+	}
+	else
+	{
+		triDicoClient(tab,nbc,1);
+	}
 	int inf = 0, sup = nbc - 1, m;
 	while (inf <= sup)
 	{
@@ -305,4 +313,70 @@ void sauvegardeTabClient(Client tab[],int tmax){
 	}
 	printf("sauvegarde client effectuée");
 	fclose(flot);
+}
+
+/*-------------------------------------------- Modification client -------------------------------------------------------*/
+
+Client * modification(Client *tabClient,int taille)
+{
+	Client c;
+	int id,pos,trouve;
+	char choix;
+	printf("Veuillez entrer le nom d'un client :\t");
+	fgets(c.nom,10,stdin);
+	c.nom[strlen(c.nom)-1]='\0';
+	pos=rechercherDicoClient(c.nom,tabClient,taille,&trouve,-1);
+	while(trouve==0)
+	{
+		printf("Client non enregistré\n");
+		return tabClient ;
+	}
+	printf("\nVoici le client %s %s :\n",c.nom,c.prenom);
+	afficherConsultClient(tabClient[pos]);
+	printf("\nConfirmez vous que vous souhaitez modifier ce client?(O/N)");
+	scanf("%c%*c",&choix);
+	if(choix=='O'||choix=='o')
+	{
+		c=tabClient[pos];
+		printf("Voulez vous modifier la civilité ? (O/N)\n");
+		scanf("%c%*c",&choix);
+		if (choix=='o' || choix=='O')
+		{
+			printf("Saisir la nouvelle civilité\t");
+			scanf("%s%*c",c.civilite);
+			while(strcmp(c.civilite,"Mr")!=0 && strcmp(c.civilite,"mr")!=0 && strcmp(c.civilite,"Mme")!=0 && strcmp(c.civilite,"mme")!=0)
+			{
+				printf("Civilité inconnue, veuillez entrer de nouveau la civilité (Mr ou Mme) :\t");
+				scanf("%s%*c",c.civilite);
+			}
+		}
+		printf("Voulez vous modifier le nom ? (O/N)\n");
+		scanf("%c%*c",&choix);
+		if (choix=='o' || choix=='O')
+		{
+			printf("Saisir le nouveau nom\t");
+			fgets(c.nom,10,stdin);
+			c.nom[strlen(c.nom)-1]='\0';
+		}
+		printf("Voulez vous modifier le prénom ? (O/N)\n");
+		scanf("%c%*c",&choix);
+		if (choix=='o' || choix=='O')
+		{
+			printf("Saisir le nouveau prénom\t");
+			fgets(c.prenom,10,stdin);
+			c.prenom[strlen(c.prenom)-1]='\0';
+		}
+		printf("Voulez vous modifier l'adresse ? (O/N)\n");
+		scanf("%c%*c",&choix);
+		if (choix=='o' || choix=='O')
+		{
+			printf("Saisir l'adresse'\t");
+			fgets(c.adresse,70,stdin);
+			c.adresse[strlen(c.adresse)-1]='\0';
+		}
+		tabClient[pos]=c;
+		return tabClient;
+	}
+	printf("vous n'avez pas modifié le client %s %s\n",c.nom,c.prenom);		
+	return tabClient;
 }

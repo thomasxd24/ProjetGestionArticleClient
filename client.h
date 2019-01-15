@@ -42,7 +42,7 @@ void sauvegardeTabClient(Client tab[],int tmax);
 void sauvegardeClient(Client c,FILE * flot);
 
 void consulterClient(Client tabClient[],int nbClient);
-
+Client * modification(Client *tabClient,int taille);
 #endif /* EXAMPLE_H *
 
 /* Fonctionnalite à rajouter :

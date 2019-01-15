@@ -289,3 +289,47 @@ int ajouterArticle(Article *tabArt[], int tailleArt)
 	printf("Ajout de l'article réussi.");
 	return tailleArt;
 }
+
+/*-------------------------------------------- Modification article -------------------------------------------------------*/
+
+Article ** modificationArt(Article **tabArt,int taille)
+{
+	Article a;
+	int id,pos,trouve;
+	char choix;
+	printf("Veuillez entrer le nom d'un article :\t");
+	fgets(a.designation,50,stdin);
+	a.designation[strlen(a.designation)-1]='\0';
+	pos=rechercherDicoArticle(a.designation,tabArt,taille,&trouve,-1);
+	while(trouve==0)
+	{
+		printf("Article non enregistré\n");
+		return tabArt ;
+	}
+	printf("\nVoici l'article' %s:\n",a.designation);
+	afficherArticle(*tabArt[pos]);
+	printf("\nConfirmez vous que vous souhaitez modifier ce article?(O/N)");
+	scanf("%c%*c",&choix);
+	if(choix=='O'||choix=='o')
+	{
+		a=*tabArt[pos];
+		printf("Voulez vous modifier le prix unitaire ? (O/N)\n");
+		scanf("%c%*c",&choix);
+		if (choix=='o' || choix=='O')
+		{
+			printf("Saisir le nouveau prix unitaire\t");
+			scanf("%f",&a.prixunitaire);
+		}
+		printf("Voulez vous modifier la quantite ? (O/N)\n");
+		scanf("%c%*c",&choix);
+		if (choix=='o' || choix=='O')
+		{
+			printf("Saisir la nnouvelle quantite\t");
+			scanf("%d",&a.quantite);
+		}
+		*tabArt[pos]=a;
+		return tabArt;
+	}
+	printf("vous n'avez pas modifié le client %s \n",a.designation);		
+	return tabArt;
+}

@@ -18,7 +18,7 @@ Ensemble insererEnTete(Ensemble e, LigneCommande commande)
 	if (m == NULL)
 	{
 		printf("Erreur de malloc");
-		exit(1);
+		return e;
 	}
 	m->v = commande;
 	m->suiv = e;
@@ -61,7 +61,7 @@ Ensemble supprimerEnTete(Ensemble e)
 	if (e == NULL)
 	{
 		printf("Opération impossible");
-		exit(1);
+		return e;
 	}
 	aux = e;
 	e = e->suiv;

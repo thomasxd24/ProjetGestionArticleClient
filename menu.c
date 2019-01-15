@@ -36,7 +36,7 @@ int getch(){
 int choixMenu(void)
 {
     int n;
-  n = getch();
+    n = getch();
     return n;
 }
 
@@ -232,6 +232,13 @@ void menuArticle(Article *tabArt[], int *tailleArt)
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
             break;
+        
+        case QUATRE:
+            triDicoArticle(tabArt, *tailleArt, 2);
+            tabArt = modificationArt(tabArt, *tailleArt);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            break;
 
         case CINQ:
             triDicoArticle(tabArt, *tailleArt, 1);
@@ -360,6 +367,15 @@ void menuClient(Client tabClient[], int *nbClient)
     case QUATRE:
     system("clear");
         consulterClient(tabClient, *nbClient);
+        printf("Appuyer sur une touche pour continuer...\n");
+        getchar();
+        break;
+    case CINQ :
+        triDicoClient(tabClient, *nbClient, 1);
+        tabClient = modification(tabClient,*nbClient);
+        printf("Appuyer sur une touche pour afficher les changements...\n");
+        getchar();
+        afficherTabClient(tabClient, *nbClient);
         printf("Appuyer sur une touche pour continuer...\n");
         getchar();
         break;
