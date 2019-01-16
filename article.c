@@ -338,9 +338,19 @@ Article ** modificationArt(Article **tabArt,int taille)
 	return tabArt;
 }
 
-void verifArtDansCommandes(Article *article,Ensemble commandes, int *trouve)
+void afficherClientCommande(Client client)
 {
 
+}
+
+Ensemble verifArtDansCommandes(Article *article,Ensemble commandes,int *trouve,Client client)
+{
+	if(commandes==NULL)
+		return commandes;
+	if(commandes->v.article->idarticle==article->idarticle)
+		afficherClientCommande(client);
+	commandes->suiv=verifArtDansCommandes(article,commandes->suiv,trouve);
+	return commandes;
 }
 
 void afficherArticleCommande(Article *article,Client tabClient[],int nbClient,int choixCommande)
@@ -350,11 +360,13 @@ void afficherArticleCommande(Article *article,Client tabClient[],int nbClient,in
 	{
 		if(choixCommande==1)
 		{
-			verifArtDansCommandes(article,tabClient[i].commandesEnAttente,&trouve);
+			if(tabClient[i].commandesEnAttente!=NULL)
+				verifArtDansCommandes(article,tabClient[i].commandesEnAttente,&trouve,tabClient[i]);
 		}
 		else
 		{
-			verifArtDansCommandes(article,tabClient[i].commandesEnCours,&trouve);
+			if(tabClient[i].commandesEnCours!=NULL)
+				verifArtDansCommandes(article,tabClient[i].commandesEnCours,&trouve,tabClient[i]);
 		}
 		
 	}
@@ -369,8 +381,8 @@ void afficherConsultArticle(Article *article,Client tabClient[],int nbClient)
 	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
 	printf("┃ID:      %d\t\t\t\t\t\t\t\t  ┃\n",article->idarticle);
 	printf("┃Désignation:     %-56s┃\n",article->designation);
-	printf("Prix:  %-64s┃\n",article->prixunitaire);
-	printf("Quantité en stock: %-64s┃\n",article->quantite);
+	printf("┃Prix:  %-64.2f┃\n",article->prixunitaire);
+	printf("┃Quantité en stock:%-64d┃\n",article->quantite);
 	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
 	printf("┃\t\t\tCommandes En Attentes\t\t\t\t  ┃\n");
 	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
@@ -384,4 +396,14 @@ void afficherConsultArticle(Article *article,Client tabClient[],int nbClient)
 	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
 	afficherArticleCommande(article,tabClient,nbClient,2);
 	printf("┗━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┛\n");
+}
+
+void consulterArticle(Article *tabArt[],int nbArt,Client tabClient[], int nbClient)
+{
+	char rechdesig_art[50];
+	int pos, trouve, i;
+	printf("Rechercher un article par désignation: ");
+	scanf("%s%*c", rechdesig_art);
+	pos = rechercherDicoArticle(rechdesig_art, tabArt, nbArt, &trouve, -1);
+	afficherConsultArticle(tabArt[pos],tabClient,nbClient);
 }

@@ -9,7 +9,7 @@
 
 
 void menuPrinciple(Article * tabArt[], int *tailleArt,Client tabClient[],int *nbClient);
-void menuArticle(Article *tabArt[], int *tailleArt);
+void menuArticle(Article *tabArt[], int *tailleArt,Client tabClient[],int *nbClient);
 void menuClient(Client tabClient[], int *nbClient);
 void menuCommande(Client tabClient[], int *nbClient,Article * tabArt[], int *nbArt);
 void menuReappro(Client tabClient[], int *nbClient,Article * tabArt[], int *nbArt);

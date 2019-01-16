@@ -40,9 +40,9 @@ int rechercherDicoArticle(char * rechmodele,Article ** tab, int nbc,int *trouve,
 // 1: idarticle
 // 2: designation
 /*-------------------------------------------- Supprimer Article --------------------------------------------------*/
-
+void consulterArticle(Article *tabArt[],int nbArt,Client tabClient[], int nbClient);
 int supprimeArticle(Article ** tabArt,int nb);
-
+void afficherConsultArticle(Article *article,Client tabClient[],int nbClient);
 /*-------------------------------------------- Ajouter Article -----------------------------------------------------*/
 
 Article saisieArticle(int tailleArt);

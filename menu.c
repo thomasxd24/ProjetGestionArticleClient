@@ -70,7 +70,7 @@ afficheMenuPrinciple();
         switch (choix)
         {
         case UN:
-            menuArticle(tabArt, tailleArt);
+            menuArticle(tabArt, tailleArt,tabClient,nbClient);
             break;
 
         case DEUX:
@@ -194,7 +194,6 @@ void menuChoixTriArticle(Article *tabArticle[], int *nbArticle)
             getchar();
             choix = 48;
             break;
-
         case 48:
             break;
 
@@ -205,7 +204,7 @@ void menuChoixTriArticle(Article *tabArticle[], int *nbArticle)
     }
 }
 
-void menuArticle(Article *tabArt[], int *tailleArt)
+void menuArticle(Article *tabArt[], int *tailleArt,Client tabClient[],int *nbClient)
 {
     int choix;
     while (choix != 48)
@@ -244,6 +243,12 @@ void menuArticle(Article *tabArt[], int *tailleArt)
         case CINQ:
             triDicoArticle(tabArt, *tailleArt, 1);
             afficherTabArticleRupture(tabArt, *tailleArt);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
+            break;
+
+        case 54:
+            consulterArticle(tabArt,*tailleArt,tabClient,*nbClient);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
             break;
