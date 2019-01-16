@@ -337,3 +337,51 @@ Article ** modificationArt(Article **tabArt,int taille)
 	printf("vous n'avez pas modifié le client %s \n",a.designation);		
 	return tabArt;
 }
+
+void verifArtDansCommandes(Article *article,Ensemble commandes, int *trouve)
+{
+
+}
+
+void afficherArticleCommande(Article *article,Client tabClient[],int nbClient,int choixCommande)
+{
+	int trouve=0;
+	for(int i = 0; i < nbClient; i++)
+	{
+		if(choixCommande==1)
+		{
+			verifArtDansCommandes(article,tabClient[i].commandesEnAttente,&trouve);
+		}
+		else
+		{
+			verifArtDansCommandes(article,tabClient[i].commandesEnCours,&trouve);
+		}
+		
+	}
+	
+}
+
+void afficherConsultArticle(Article *article,Client tabClient[],int nbClient)
+{
+	system("clear");
+	printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf("┃\t\t\tConsultation Article\t\t\t\t  ┃\n");
+	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃ID:      %d\t\t\t\t\t\t\t\t  ┃\n",article->idarticle);
+	printf("┃Désignation:     %-56s┃\n",article->designation);
+	printf("Prix:  %-64s┃\n",article->prixunitaire);
+	printf("Quantité en stock: %-64s┃\n",article->quantite);
+	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃\t\t\tCommandes En Attentes\t\t\t\t  ┃\n");
+	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
+	printf("┃idCommande┃Désignation Article          ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
+	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
+	afficherArticleCommande(article,tabClient,nbClient,1);
+	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃\t\t\tCommandes En Cours\t\t\t\t  ┃\n");
+	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
+	printf("┃idCommande┃Désignation Article          ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
+	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
+	afficherArticleCommande(article,tabClient,nbClient,2);
+	printf("┗━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┛\n");
+}

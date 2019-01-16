@@ -158,7 +158,7 @@ void lireFichierCommande(Client tabClient[], int nbClient, Article *tabArt[], in
 //-------------------Reappro------------------------
 
 
-Ensemble verifCommandeEnAttente(Ensemble commandes,Article * commandeArt,int *quantite,Ensemble commandesEnCours)
+Ensemble verifCommandeEnAttente(Ensemble commandes,Article * commandeArt,int *quantite,Client tabClient[],int pos)
 {
     LigneCommande enCours;
     if(*quantite==0)
@@ -173,7 +173,7 @@ Ensemble verifCommandeEnAttente(Ensemble commandes,Article * commandeArt,int *qu
         {
             *quantite=*quantite-commandes->v.quantite;
             printf("La commande de numero %d de client %d va passer en cours.\n",commandes->v.idCommande,commandes->v.idClient);
-            commandesEnCours=ajouterCommande(commandesEnCours,commandes->v);
+            tabClient[pos].commandesEnCours=ajouterCommande(tabClient[pos].commandesEnCours,commandes->v);
             commandes=supprimerEnTete(commandes);
         }
         else
@@ -181,7 +181,7 @@ Ensemble verifCommandeEnAttente(Ensemble commandes,Article * commandeArt,int *qu
             enCours=commandes->v;
             enCours.quantite=*quantite;
             printf("La commande de numero %d de client %d va passer en cours partiellement (%d produits retirés).\n",commandes->v.idCommande,commandes->v.idClient,*quantite);
-            commandesEnCours=ajouterCommande(commandesEnCours,commandes->v);
+           tabClient[pos].commandesEnCours=ajouterCommande(tabClient[pos].commandesEnCours,enCours);
             commandes->v.quantite=commandes->v.quantite-*quantite;
             *quantite=0;
         }
@@ -190,7 +190,7 @@ Ensemble verifCommandeEnAttente(Ensemble commandes,Article * commandeArt,int *qu
     }
     if (commandes == NULL)
 		return commandes;
-	commandes->suiv = verifCommandeEnAttente(commandes->suiv, commandeArt,quantite,commandesEnCours);
+	commandes->suiv = verifCommandeEnAttente(commandes->suiv, commandeArt,quantite,tabClient,pos);
 	return commandes;
 }
 
@@ -200,7 +200,7 @@ void verifTabClientCommande(Client tabClient[], int nbClient, Article *commandeA
     {
         if(!commandeEstVide(tabClient[i].commandesEnAttente))
         {
-            tabClient[i].commandesEnAttente=verifCommandeEnAttente(tabClient[i].commandesEnAttente,commandeArt,quantite,tabClient[i].commandesEnCours);
+            tabClient[i].commandesEnAttente=verifCommandeEnAttente(tabClient[i].commandesEnAttente,commandeArt,quantite,tabClient,i);
             afficherCommande(tabClient[i].commandesEnCours);
         }
     }
