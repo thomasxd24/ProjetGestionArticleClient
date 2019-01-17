@@ -311,7 +311,11 @@ void consulterClient(Client tabClient[],int nbClient)
 		}
 		if(pos==-1)
 		{
-			pos
+			pos=nbClient-1;
+		}
+		if(pos==nbClient)
+		{
+			pos=0;
 		}
 		afficherConsultClient(tabClient[pos]);
 		printf("Appuyer sur ← ou → pour naviguer\n");
