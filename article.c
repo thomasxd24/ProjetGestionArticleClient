@@ -80,11 +80,13 @@ void afficherTabArticleRupture(Article **tab, int nbarticle)
 }
 /*-------------------------------------------- Sauvegarder TAB --------------------------------------------------*/
 
-void sauvegardeArticle(Article a,FILE * flot){
-	fprintf(flot,"%d \t %.2f \t %d \t %s \n",a.idarticle,a.prixunitaire,a.quantite,a.designation);
+void sauvegardeArticle(Article a, FILE *flot)
+{
+	fprintf(flot, "%d \t %.2f \t %d \t %s \n", a.idarticle, a.prixunitaire, a.quantite, a.designation);
 }
 
-void sauvegardeTabArticle(Article *tab[],int tmax){
+void sauvegardeTabArticle(Article *tab[], int tmax)
+{
 	int i;
 	FILE *flot;
 	flot = fopen("articles.don", "r+");
@@ -93,8 +95,9 @@ void sauvegardeTabArticle(Article *tab[],int tmax){
 		printf("Problème d'ouverture du fichier");
 		return;
 	}
-	for(i=0;i<tmax;i++){
-		sauvegardeArticle(*tab[i],flot);
+	for (i = 0; i < tmax; i++)
+	{
+		sauvegardeArticle(*tab[i], flot);
 	}
 	printf("Sauvegarde article effectuée\n");
 	fclose(flot);
@@ -191,12 +194,11 @@ void triDicoArticle(Article *tab[], int n, int choix)
 
 int rechercherDicoArticle(char rechmodele[], Article *tab[], int nbc, int *trouve, int rechID)
 {
-	if(rechID == -1)
-		triDicoArticle(tab,nbc,2);
+	if (rechID == -1)
+		triDicoArticle(tab, nbc, 2);
 	else
-		triDicoArticle(tab,nbc,1);
-	
-	
+		triDicoArticle(tab, nbc, 1);
+
 	int inf = 0, sup = nbc - 1, m;
 	while (inf <= sup)
 	{
@@ -225,7 +227,6 @@ int rechercherDicoArticle(char rechmodele[], Article *tab[], int nbc, int *trouv
 			else
 				inf = m + 1;
 		}
-		
 	}
 	*trouve = 0;
 	return inf;
@@ -240,7 +241,7 @@ int supprimeArticle(Article **tabArt, int nb)
 	printf("Saisir le nom d'un article : \t");
 	scanf("%s%*c", rechdesig_art);
 	printf("%s\n", rechdesig_art);
-	pos = rechercherDicoArticle(rechdesig_art, tabArt, nb, &trouve,-1);
+	pos = rechercherDicoArticle(rechdesig_art, tabArt, nb, &trouve, -1);
 	if (trouve == 0)
 	{
 		printf("Article non trouvé \n");
@@ -276,7 +277,7 @@ int ajouterArticle(Article *tabArt[], int tailleArt)
 	triDicoArticle(tabArt, tailleArt, 1);
 	a = saisieArticle(tabArt[tailleArt - 1]->idarticle);
 	triDicoArticle(tabArt, tailleArt, 2);
-	pos = rechercherDicoArticle(a.designation, tabArt, tailleArt, &trouve,-1);
+	pos = rechercherDicoArticle(a.designation, tabArt, tailleArt, &trouve, -1);
 	if (trouve == 1)
 	{
 		printf("Erreur: Article déjà enregistré \n");
@@ -292,118 +293,135 @@ int ajouterArticle(Article *tabArt[], int tailleArt)
 
 /*-------------------------------------------- Modification article -------------------------------------------------------*/
 
-Article ** modificationArt(Article **tabArt,int taille)
+Article **modificationArt(Article **tabArt, int taille)
 {
 	Article a;
-	int id,pos,trouve;
+	int id, pos, trouve;
 	char choix;
 	printf("Veuillez entrer le nom d'un article :");
-	fgets(a.designation,50,stdin);
-	a.designation[strlen(a.designation)-1]='\0';
-	pos=rechercherDicoArticle(a.designation,tabArt,taille,&trouve,-1);
-	if(trouve==0)
+	fgets(a.designation, 50, stdin);
+	a.designation[strlen(a.designation) - 1] = '\0';
+	pos = rechercherDicoArticle(a.designation, tabArt, taille, &trouve, -1);
+	if (trouve == 0)
 	{
 		printf("Article non enregistré\n");
-		return tabArt ;
+		return tabArt;
 	}
-	printf("\nVoici l'article' %s:\n",a.designation);
+	printf("\nVoici l'article' %s:\n", a.designation);
 	printf("━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	printf("ID\t┃Prix\t┃Quantite┃Designation \n");
 	printf("━━━━━━━━╋━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	afficherArticle(*tabArt[pos]);
 	printf("\nConfirmez vous que vous souhaitez modifier ce article?(O/N)");
-	scanf("%c%*c",&choix);
-	if(choix=='O'||choix=='o')
+	scanf("%c%*c", &choix);
+	if (choix == 'O' || choix == 'o')
 	{
-		a=*tabArt[pos];
+		a = *tabArt[pos];
 		printf("Voulez vous modifier le prix unitaire ? (O/N) ");
-		scanf("%c%*c",&choix);
-		if (choix=='o' || choix=='O')
+		scanf("%c%*c", &choix);
+		if (choix == 'o' || choix == 'O')
 		{
 			printf("Saisir le nouveau prix unitaire\t");
-			scanf("%f%*c",&a.prixunitaire);
+			scanf("%f%*c", &a.prixunitaire);
 		}
 		printf("Voulez vous modifier la quantite ? (O/N) ");
-		scanf("%c%*c",&choix);
-		if (choix=='o' || choix=='O')
+		scanf("%c%*c", &choix);
+		if (choix == 'o' || choix == 'O')
 		{
 			printf("Saisir la nnouvelle quantite\t");
-			scanf("%d%*c",&a.quantite);
+			scanf("%d%*c", &a.quantite);
 		}
 		printf("Vous avez modifié l'article\n");
-		*tabArt[pos]=a;
+		*tabArt[pos] = a;
 		return tabArt;
 	}
-	printf("vous n'avez pas modifié le client %s \n",a.designation);		
+	printf("vous n'avez pas modifié le client %s \n", a.designation);
 	return tabArt;
 }
 
-void afficherClientCommande(Client client)
+void afficherClientCommande(Client client, LigneCommande commande)
 {
-
+	char nomEntier[150];
+	sprintf(nomEntier, "%s. %s %s", client.civilite, client.nom, client.prenom);
+	printf("┃%d\t   ┃%-40s┃%-21d┃\n", commande.idCommande, nomEntier, commande.quantite);
 }
 
-Ensemble verifArtDansCommandes(Article *article,Ensemble commandes,int *trouve,Client client)
+Ensemble verifArtDansCommandes(Article *article, Ensemble commandes, int *trouve, Client client)
 {
-	if(commandes==NULL)
+	if (commandes == NULL)
 		return commandes;
-	if(commandes->v.article->idarticle==article->idarticle)
-		afficherClientCommande(client);
-	commandes->suiv=verifArtDansCommandes(article,commandes->suiv,trouve);
+	if (commandes->v.article->idarticle == article->idarticle)
+		afficherClientCommande(client, commandes->v);
+	commandes->suiv = verifArtDansCommandes(article, commandes->suiv, trouve, client);
 	return commandes;
 }
 
-void afficherArticleCommande(Article *article,Client tabClient[],int nbClient,int choixCommande)
+void afficherArticleCommande(Article *article, Client tabClient[], int nbClient, int choixCommande)
 {
-	int trouve=0;
-	for(int i = 0; i < nbClient; i++)
+	int trouve = 0;
+	for (int i = 0; i < nbClient; i++)
 	{
-		if(choixCommande==1)
+		if (choixCommande == 1)
 		{
-			if(tabClient[i].commandesEnAttente!=NULL)
-				verifArtDansCommandes(article,tabClient[i].commandesEnAttente,&trouve,tabClient[i]);
+			if (tabClient[i].commandesEnAttente != NULL)
+				verifArtDansCommandes(article, tabClient[i].commandesEnAttente, &trouve, tabClient[i]);
 		}
 		else
 		{
-			if(tabClient[i].commandesEnCours!=NULL)
-				verifArtDansCommandes(article,tabClient[i].commandesEnCours,&trouve,tabClient[i]);
+			if (tabClient[i].commandesEnCours != NULL)
+				verifArtDansCommandes(article, tabClient[i].commandesEnCours, &trouve, tabClient[i]);
 		}
-		
 	}
-	
 }
 
-void afficherConsultArticle(Article *article,Client tabClient[],int nbClient)
+void afficherConsultArticle(Article *article, Client tabClient[], int nbClient)
 {
 	system("clear");
 	printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
 	printf("┃\t\t\tConsultation Article\t\t\t\t  ┃\n");
 	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-	printf("┃ID:      %d\t\t\t\t\t\t\t\t  ┃\n",article->idarticle);
-	printf("┃Désignation:     %-56s┃\n",article->designation);
-	printf("┃Prix:  %-64.2f┃\n",article->prixunitaire);
-	printf("┃Quantité en stock:%-64d┃\n",article->quantite);
+	printf("┃ID: %-69d┃\n", article->idarticle);
+	printf("┃Désignation: %-60s┃\n", article->designation);
+	printf("┃Prix:  %-66.2f┃\n", article->prixunitaire);
+	printf("┃Quantité en stock: %-54d┃\n", article->quantite);
 	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
 	printf("┃\t\t\tCommandes En Attentes\t\t\t\t  ┃\n");
-	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
-	printf("┃idCommande┃Désignation Article          ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
-	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
-	afficherArticleCommande(article,tabClient,nbClient,1);
-	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃idCommande┃Nom Client                              ┃Quantité Commandé    ┃\n");
+	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━┫\n");
+	afficherArticleCommande(article, tabClient, nbClient, 1);
+	printf("┣━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━┫\n");
 	printf("┃\t\t\tCommandes En Cours\t\t\t\t  ┃\n");
-	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
-	printf("┃idCommande┃Désignation Article          ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
-	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
-	afficherArticleCommande(article,tabClient,nbClient,2);
-	printf("┗━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┛\n");
+	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃idCommande┃Nom Client                              ┃Quantité Commandé    ┃\n");
+	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━┫\n");
+	afficherArticleCommande(article, tabClient, nbClient, 2);
+	printf("┗━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
-void consulterArticle(Article *tabArt[],int nbArt,Client tabClient[], int nbClient)
+void consulterArticle(Article *tabArt[], int nbArt, Client tabClient[], int nbClient)
 {
 	char rechdesig_art[50];
-	int pos, trouve, i;
+	int pos, trouve, i, choix = 0;
 	printf("Rechercher un article par désignation: ");
 	scanf("%s%*c", rechdesig_art);
 	pos = rechercherDicoArticle(rechdesig_art, tabArt, nbArt, &trouve, -1);
-	afficherConsultArticle(tabArt[pos],tabClient,nbClient);
+	afficherConsultArticle(tabArt[pos], tabClient, nbClient);
+	printf("Appuyer sur ← ou → pour naviguer\n");
+	printf("Appuyer sur entrer pour sortir\n");
+	while (choix != 10)
+	{
+		choix = getch();
+		if (choix == 68)
+		{
+			pos = pos - 1;
+		}
+		else if (choix == 67)
+		{
+			pos = pos + 1;
+		}
+		afficherConsultArticle(tabArt[pos], tabClient, nbClient);
+		printf("Appuyer sur ← ou → pour naviguer\n");
+		printf("Appuyer sur entrer pour sortir\n");
+	}
 }

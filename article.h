@@ -4,6 +4,7 @@
 #include<string.h>
 #include<stdlib.h>
 #include"struct.h"
+#include"getch.h"
 
 /*-------------------------------------------- Chargement TAB ---------------------------------------------------*/
 

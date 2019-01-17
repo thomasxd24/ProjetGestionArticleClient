@@ -7,10 +7,10 @@ void afficherTabClient(Client tabClient[], int nbClient)
 	int i = 0;
 	printf("Liste des Clients\n");
 	printf("━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
-	printf("   ID\t┃Civilité  ┃Nom            ┃Prénom         ┃Nb Commandes┃Adresse \n");
+	printf("   ID\t┃Civilité  ┃Nom            ┃Prénom         ┃Cdes En Attente┃Cdes En Cours┃Adresse \n");
 	printf("━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	for (i = 0; i < nbClient; i++)
-		printf("%d\t┃%-10s┃%-15s┃%-15s┃%d\t┃%s\n", tabClient[i].idClient, tabClient[i].civilite, tabClient[i].nom, tabClient[i].prenom, longueur(tabClient[i].commandesEnAttente),tabClient[i].adresse);
+		printf("%d\t┃%-10s┃%-15s┃%-15s┃%-15d┃%-13d┃%s\n", tabClient[i].idClient, tabClient[i].civilite, tabClient[i].nom, tabClient[i].prenom, longueur(tabClient[i].commandesEnAttente),longueur(tabClient[i].commandesEnCours),tabClient[i].adresse);
 	printf("━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	printf("Nombre de client : %d \n", nbClient);
 }
@@ -290,12 +290,33 @@ void afficherConsultClient(Client client)
 void consulterClient(Client tabClient[],int nbClient)
 {
 	char rechdesig_art[50];
-	int pos, trouve, i;
+	int pos, trouve, i,choix;
 	printf("Saisir le nom du client : \t");
 	scanf("%s%*c", rechdesig_art);
 	triDicoClient(tabClient,nbClient,2);
 	pos = rechercherDicoClient(rechdesig_art, tabClient, nbClient, &trouve, -1);
 	afficherConsultClient(tabClient[pos]);
+	printf("Appuyer sur ← ou → pour naviguer\n");
+	printf("Appuyer sur entrer pour sortir\n");
+	while (choix != 10)
+	{
+		choix = getch();
+		if (choix == 68)
+		{
+			pos = pos - 1;
+		}
+		else if (choix == 67)
+		{
+			pos = pos + 1;
+		}
+		if(pos==-1)
+		{
+			pos
+		}
+		afficherConsultClient(tabClient[pos]);
+		printf("Appuyer sur ← ou → pour naviguer\n");
+		printf("Appuyer sur entrer pour sortir\n");
+	}
 }
 
 

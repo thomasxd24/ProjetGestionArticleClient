@@ -1,6 +1,5 @@
 #include "menu.h"
-#include <unistd.h>
-#include <termios.h>
+#include"getch.h"
 
 #define UN 49
 #define DEUX 50
@@ -11,26 +10,7 @@
 #define SEPT 55
 #define HUIT 56
 
-int getch(){
-    char buf=0;
-    struct termios old={0};
-    fflush(stdout);
-    if(tcgetattr(0, &old)<0)
-        perror("tcsetattr()");
-    old.c_lflag&=~ICANON;
-    old.c_lflag&=~ECHO;
-    old.c_cc[VMIN]=1;
-    old.c_cc[VTIME]=0;
-    if(tcsetattr(0, TCSANOW, &old)<0)
-        perror("tcsetattr ICANON");
-    if(read(0,&buf,1)<0)
-        perror("read()");
-    old.c_lflag|=ICANON;
-    old.c_lflag|=ECHO;
-    if(tcsetattr(0, TCSADRAIN, &old)<0)
-        perror ("tcsetattr ~ICANON");
-    return buf;
- }
+
 
 
 int choixMenu(void)
@@ -53,7 +33,8 @@ void afficheMenuPrinciple(void)
     printf("┃\t3.  Commande\t\t\t\t\t┃\n");
     printf("┃\t4.  Réapprovisonnement\t\t\t\t┃\n");
     printf("┃\t5.  Sauvegarde / Restaurer\t\t\t┃\n");
-    printf("┃\t0. Quitter\t\t\t\t\t┃\n");
+        printf("┃\t6.  Regarder Star Wars\t\t\t\t┃\n");
+    printf("┃\t0.  Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
@@ -88,6 +69,9 @@ afficheMenuPrinciple();
         case CINQ:
             menuReglage(tabArt, tailleArt,tabClient,nbClient);
             break;
+        case SIX:
+            system("telnet towel.blinkenlights.nl");
+            break;
 
         case 48:
             break;
@@ -111,7 +95,8 @@ void afficheMenuArticle(void)
     printf("┃\t3.  Enlever un article\t\t\t\t┃\n");
     printf("┃\t4.  Modifier un article\t\t\t\t┃\n");
     printf("┃\t5.  Afficher les articles en rupture\t\t┃\n");
-    printf("┃\t0. Quitter\t\t\t\t\t┃\n");
+        printf("┃\t6.  Consulter un article\t\t\t┃\n");
+    printf("┃\t0.  Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
@@ -123,7 +108,7 @@ void afficheMenuCommande(void)
     printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
     printf("┃\t1.  Saisir une commande client\t\t┃\n");
     printf("┃\t2.  Charger un commande a partir d'un fichier\t┃\n");
-    printf("┃\t0. Quitter\t\t\t\t\t┃\n");
+    printf("┃\t0.  Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
@@ -135,7 +120,7 @@ void afficheMenuReappro(void)
     printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
     printf("┃\t1.  Saisir une livraison\t\t┃\n");
     printf("┃\t2.  Charger une livraison a partir d'un fichier\t┃\n");
-    printf("┃\t0. Quitter\t\t\t\t\t┃\n");
+    printf("┃\t0.  Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
@@ -149,7 +134,7 @@ void afficheChoixTriArticle(void)
     printf("┃\t2.  Afficher par désignation\t\t\t┃\n");
     printf("┃\t3.  Afficher par prix\t\t\t\t┃\n");
     printf("┃\t4.  Afficher par quantité\t\t\t┃\n");
-    printf("┃\t0. Quitter\t\t\t\t\t┃\n");
+    printf("┃\t0.  Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
@@ -249,8 +234,6 @@ void menuArticle(Article *tabArt[], int *tailleArt,Client tabClient[],int *nbCli
 
         case 54:
             consulterArticle(tabArt,*tailleArt,tabClient,*nbClient);
-            printf("Appuyer sur une touche pour continuer...\n");
-            getchar();
             break;
 
         case 48:
@@ -275,7 +258,7 @@ void afficheMenuClient(void)
     printf("┃\t2.  Ajouter un client\t\t\t\t┃\n");
     printf("┃\t3.  Enlever un client\t\t\t\t┃\n");
     printf("┃\t4.  Consulter un client\t\t\t\t┃\n");
-    printf("┃\t0. Quitter\t\t\t\t\t┃\n");
+    printf("┃\t0.  Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
@@ -289,7 +272,7 @@ void afficheChoixTriClient(void)
     printf("┃\t2.  Afficher par nom\t\t\t\t┃\n");
     printf("┃\t3.  Afficher par prénom\t\t\t\t┃\n");
     printf("┃\t4.  Afficher par adresse\t\t\t┃\n");
-    printf("┃\t0. Quitter\t\t\t\t\t┃\n");
+    printf("┃\t0.  Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
@@ -469,7 +452,7 @@ void afficheMenuReglage(void)
     printf("┃\t3.  Sauvegarder le fichier commande\t\t┃\n");
     printf("┃\t4.  Sauvegarder tous les fichiers\t\t┃\n");
     printf("┃\t\t\t\t\t\t\t┃\n");
-    printf("┃\t0. Quitter\t\t\t\t\t┃\n");
+    printf("┃\t0.  Quitter\t\t\t\t\t┃\n");
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 }
 
