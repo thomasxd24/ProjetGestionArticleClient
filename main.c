@@ -9,8 +9,6 @@ int main(void)
 {
     Article *tabArt[100];
     Client *tabClient;
-    Ensemble en;
-    LigneCommande lc;
     int nbArt, nbClient;
     system("clear");
     printf("Chargement des Articles...");

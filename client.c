@@ -275,10 +275,10 @@ void afficherConsultClient(Client client)
 	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
 	printf("┃\t\t\tCommandes En Attentes\t\t\t\t  ┃\n");
 	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
-	printf("┃idCommande┃Désignation Article          ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
+	printf("┃idCommande┃Article                      ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
 	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
 	afficherCommande(client.commandesEnAttente);
-	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┣━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┫\n");
 	printf("┃\t\t\tCommandes En Cours\t\t\t\t  ┃\n");
 	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
 	printf("┃idCommande┃Désignation Article          ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");

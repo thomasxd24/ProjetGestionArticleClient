@@ -420,6 +420,14 @@ void consulterArticle(Article *tabArt[], int nbArt, Client tabClient[], int nbCl
 		{
 			pos = pos + 1;
 		}
+		if (pos==-1) {
+			pos=nbClient;
+		}
+		if (pos==nbClient) {
+			pos=0;
+		}
+		
+		
 		afficherConsultArticle(tabArt[pos], tabClient, nbClient);
 		printf("Appuyer sur ← ou → pour naviguer\n");
 		printf("Appuyer sur entrer pour sortir\n");
