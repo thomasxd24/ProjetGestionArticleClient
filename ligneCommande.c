@@ -88,46 +88,7 @@ int longueur(Ensemble e)
 
 /*-------------------------------------------- Chargement tableau--------------------------------------------------------*/
 
-LigneCommande lireLigneCommande(FILE *flot, Article *tabArt[], int nbArt)
-{
-	LigneCommande v;
-	Article *art;
-	int pos, trouve, idArt;
-	fscanf(flot, "%d%d%d%d", &v.idCommande,&idArt,&v.idClient,&v.quantite);
-	pos = rechercherDicoArticle('\0', tabArt, nbArt, &trouve, idArt);
-	if (!trouve) //Article non trouvee, passer au prochain lignecommande
-		v.article = NULL;
-	else
-		v.article = tabArt[pos];
-	return v;
-}
 
-void remplirTabLigneCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt)
-{
-	FILE *flot;
-	LigneCommande commande;
-	int trouve, pos;
-	flot = fopen("ligneCommandes.don", "r");
-	if (flot == NULL)
-	{
-		printf("Problème d'ouverture du fichier");
-		return;
-	}
-	
-	while (!feof(flot))
-	{
-		commande = lireLigneCommande(flot, tabArt, nbArt);
-		
-		pos = rechercherDicoClient('\0', tabClient, nbClient, &trouve, commande.idClient);
-		if (!trouve || commande.article == NULL) //Client non trouvee ou article non trouvee, passer au prochain lignecommande
-		{
-			commande = lireLigneCommande(flot, tabArt, nbArt);
-			continue;
-		}
-		
-		tabClient[pos].commandesEnAttente = ajouterCommande(tabClient[pos].commandesEnAttente, commande);
-	}
-}
 
 Ensemble sauvegardeCommande(Ensemble e,FILE *flot)
 {

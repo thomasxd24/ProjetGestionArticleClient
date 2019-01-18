@@ -16,7 +16,7 @@ Ensemble supprimerCommande(Ensemble e, Article *x);
 int longueur (Ensemble e);
 
 /*-------------------------------------------- Chargement tableau--------------------------------------------------------*/
-void remplirTabLigneCommande(Client tabClient[],int nbClient, Article *tabArt[], int nbArt);
+
 
 /*-------------------------------------------- Supprimer ligne vide --------------------------------------------------------*/
 
