@@ -194,7 +194,7 @@ void triDicoArticle(Article *tab[], int n, int choix)
 
 int rechercherDicoArticle(char rechmodele[], Article *tab[], int nbc, int *trouve, int rechID)
 {
-	if (rechID == -1)
+	if (rechID == -1) //on recherche par nom
 		triDicoArticle(tab, nbc, 2);
 	else
 		triDicoArticle(tab, nbc, 1);
@@ -203,7 +203,7 @@ int rechercherDicoArticle(char rechmodele[], Article *tab[], int nbc, int *trouv
 	while (inf <= sup)
 	{
 		m = (inf + sup) / 2;
-		if (rechID == -1)
+		if (rechID == -1)//on recherche par nom
 		{
 			if ((strcmp(rechmodele, tab[m]->designation)) == 0)
 			{
