@@ -425,12 +425,12 @@ void menuReappro(Client tabClient[], int *nbClient,Article * tabArt[], int *nbAr
             saisirReappro(tabClient,*nbClient,tabArt,*nbArt);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
-            getchar();
-            getchar();
             break;
 
         case DEUX:
-            printf("hi2");
+            lireFichierReappro(tabClient,*nbClient,tabArt,*nbArt);
+            printf("Appuyer sur une touche pour continuer...\n");
+            getchar();
             break;
 
     default:

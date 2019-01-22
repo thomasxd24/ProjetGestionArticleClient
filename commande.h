@@ -15,3 +15,5 @@ void verifTabClientCommande(Client tabClient[], int nbClient, Article *commandeA
 void saisirReappro(Client tabClient[], int nbClient, Article *tabArt[], int nbArt);
 LigneCommande lireLigneCommande(FILE *flot, Article *tabArt[], int nbArt);
 void remplirTabLigneCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt);
+void lireFichierReappro(Client tabClient[], int nbClient, Article *tabArt[], int nbArt);
+void saisirLigneReappro(Client tabClient[], int nbClient, Article *tabArt[], int nbArt, FILE *flot);
