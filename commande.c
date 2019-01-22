@@ -165,7 +165,6 @@ void verifTabClientCommande(Client tabClient[], int nbClient, Article *commandeA
         if (!commandeEstVide(tabClient[i].commandesEnAttente))
         {
             tabClient[i].commandesEnAttente = verifCommandeEnAttente(tabClient[i].commandesEnAttente, commandeArt, quantite, tabClient, i);
-            afficherCommande(tabClient[i].commandesEnCours);
         }
     }
 }

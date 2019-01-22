@@ -300,7 +300,7 @@ void consulterClient(Client tabClient[],int nbClient)
 	printf("Appuyer sur entrer pour sortir\n");
 	while (choix != 10)
 	{
-		choix = getchar();
+		choix = getch();
 		if (choix == 68)
 		{
 			pos = pos - 1;
