@@ -72,56 +72,6 @@ void saisirCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbA
     calculCommande(tabClient, posClient, commandeArt, quantite, 0);
 }
 
-void saisirLigneCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt, FILE *flot, int ligne)
-{
-    char nomClient[50];
-    Article *commandeArt;
-    LigneCommande commandeEnAttente, commandeEnCours;
-    int idArt, quantite, i, posArt, posClient, trouve, reste;
-
-    fscanf(flot, "%s", nomClient);
-    fscanf(flot, "%d", &idArt);
-    fscanf(flot, "%d", &quantite);
-    triDicoClient(tabClient, nbClient, 2);
-    posClient = rechercherDicoClient(nomClient, tabClient, nbClient, &trouve, -1);
-    if (!trouve)
-    {
-        printf("Ligne %d: Client %s introuvable. Ligne Ignore.\n", ligne, nomClient);
-        return;
-    }
-    trouve = 0;
-    posArt = rechercherDicoArticle('\0', tabArt, nbArt, &trouve, idArt);
-    if (!trouve)
-    {
-        printf("Ligne %d: Article de ID %d introuvable. Ligne Ignore.\n", ligne, idArt);
-        return;
-    }
-    commandeArt = tabArt[posArt];
-    calculCommande(tabClient, posClient, commandeArt, quantite, 0);
-}
-
-void lireFichierCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt)
-{
-    FILE *flot;
-    int i = 1;
-    system("clear");
-    printf("Chargement de fichier en cours...\n");
-    flot = fopen("commandes.don", "r");
-    if (flot == NULL)
-    {
-        printf("Problème d'ouverture du fichier");
-        return;
-    }
-    printf("Traitement des lignes...\n");
-    while (!feof(flot))
-    {
-        saisirLigneCommande(tabClient, nbClient, tabArt, nbArt, flot, i);
-        i = i + 1;
-    }
-    printf("Chargement effectuée\n");
-    fclose(flot);
-}
-
 //-------------------Reappro------------------------
 
 Ensemble verifCommandeEnAttente(Ensemble commandes, Article *commandeArt, int *quantite, Client tabClient[], int pos)
@@ -266,4 +216,18 @@ void lireFichierReappro(Client tabClient[], int nbClient, Article *tabArt[], int
     }
     printf("Chargement effectuée\n");
     fclose(flot);
+}
+
+void supprimerCommandeEnAttente(Client tabClient[], int nbClient)
+{
+    int idCommande;
+    printf("Veuillez entrer l'identifiant de la commande:\n");
+    scanf("%d",&idCommande);
+    for(int i=0;i<nbClient;i++)
+    {
+        supprimerCommande(tabClient[i].commandesEnAttente,idCommande);
+    }
+    
+
+
 }

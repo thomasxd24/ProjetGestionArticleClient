@@ -25,6 +25,8 @@ void menuCommande(Client tabClient[], int *nbClient, Article *tabArt[], int *nbA
 void menuReappro(Client tabClient[], int *nbClient, Article *tabArt[], int *nbArt);
 void afficheMenuReglage(void);
 void menuReglage(Article *tabArt[], int *tailleArt, Client tabClient[], int *nbClient);
+void lireNomFichier(void);
+
 
 
 

@@ -1,20 +1,45 @@
 #include "client.h"
 
-/*-------------------------------------------- Afficher le tableau des clients --------------------------------------------------------*/
+/*-------------------------------------------- Toutes les affichage --------------------------------------------------------*/
 
 void afficherTabClient(Client tabClient[], int nbClient)
 {
 	int i = 0;
 	printf("Liste des Clients\n");
-	printf("━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+	printf("━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━\n");
 	printf("   ID\t┃Civilité  ┃Nom            ┃Prénom         ┃Cdes En Attente┃Cdes En Cours┃Adresse \n");
-	printf("━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+	printf("━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━\n");
 	for (i = 0; i < nbClient; i++)
 		printf("%d\t┃%-10s┃%-15s┃%-15s┃%-15d┃%-13d┃%s\n", tabClient[i].idClient, tabClient[i].civilite, tabClient[i].nom, tabClient[i].prenom, longueur(tabClient[i].commandesEnAttente),longueur(tabClient[i].commandesEnCours),tabClient[i].adresse);
-	printf("━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+	printf("━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━\n");
 	printf("Nombre de client : %d \n", nbClient);
 }
 
+
+void afficherConsultClient(Client client)
+{
+	system("clear");
+	printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf("┃\t\t\tConsultation Client\t\t\t\t  ┃\n");
+	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃ID:      %d\t\t\t\t\t\t\t\t  ┃\n",client.idClient);
+	printf("┃Nom:     %-64s┃\n",client.nom);
+	printf("┃Prenom:  %-64s┃\n",client.prenom);
+	printf("┃Address: %-64s┃\n",client.adresse);
+	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃\t\t\tCommandes En Attentes\t\t\t\t  ┃\n");
+	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
+	printf("┃idCommande┃Article                      ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
+	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
+	afficherCommande(client.commandesEnAttente);
+	printf("┣━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┫\n");
+	printf("┃\t\t\tCommandes En Cours\t\t\t\t  ┃\n");
+	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
+	printf("┃idCommande┃Désignation Article          ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
+	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
+	afficherCommande(client.commandesEnCours);
+	printf("┗━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┛\n");
+}
 /*-------------------------------------------- Chargement du tableau de client --------------------------------------------------------*/
 
 Client saisirClient(FILE *flot)
@@ -237,6 +262,8 @@ Client saisieClient(int nb)
 	printf("Saisir l'adresse de nouveau client :");
 	fgets(c.adresse, 50, stdin);
 	c.adresse[strlen(c.adresse) - 1] = '\0';
+	c.commandesEnAttente=ensembleVide();
+	c.commandesEnCours=ensembleVide();
 	c.idClient = nb + 1;
 	return c;
 }
@@ -262,30 +289,7 @@ Client * ajouterClient(Client tabClient[], int *nbClient)
 	return tabClient;
 }
 
-void afficherConsultClient(Client client)
-{
-	system("clear");
-	printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
-	printf("┃\t\t\tConsultation Client\t\t\t\t  ┃\n");
-	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-	printf("┃ID:      %d\t\t\t\t\t\t\t\t  ┃\n",client.idClient);
-	printf("┃Nom:     %-64s┃\n",client.nom);
-	printf("┃Prenom:  %-64s┃\n",client.prenom);
-	printf("┃Address: %-64s┃\n",client.adresse);
-	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-	printf("┃\t\t\tCommandes En Attentes\t\t\t\t  ┃\n");
-	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
-	printf("┃idCommande┃Article                      ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
-	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
-	afficherCommande(client.commandesEnAttente);
-	printf("┣━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┫\n");
-	printf("┃\t\t\tCommandes En Cours\t\t\t\t  ┃\n");
-	printf("┣━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┫\n");
-	printf("┃idCommande┃Désignation Article          ┃Prix Unit.┃Quantité┃Prix Total  ┃\n");
-	printf("┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━┫\n");
-	afficherCommande(client.commandesEnCours);
-	printf("┗━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┛\n");
-}
+
 
 void consulterClient(Client tabClient[],int nbClient)
 {

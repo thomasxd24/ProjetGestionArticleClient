@@ -69,13 +69,13 @@ Ensemble supprimerEnTete(Ensemble e)
 	return e;
 }
 
-Ensemble supprimerCommande(Ensemble e, Article *x)
+Ensemble supprimerCommande(Ensemble e, int idCommande)
 {
 	if (e == NULL)
 		return e;
-	if (x->idarticle == e->v.article->idarticle)
+	if (idCommande == e->v.idCommande)
 		return supprimerEnTete(e);
-	e->suiv = supprimerCommande(e->suiv, x);
+	e->suiv = supprimerCommande(e->suiv, idCommande);
 	return e;
 }
 

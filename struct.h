@@ -39,5 +39,10 @@ typedef struct{
 	Ensemble commandesEnCours;
 } Client;
 
+extern char nomFichArt[50];
+extern char nomFichClient[50];
+extern char nomFichCommande[50];
+extern char nomFichLivraison[50];
+
 
 #endif /* EXAMPLE_H */

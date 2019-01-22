@@ -5,10 +5,10 @@
 Article saisirArticle(FILE *flot)
 {
 	Article a;
-	fscanf(flot, "%d %f %d ", &a.idarticle, &a.prixunitaire, &a.quantite);
+	fscanf(flot, "%d%f%d ", &a.idarticle, &a.prixunitaire, &a.quantite);
 
 	fgets(a.designation, 50, flot);
-	a.designation[strlen(a.designation) - 2] = '\0'; // -2 parce que il faut encore eliminer le \n sinon il ne marche pas
+	a.designation[strlen(a.designation) - 1] = '\0'; // -1 parce que il faut encore eliminer le \n sinon il ne marche pas
 	return a;
 }
 
@@ -82,7 +82,7 @@ void afficherTabArticleRupture(Article **tab, int nbarticle)
 
 void sauvegardeArticle(Article a, FILE *flot)
 {
-	fprintf(flot, "%d \t %.2f \t %d \t %s \n", a.idarticle, a.prixunitaire, a.quantite, a.designation);
+	fprintf(flot, "%d %.2f %d %s\n", a.idarticle, a.prixunitaire, a.quantite, a.designation);
 }
 
 void sauvegardeTabArticle(Article *tab[], int tmax)
@@ -250,7 +250,7 @@ int supprimeArticle(Article **tabArt, int nb)
 	for (i = pos; i < nb; i++)
 		tabArt[i] = tabArt[i + 1];
 	nb = nb - 1;
-	afficherTabArticle(tabArt, nb);
+	printf("Article supprimé.\n");
 	return nb;
 }
 
@@ -280,14 +280,14 @@ int ajouterArticle(Article *tabArt[], int tailleArt)
 	pos = rechercherDicoArticle(a.designation, tabArt, tailleArt, &trouve, -1);
 	if (trouve == 1)
 	{
-		printf("Erreur: Article déjà enregistré \n");
+		printf("Erreur: Article déjà enregistré (Désignation déjà existant)\n");
 		return tailleArt;
 	}
 	tabArt[tailleArt] = (Article *)malloc(sizeof(Article));
 	*(tabArt[tailleArt]) = a;
 	tailleArt = tailleArt + 1;
 	triDicoArticle(tabArt, tailleArt, 2);
-	printf("Ajout de l'article réussi.");
+	printf("Ajout de l'article réussi.\n");
 	return tailleArt;
 }
 

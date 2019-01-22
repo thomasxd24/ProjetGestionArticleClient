@@ -11,7 +11,7 @@ Ensemble ajouterCommande(Ensemble e, LigneCommande commande);
 Booleen commandeEstVide(Ensemble e);
 void afficherCommande(Ensemble e);
 Ensemble supprimerEnTete(Ensemble e);
-Ensemble supprimerCommande(Ensemble e, Article *x);
+Ensemble supprimerCommande(Ensemble e, int idCommande);
 int longueur(Ensemble e);
 Ensemble sauvegardeCommande(Ensemble e, FILE *flot);
 void sauvegardeListeCommandes(Client tabClient[], int nbClient);
