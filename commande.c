@@ -74,7 +74,7 @@ void saisirCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbA
 
 //-------------------Reappro------------------------
 
-Ensemble verifCommandeEnAttente(Ensemble commandes, Article *commandeArt, int *quantite, Client tabClient[], int pos)
+ListeCommande verifCommandeEnAttente(ListeCommande commandes, Article *commandeArt, int *quantite, Client tabClient[], int pos)
 {
     LigneCommande enCours;
     if (*quantite == 0)
@@ -83,7 +83,7 @@ Ensemble verifCommandeEnAttente(Ensemble commandes, Article *commandeArt, int *q
     }
     if (commandes == NULL)
         return commandes;
-    if (commandes->v.article->idarticle == commandeArt->idarticle)
+    if (commandes->v.article->idArticle == commandeArt->idArticle)
     {
         if (commandes->v.quantite < *quantite)
         {
@@ -232,13 +232,13 @@ void supprimerCommandeEnAttente(Client tabClient[], int nbClient)
 
 }
 
-Ensemble sauvegardeCommande(Ensemble e,FILE *flot)
+ListeCommande sauvegardeCommande(ListeCommande e,FILE *flot)
 {
 	if (e == NULL)
 	{
 		return e;
 	}	
-	fprintf(flot,"%d %d %d %d\n", e->v.idCommande, e->v.article->idarticle, e->v.idClient,e->v.quantite);
+	fprintf(flot,"%d %d %d %d\n", e->v.idCommande, e->v.article->idArticle, e->v.idClient,e->v.quantite);
 	e->suiv=sauvegardeCommande(e->suiv,flot);
 	return e;
 }

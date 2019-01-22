@@ -6,14 +6,14 @@
 
 /*-------------------------------------------- Fonctions liste --------------------------------------------------------*/
 
-Ensemble ensembleVide(void)
+ListeCommande ensembleVide(void)
 {
 	return NULL;
 }
 
-Ensemble insererEnTete(Ensemble e, LigneCommande commande)
+ListeCommande insererEnTete(ListeCommande e, LigneCommande commande)
 {
-	Ensemble m;
+	ListeCommande m;
 	m = (Maillon *)malloc(sizeof(Maillon));
 	if (m == NULL)
 	{
@@ -25,7 +25,7 @@ Ensemble insererEnTete(Ensemble e, LigneCommande commande)
 	return m;
 }
 
-Ensemble ajouterCommande(Ensemble e, LigneCommande commande)
+ListeCommande ajouterCommande(ListeCommande e, LigneCommande commande)
 {
 	if (e == NULL)
 		return insererEnTete(e, commande);
@@ -33,14 +33,14 @@ Ensemble ajouterCommande(Ensemble e, LigneCommande commande)
 	return e;
 }
 
-Booleen commandeEstVide(Ensemble e)
+Booleen commandeEstVide(ListeCommande e)
 {
 	if (e == NULL)
 		return vrai;
 	return faux;
 }
 
-void afficherCommande(Ensemble e)
+void afficherCommande(ListeCommande e)
 {
 	if (e == NULL)
 	{
@@ -54,7 +54,7 @@ void afficherCommande(Ensemble e)
 	}
 }
 
-Ensemble supprimerEnTete(Ensemble e)
+ListeCommande supprimerEnTete(ListeCommande e)
 {
 	Maillon *aux;
 	if (e == NULL)
@@ -68,7 +68,7 @@ Ensemble supprimerEnTete(Ensemble e)
 	return e;
 }
 
-Ensemble supprimerCommande(Ensemble e, int idCommande)
+ListeCommande supprimerCommande(ListeCommande e, int idCommande)
 {
 	if (e == NULL)
 		return e;
@@ -78,7 +78,7 @@ Ensemble supprimerCommande(Ensemble e, int idCommande)
 	return e;
 }
 
-int longueur(Ensemble e)
+int longueur(ListeCommande e)
 {
 	if (e == NULL)
 		return 0;

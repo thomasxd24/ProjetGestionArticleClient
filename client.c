@@ -45,10 +45,7 @@ void afficherConsultClient(Client client)
 Client saisirClient(FILE *flot)
 {
 	Client c;
-	fscanf(flot, "%d", &c.idClient);
-	fscanf(flot, "%s", c.civilite);
-	fscanf(flot, "%s", c.nom);
-	fscanf(flot, "%s ", c.prenom);
+	fscanf(flot, "%d%s%s%s ", &c.idClient,c.civilite,c.nom,c.prenom);
 	fgets(c.adresse, 50, flot);
 	c.adresse[strlen(c.adresse) - 1] = '\0';
 	c.commandesEnAttente = NULL;
@@ -332,7 +329,7 @@ void consulterClient(Client tabClient[],int nbClient)
 /*-------------------------------------------- Sauvegarder un client -------------------------------------------------------*/
 
 void sauvegardeClient(Client c,FILE * flot){
-	fprintf(flot,"%d %s %s %s %s\n",c.idClient,c.civilite,c.nom,c.prenom,c.adresse);
+	fprintf(flot,"%d %s %s %s %s",c.idClient,c.civilite,c.nom,c.prenom,c.adresse);
 }
 
 void sauvegardeTabClient(Client tab[],int tmax){
@@ -344,7 +341,8 @@ void sauvegardeTabClient(Client tab[],int tmax){
 		printf("Problème d'ouverture du fichier");
 		return;
 	}
-	for(i=0;i<tmax;i++){
+	fprintf(flot,"%d %s %s %s %s",tab[0].idClient,tab[0].civilite,tab[0].nom,tab[0].prenom,tab[0].adresse);
+	for(i=1;i<tmax-1;i++){
 		sauvegardeClient(tab[i],flot);
 	}
 	fclose(flot);

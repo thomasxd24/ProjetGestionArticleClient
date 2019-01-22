@@ -4,7 +4,7 @@
 /*---------------------Structure Article---------------------*/
 
 typedef struct{
-	int idarticle;
+	int idArticle;
 	float prixunitaire;
 	int quantite;
     char designation[50];
@@ -24,7 +24,7 @@ typedef struct maillon{
 	struct maillon * suiv;
 }Maillon;
 
-typedef Maillon *Ensemble;
+typedef Maillon *ListeCommande;
 
 typedef enum {faux,vrai}Booleen;
 
@@ -35,8 +35,8 @@ typedef struct{
 	char nom[10];
 	char prenom[10];
 	char adresse[70];
-	Ensemble commandesEnAttente;
-	Ensemble commandesEnCours;
+	ListeCommande commandesEnAttente;
+	ListeCommande commandesEnCours;
 } Client;
 
 /*---------------------Variable Global---------------------*/

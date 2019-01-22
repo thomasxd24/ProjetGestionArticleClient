@@ -5,10 +5,10 @@
 Article saisirArticle(FILE *flot)
 {
 	Article a;
-	fscanf(flot, "%d%f%d ", &a.idarticle, &a.prixunitaire, &a.quantite);
+	fscanf(flot, "%d%f%d ", &a.idArticle, &a.prixunitaire, &a.quantite);
 
 	fgets(a.designation, 50, flot);
-	a.designation[strlen(a.designation) - 1] = '\0'; // -1 parce que il faut encore eliminer le \n sinon il ne marche pas
+	a.designation[strlen(a.designation) - 2] = '\0'; // -2 parce que il faut encore eliminer le \n sinon il ne marche pas
 	return a;
 }
 
@@ -49,7 +49,7 @@ int remplirTabArticle(Article *tab[], int tmax)
 
 void afficherArticle(Article a)
 {
-	printf("%d\t┃%.2f\t┃%d\t ┃%s\n", a.idarticle, a.prixunitaire, a.quantite, a.designation);
+	printf("%d\t┃%.2f\t┃%d\t ┃%s\n", a.idArticle, a.prixunitaire, a.quantite, a.designation);
 }
 
 void afficherTabArticle(Article **tab, int nbarticle)
@@ -82,7 +82,7 @@ void afficherTabArticleRupture(Article **tab, int nbarticle)
 
 void sauvegardeArticle(Article a, FILE *flot)
 {
-	fprintf(flot, "%d %.2f %d %s\n", a.idarticle, a.prixunitaire, a.quantite, a.designation);
+	fprintf(flot, "%d %.2f %d %s\n", a.idArticle, a.prixunitaire, a.quantite, a.designation);
 }
 
 void sauvegardeTabArticle(Article *tab[], int tmax)
@@ -108,7 +108,7 @@ int testTriArticle(Article *R, Article *S, int choix)
 	switch (choix)
 	{
 	case 1:
-		return R->idarticle - S->idarticle;
+		return R->idArticle - S->idArticle;
 		break;
 	case 2:
 		return strcmp(R->designation, S->designation);
@@ -191,7 +191,7 @@ void triDicoArticle(Article *tab[], int n, int choix)
 
 /*-------------------------------------------- Recherche Article Designation ------------------------------------*/
 
-int rechercherDicoArticle(char rechmodele[], Article *tab[], int nbc, int *trouve, int rechID)
+int rechercherDicoArticle(char designation[], Article *tab[], int nbc, int *trouve, int rechID)
 {
 	if (rechID == -1) //on recherche par nom
 		triDicoArticle(tab, nbc, 2);
@@ -204,24 +204,24 @@ int rechercherDicoArticle(char rechmodele[], Article *tab[], int nbc, int *trouv
 		m = (inf + sup) / 2;
 		if (rechID == -1)//on recherche par nom
 		{
-			if ((strcmp(rechmodele, tab[m]->designation)) == 0)
+			if ((strcmp(designation, tab[m]->designation)) == 0)
 			{
 				*trouve = 1;
 				return m;
 			}
-			if ((strcmp(rechmodele, tab[m]->designation)) < 0)
+			if ((strcmp(designation, tab[m]->designation)) < 0)
 				sup = m - 1;
 			else
 				inf = m + 1;
 		}
 		else
 		{
-			if (rechID == tab[m]->idarticle)
+			if (rechID == tab[m]->idArticle)
 			{
 				*trouve = 1;
 				return m;
 			}
-			if (rechID < tab[m]->idarticle)
+			if (rechID < tab[m]->idArticle)
 				sup = m - 1;
 			else
 				inf = m + 1;
@@ -246,6 +246,7 @@ int supprimeArticle(Article **tabArt, int nb)
 		printf("Article non trouvé \n");
 		return nb;
 	}
+	free(tabArt[pos]);
 	for (i = pos; i < nb; i++)
 		tabArt[i] = tabArt[i + 1];
 	nb = nb - 1;
@@ -265,7 +266,7 @@ Article saisieArticle(int tailleArt)
 	scanf("%f%*c", &a.prixunitaire);
 	printf("Quantité initiale: ");
 	scanf("%d%*c", &a.quantite);
-	a.idarticle = tailleArt + 1;
+	a.idArticle = tailleArt + 1;
 	return a;
 }
 
@@ -274,7 +275,7 @@ int ajouterArticle(Article *tabArt[], int tailleArt)
 	Article a;
 	int trouve, pos;
 	triDicoArticle(tabArt, tailleArt, 1);
-	a = saisieArticle(tabArt[tailleArt - 1]->idarticle);
+	a = saisieArticle(tabArt[tailleArt - 1]->idArticle);
 	triDicoArticle(tabArt, tailleArt, 2);
 	pos = rechercherDicoArticle(a.designation, tabArt, tailleArt, &trouve, -1);
 	if (trouve == 1)
@@ -345,11 +346,11 @@ void afficherClientCommande(Client client, LigneCommande commande)
 	printf("┃%d\t   ┃%-40s┃%-21d┃\n", commande.idCommande, nomEntier, commande.quantite);
 }
 
-Ensemble verifArtDansCommandes(Article *article, Ensemble commandes, int *trouve, Client client)
+ListeCommande verifArtDansCommandes(Article *article, ListeCommande commandes, int *trouve, Client client)
 {
 	if (commandes == NULL)
 		return commandes;
-	if (commandes->v.article->idarticle == article->idarticle)
+	if (commandes->v.article->idArticle == article->idArticle)
 		afficherClientCommande(client, commandes->v);
 	commandes->suiv = verifArtDansCommandes(article, commandes->suiv, trouve, client);
 	return commandes;
@@ -379,7 +380,7 @@ void afficherConsultArticle(Article *article, Client tabClient[], int nbClient)
 	printf("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
 	printf("┃\t\t\tConsultation Article\t\t\t\t  ┃\n");
 	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
-	printf("┃ID: %-69d┃\n", article->idarticle);
+	printf("┃ID: %-69d┃\n", article->idArticle);
 	printf("┃Désignation: %-60s┃\n", article->designation);
 	printf("┃Prix:  %-66.2f┃\n", article->prixunitaire);
 	printf("┃Quantité en stock: %-54d┃\n", article->quantite);
