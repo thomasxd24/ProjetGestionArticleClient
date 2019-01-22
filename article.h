@@ -35,7 +35,7 @@ void afficherArticleCommande(Article *article, Client tabClient[], int nbClient,
 void afficherConsultArticle(Article *article, Client tabClient[], int nbClient);
 void consulterArticle(Article *tabArt[], int nbArt, Client tabClient[], int nbClient);
 
-
+char nomFichArt[50]; // declaration de variable global
 
 
 

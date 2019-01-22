@@ -161,7 +161,7 @@ void remplirTabLigneCommande(Client tabClient[], int nbClient, Article *tabArt[]
     FILE *flot;
     LigneCommande commande;
     int trouve, pos;
-    flot = fopen("ligneCommandes.don", "r");
+    flot = fopen(nomFichCommande, "r");
     if (flot == NULL)
     {
         printf("Problème d'ouverture du fichier");
@@ -203,7 +203,7 @@ void lireFichierReappro(Client tabClient[], int nbClient, Article *tabArt[], int
     FILE *flot;
     int i = 1;
     system("clear");
-    flot = fopen("livraison.don", "r");
+    flot = fopen(nomFichLivraison, "r");
     if (flot == NULL)
     {
         printf("Problème d'ouverture du fichier");

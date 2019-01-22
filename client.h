@@ -23,4 +23,5 @@ void consulterClient(Client tabClient[], int nbClient);
 void sauvegardeClient(Client c, FILE *flot);
 void sauvegardeTabClient(Client tab[], int tmax);
 Client *modification(Client *tabClient, int taille);
+char nomFichClient[50];
 #endif /* EXAMPLE_H */

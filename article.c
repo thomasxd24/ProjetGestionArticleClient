@@ -17,7 +17,7 @@ int remplirTabArticle(Article *tab[], int tmax)
 	FILE *flot;
 	int i = 0;
 	Article a;
-	flot = fopen("articles.don", "r");
+	flot = fopen(nomFichArt, "r");
 	if (flot == NULL)
 	{
 		printf("Problème d'ouverture du fichier");
@@ -89,7 +89,7 @@ void sauvegardeTabArticle(Article *tab[], int tmax)
 {
 	int i;
 	FILE *flot;
-	flot = fopen("articles.don", "r+");
+	flot = fopen(nomFichArt, "r+");
 	if (flot == NULL)
 	{
 		printf("Problème d'ouverture du fichier");

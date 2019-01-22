@@ -10,9 +10,6 @@
 #define SEPT 55
 #define HUIT 56
 
-
-
-
 int choixMenu(void)
 {
     int n;
@@ -21,7 +18,7 @@ int choixMenu(void)
 }
 
 
-/*-------------------------------------------- Partie Affichage-------------------------------------------------*/
+//----------------Partie Affichage----------------
 
 void afficheMenuPrinciple(void)
 {
@@ -180,7 +177,7 @@ void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *n
     }
 }
 
-// ------------------------------------Partie Article------------------------------------
+// ----------------Partie Article----------------
 
 void menuArticle(Article *tabArt[], int *tailleArt,Client tabClient[],int *nbClient)
 {
@@ -297,7 +294,7 @@ void menuChoixTriArticle(Article *tabArticle[], int *nbArticle)
 
 
 
-// ------------------------------------Partie Client------------------------------------
+// ----------------Partie Client----------------
 
 void menuClient(Client tabClient[], int *nbClient)
 {
@@ -401,10 +398,7 @@ void menuChoixTriClient(Client tabClient[], int *nbClient)
         }
     }
 }
-
-
-
-/*-------------------------------------------- Menu Commande ------------------------------------------------*/
+// ----------------Menu Commande----------------
 
 void menuCommande(Client tabClient[], int *nbClient,Article * tabArt[], int *nbArt)
 {
@@ -435,7 +429,7 @@ void menuCommande(Client tabClient[], int *nbClient,Article * tabArt[], int *nbA
     menuCommande(tabClient, nbClient,tabArt,nbArt);
 }
 
-/*-------------------------------------------- Menu Commande ------------------------------------------------*/
+// ----------------Menu Reapprovisionnment----------------
 
 void menuReappro(Client tabClient[], int *nbClient,Article * tabArt[], int *nbArt)
 {
@@ -464,9 +458,7 @@ void menuReappro(Client tabClient[], int *nbClient,Article * tabArt[], int *nbAr
     }
     menuReappro(tabClient, nbClient,tabArt,nbClient);
 }
-/*-------------------------------------------- Menu Sauvegarde -------------------------------------------------*/
-
-
+//----------------Menu Sauvegarde----------------
 
 void menuReglage(Article *tabArt[], int *tailleArt,Client tabClient[], int *nbClient)
 {

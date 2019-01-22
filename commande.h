@@ -20,3 +20,6 @@ LigneCommande lireLigneCommande(FILE *flot, Article *tabArt[], int nbArt);
 void remplirTabLigneCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt);
 
 void supprimerCommandeEnAttente(Client tabClient[], int nbClient);
+
+char nomFichCommande[50];
+char nomFichLivraison[50];

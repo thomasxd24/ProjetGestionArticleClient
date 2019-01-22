@@ -104,7 +104,7 @@ Ensemble sauvegardeCommande(Ensemble e,FILE *flot)
 void sauvegardeListeCommandes(Client tabClient[],int nbClient){
 	int i;
 	FILE *flot;
-	flot = fopen("ligneCommande.don", "w");
+	flot = fopen(nomFichCommande, "w");
 	if (flot == NULL)
 	{
 		printf("Problème d'ouverture du fichier");

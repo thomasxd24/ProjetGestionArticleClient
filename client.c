@@ -60,7 +60,7 @@ Client *chargeTabClient(Client *tabClient, int *nbClient)
 {
 	FILE *flot;
 	int i = 0, tMax = 1;
-	flot = fopen("clients.don", "r");
+	flot = fopen(nomFichClient, "r");
 	if (flot == NULL)
 	{
 		printf("Problème d'ouverture du fichier");
@@ -338,7 +338,7 @@ void sauvegardeClient(Client c,FILE * flot){
 void sauvegardeTabClient(Client tab[],int tmax){
 	int i;
 	FILE *flot;
-	flot = fopen("clientss.don", "w");
+	flot = fopen(nomFichClient, "w");
 	if (flot == NULL)
 	{
 		printf("Problème d'ouverture du fichier");

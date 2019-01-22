@@ -17,5 +17,5 @@ Ensemble sauvegardeCommande(Ensemble e, FILE *flot);
 void sauvegardeListeCommandes(Client tabClient[], int nbClient);
 
 
-#endif /* EXAMPLE_H */
+#endif 
 
