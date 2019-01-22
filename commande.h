@@ -21,5 +21,8 @@ void remplirTabLigneCommande(Client tabClient[], int nbClient, Article *tabArt[]
 
 void supprimerCommandeEnAttente(Client tabClient[], int nbClient);
 
+Ensemble sauvegardeCommande(Ensemble e, FILE *flot);
+void sauvegardeListeCommandes(Client tabClient[], int nbClient);
+
 char nomFichCommande[50];
 char nomFichLivraison[50];

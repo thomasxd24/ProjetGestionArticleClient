@@ -1,7 +1,7 @@
 #ifndef STRUCTDEF
 #define STRUCTDEF
 
-/*-------------------------------------------------- Structure Article -----------------------------------*/
+/*---------------------Structure Article---------------------*/
 
 typedef struct{
 	int idarticle;
@@ -10,7 +10,7 @@ typedef struct{
     char designation[50];
 } Article;	
 
-/*-------------------------------------------------- Structure LigneCommande -------------------------------*/
+/*----------------------Structure LigneCommande---------------------*/
 typedef struct 
 {
     int idCommande;
@@ -28,7 +28,7 @@ typedef Maillon *Ensemble;
 
 typedef enum {faux,vrai}Booleen;
 
-/*-------------------------------------------------- Structure Client ---------------------------------------*/
+/*---------------------Structure Client---------------------*/
 typedef struct{
 	int idClient;
 	char civilite[5];
@@ -39,10 +39,12 @@ typedef struct{
 	Ensemble commandesEnCours;
 } Client;
 
+/*---------------------Variable Global---------------------*/
+
 extern char nomFichArt[50];
 extern char nomFichClient[50];
 extern char nomFichCommande[50];
 extern char nomFichLivraison[50];
 
 
-#endif /* EXAMPLE_H */
+#endif

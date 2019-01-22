@@ -44,7 +44,6 @@ void afficherCommande(Ensemble e)
 {
 	if (e == NULL)
 	{
-		printf("┃     -    ┃               -             ┃    -     ┃   -    ┃     -      ┃\n");
 		return;
 	}
 		
@@ -86,34 +85,5 @@ int longueur(Ensemble e)
 	return 1 + longueur(e->suiv);
 }
 
-/*-------------------------------------------- Chargement tableau--------------------------------------------------------*/
 
 
-
-Ensemble sauvegardeCommande(Ensemble e,FILE *flot)
-{
-	if (e == NULL)
-	{
-		return e;
-	}	
-	fprintf(flot,"%d %d %d %d\n", e->v.idCommande, e->v.article->idarticle, e->v.idClient,e->v.quantite);
-	e->suiv=sauvegardeCommande(e->suiv,flot);
-	return e;
-}
-
-void sauvegardeListeCommandes(Client tabClient[],int nbClient){
-	int i;
-	FILE *flot;
-	flot = fopen(nomFichCommande, "w");
-	if (flot == NULL)
-	{
-		printf("Problème d'ouverture du fichier");
-		return;
-	}
-	for(i = 0; i < nbClient; i++)
-	{
-		sauvegardeCommande(tabClient[i].commandesEnAttente,flot);
-	}
-	printf("sauvegarde ligne commande effectuée");
-	fclose(flot);
-}

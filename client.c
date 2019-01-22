@@ -178,7 +178,7 @@ void triDicoClient(Client tab[], int n, int trieID)
 	free(S);
 }
 
-/*-------------------------------------------- Recherche dico --------------------------------------------------------*/
+/*------------------------ Recherche dico ------------------------*/
 
 int rechercherDicoClient(char *rechnom, Client tab[], int nbc, int *trouve, int rechID)
 {
@@ -223,7 +223,7 @@ int rechercherDicoClient(char *rechnom, Client tab[], int nbc, int *trouve, int 
 	return inf;
 }
 
-/*-------------------------------------------- SupprimerUnClient --------------------------------------------------------*/
+/*------------------------SupprimerUnClient------------------------*/
 
 int supprimeClient(Client *tabClient, int nb)
 {
@@ -245,7 +245,7 @@ int supprimeClient(Client *tabClient, int nb)
 	return nb;
 }
 
-/*-------------------------------------------- Ajouter un client -------------------------------------------------------*/
+/*------------------------Ajouter un client------------------------*/
 Client saisieClient(int nb)
 {
 	Client c;
@@ -289,7 +289,7 @@ Client * ajouterClient(Client tabClient[], int *nbClient)
 	return tabClient;
 }
 
-
+/*------------------------Consulter un client------------------------*/
 
 void consulterClient(Client tabClient[],int nbClient)
 {
@@ -347,7 +347,6 @@ void sauvegardeTabClient(Client tab[],int tmax){
 	for(i=0;i<tmax;i++){
 		sauvegardeClient(tab[i],flot);
 	}
-	printf("sauvegarde client effectuée");
 	fclose(flot);
 }
 
