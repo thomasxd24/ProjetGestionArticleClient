@@ -7,7 +7,7 @@
 #include"ligneCommande.h"
 
 void calculCommande(Client tabClient[], int posClient, Article *commandeArt, int quantite, int idCommande);
-void saisirCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt);
+Client * saisirCommande(Client tabClient[], int *nbClient, Article *tabArt[], int nbArt);
 
 LigneCommande lireLigneCommande(FILE *flot, Article *tabArt[], int nbArt);
 void remplirTabLigneCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt);

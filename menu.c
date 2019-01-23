@@ -157,7 +157,7 @@ void menuPrinciple(Article *tabArt[], int *tailleArt, Client tabClient[], int *n
             break;
         
         case TROIS:
-            menuCommande(tabClient, nbClient,tabArt,tailleArt);
+            menuCommande(&tabClient, nbClient,tabArt,tailleArt);
             break;
 
         case QUATRE:
@@ -400,7 +400,7 @@ void menuChoixTriClient(Client tabClient[], int *nbClient)
 }
 // ----------------Menu Commande----------------
 
-void menuCommande(Client tabClient[], int *nbClient,Article * tabArt[], int *nbArt)
+void menuCommande(Client *tabClient[], int *nbClient,Article * tabArt[], int *nbArt)
 {
     int choix;
     afficheMenuCommande();
@@ -411,13 +411,13 @@ void menuCommande(Client tabClient[], int *nbClient,Article * tabArt[], int *nbA
     {
         case UN:
         system("clear");
-            saisirCommande(tabClient,*nbClient,tabArt,*nbArt);
-            printf("Appuyer sur une touche pour continuer...\n");
+            *tabClient=saisirCommande(*tabClient,nbClient,tabArt,*nbArt);
+            printf("\nAppuyer sur une touche pour continuer...");
             getchar();
             break;
 
         case DEUX:
-            supprimerCommandeEnAttente(tabClient,*nbClient);
+            supprimerCommandeEnAttente(*tabClient,*nbClient);
             printf("Appuyer sur une touche pour continuer...\n");
             getchar();
             break;
@@ -442,13 +442,13 @@ void menuReappro(Client tabClient[], int *nbClient,Article * tabArt[], int *nbAr
     {
         case UN:
             saisirReappro(tabClient,*nbClient,tabArt,*nbArt);
-            printf("Appuyer sur une touche pour continuer...\n");
+            printf("Appuyer sur une touche pour continuer...");
             getchar();
             break;
 
         case DEUX:
             lireFichierReappro(tabClient,*nbClient,tabArt,*nbArt);
-            printf("Appuyer sur une touche pour continuer...\n");
+            printf("Appuyer sur une touche pour continuer...");
             getchar();
             break;
 
@@ -456,7 +456,7 @@ void menuReappro(Client tabClient[], int *nbClient,Article * tabArt[], int *nbAr
         printf("Mauvaise saisie");
         break;
     }
-    menuReappro(tabClient, nbClient,tabArt,nbClient);
+    menuReappro(tabClient, nbClient,tabArt,nbArt);
 }
 //----------------Menu Sauvegarde----------------
 

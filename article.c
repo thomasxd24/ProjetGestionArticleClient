@@ -8,7 +8,7 @@ Article saisirArticle(FILE *flot)
 	fscanf(flot, "%d%f%d ", &a.idArticle, &a.prixunitaire, &a.quantite);
 
 	fgets(a.designation, 50, flot);
-	a.designation[strlen(a.designation) - 2] = '\0'; // -2 parce que il faut encore eliminer le \n sinon il ne marche pas
+	a.designation[strlen(a.designation) - 1] = '\0'; // -2 parce que il faut encore eliminer le \n sinon il ne marche pas
 	return a;
 }
 
@@ -67,22 +67,27 @@ void afficherTabArticle(Article **tab, int nbarticle)
 
 void afficherTabArticleRupture(Article **tab, int nbarticle)
 {
-	int i;
+	int i,j=0;
 	printf("Liste des Articles en ruptures\n");
 	printf("━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	printf("ID\t┃Prix\t┃Quantite┃Designation \n");
 	printf("━━━━━━━━╋━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━\n");
 	for (i = 0; i < nbarticle; i++)
 		if (tab[i]->quantite == 0)
-			afficherArticle(*tab[i]);
+			 {
+				afficherArticle(*tab[i]);
+				j=j+1;
+			 }
+			
+
 	printf("━━━━━━━━┻━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━\n");
-	printf("Nombre d'Article En Rupture : %d \n", nbarticle);
+	printf("Nombre d'Article En Rupture : %d \n", j);
 }
 /*-------------------------------------------- Sauvegarder TAB --------------------------------------------------*/
 
 void sauvegardeArticle(Article a, FILE *flot)
 {
-	fprintf(flot, "\n%d %.2f %d %s", a.idArticle, a.prixunitaire, a.quantite, a.designation);
+	fprintf(flot, "%d %.2f %d %s\n", a.idArticle, a.prixunitaire, a.quantite, a.designation);
 }
 
 void sauvegardeTabArticle(Article *tab[], int tmax)
@@ -421,9 +426,9 @@ void consulterArticle(Article *tabArt[], int nbArt, Client tabClient[], int nbCl
 			pos = pos + 1;
 		}
 		if (pos==-1) {
-			pos=nbClient;
+			pos=nbArt-1;
 		}
-		if (pos==nbClient) {
+		if (pos==nbArt) {
 			pos=0;
 		}
 		

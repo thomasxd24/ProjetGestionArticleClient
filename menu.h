@@ -21,7 +21,7 @@ void afficheMenuClient(void);
 void afficheChoixTriClient(void);
 void menuChoixTriClient(Client tabClient[], int *nbClient);
 void menuClient(Client tabClient[], int *nbClient);
-void menuCommande(Client tabClient[], int *nbClient, Article *tabArt[], int *nbArt);
+void menuCommande(Client *tabClient[], int *nbClient, Article *tabArt[], int *nbArt);
 void menuReappro(Client tabClient[], int *nbClient, Article *tabArt[], int *nbArt);
 void afficheMenuReglage(void);
 void menuReglage(Article *tabArt[], int *tailleArt, Client tabClient[], int *nbClient);

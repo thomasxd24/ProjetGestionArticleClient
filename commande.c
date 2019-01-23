@@ -41,7 +41,7 @@ void calculCommande(Client tabClient[], int posClient, Article *commandeArt, int
     }
 }
 
-void saisirCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbArt)
+Client * saisirCommande(Client tabClient[], int *nbClient, Article *tabArt[], int nbArt)
 {
     char nomClient[50];
     Article *commandeArt;
@@ -50,12 +50,13 @@ void saisirCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbA
     system("clear");
     printf("Entrer le nom du client:");
     scanf("%s", nomClient);
-    triDicoClient(tabClient, nbClient, 2);
-    posClient = rechercherDicoClient(nomClient, tabClient, nbClient, &trouve, -1);
+    triDicoClient(tabClient, *nbClient, 2);
+    posClient = rechercherDicoClient(nomClient, tabClient, *nbClient, &trouve, -1);
     if (!trouve)
     {
-        printf("Client non trouvée. Abandon.\n");
-        return;
+        printf("Client non trouvée.Créeons ce client.\n");
+        tabClient=ajouterClient(tabClient,nbClient);
+        posClient=*nbClient-1;
     }
     trouve = 0;
     while (!trouve)
@@ -69,7 +70,11 @@ void saisirCommande(Client tabClient[], int nbClient, Article *tabArt[], int nbA
     commandeArt = tabArt[posArt];
     printf("Entrer la quantité de l'article demandée:");
     scanf("%d", &quantite);
+    printf("Calcul de la réalisation des commandes..."),
     calculCommande(tabClient, posClient, commandeArt, quantite, 0);
+    printf("Réussi\n");
+    printf("Commande entreé avec succès...");
+    return tabClient;
 }
 
 //-------------------Reappro------------------------
@@ -88,7 +93,6 @@ ListeCommande verifCommandeEnAttente(ListeCommande commandes, Article *commandeA
         if (commandes->v.quantite < *quantite)
         {
             *quantite = *quantite - commandes->v.quantite;
-            printf("La commande de numero %d de client %d va passer en cours.\n", commandes->v.idCommande, commandes->v.idClient);
             tabClient[pos].commandesEnCours = ajouterCommande(tabClient[pos].commandesEnCours, commandes->v);
             commandes = supprimerEnTete(commandes);
         }
@@ -96,7 +100,6 @@ ListeCommande verifCommandeEnAttente(ListeCommande commandes, Article *commandeA
         {
             enCours = commandes->v;
             enCours.quantite = *quantite;
-            printf("La commande de numero %d de client %d va passer en cours partiellement (%d produits retirés).\n", commandes->v.idCommande, commandes->v.idClient, *quantite);
             tabClient[pos].commandesEnCours = ajouterCommande(tabClient[pos].commandesEnCours, enCours);
             commandes->v.quantite = commandes->v.quantite - *quantite;
             *quantite = 0;
@@ -138,7 +141,6 @@ void saisirReappro(Client tabClient[], int nbClient, Article *tabArt[], int nbAr
     printf("Véification des commandes en attente...\n");
     verifTabClientCommande(tabClient, nbClient, commandeArt, &quantite);
     commandeArt->quantite = commandeArt->quantite + quantite;
-    printf("%d produits va etre entreé en stock\n", quantite);
 }
 
 //------------
@@ -195,7 +197,6 @@ void saisirLigneReappro(Client tabClient[], int nbClient, Article *tabArt[], int
     fscanf(flot,"%d", &quantite);
     verifTabClientCommande(tabClient, nbClient, commandeArt, &quantite);
     commandeArt->quantite = commandeArt->quantite + quantite;
-    printf("%d produits va etre entreé en stock\n", quantite);
 }
 
 void lireFichierReappro(Client tabClient[], int nbClient, Article *tabArt[], int nbArt)
@@ -227,6 +228,7 @@ void supprimerCommandeEnAttente(Client tabClient[], int nbClient)
     {
         supprimerCommande(tabClient[i].commandesEnAttente,idCommande);
     }
+    printf("Commande Supprimée si il existe...\n");
     
 
 
