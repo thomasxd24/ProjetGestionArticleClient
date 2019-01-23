@@ -329,7 +329,7 @@ void consulterClient(Client tabClient[],int nbClient)
 /*-------------------------------------------- Sauvegarder un client -------------------------------------------------------*/
 
 void sauvegardeClient(Client c,FILE * flot){
-	fprintf(flot,"%d %s %s %s %s",c.idClient,c.civilite,c.nom,c.prenom,c.adresse);
+	fprintf(flot,"\n%d %s %s %s %s",c.idClient,c.civilite,c.nom,c.prenom,c.adresse);
 }
 
 void sauvegardeTabClient(Client tab[],int tmax){
@@ -341,8 +341,7 @@ void sauvegardeTabClient(Client tab[],int tmax){
 		printf("Problème d'ouverture du fichier");
 		return;
 	}
-	fprintf(flot,"%d %s %s %s %s",tab[0].idClient,tab[0].civilite,tab[0].nom,tab[0].prenom,tab[0].adresse);
-	for(i=1;i<tmax-1;i++){
+	for(i=0;i<tmax;i++){
 		sauvegardeClient(tab[i],flot);
 	}
 	fclose(flot);

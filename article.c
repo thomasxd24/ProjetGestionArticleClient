@@ -82,14 +82,14 @@ void afficherTabArticleRupture(Article **tab, int nbarticle)
 
 void sauvegardeArticle(Article a, FILE *flot)
 {
-	fprintf(flot, "%d %.2f %d %s\n", a.idArticle, a.prixunitaire, a.quantite, a.designation);
+	fprintf(flot, "\n%d %.2f %d %s", a.idArticle, a.prixunitaire, a.quantite, a.designation);
 }
 
 void sauvegardeTabArticle(Article *tab[], int tmax)
 {
 	int i;
 	FILE *flot;
-	flot = fopen(nomFichArt, "r+");
+	flot = fopen(nomFichArt, "w");
 	if (flot == NULL)
 	{
 		printf("Problème d'ouverture du fichier");
